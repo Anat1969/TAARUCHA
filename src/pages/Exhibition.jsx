@@ -5,6 +5,7 @@ import { useAsync, fetchExhibition, fetchExhibitions, splitBody, pad, TYPE_LABEL
 import { Page, Lines, Reveal, EASE } from '../components/Motion'
 import { WallWork } from '../components/Work'
 import Lightbox from '../components/Lightbox'
+import EditBar from '../components/EditBar'
 
 function useIsNarrow() {
   const q = '(max-width: 900px)'
@@ -57,8 +58,8 @@ export default function Exhibition() {
       </section>
 
       {works.length > 0 && (narrow
-        ? <Stack works={works} onOpen={setOpen} />
-        : <Wall works={works} onOpen={setOpen} code={ex.code} />)}
+        ? <Stack works={works} onOpen={setOpen} exId={ex.id} />
+        : <Wall works={works} onOpen={setOpen} code={ex.code} exId={ex.id} />)}
 
       <nav aria-label="ניווט בין תערוכות" className="wrap mono" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', gap: 16, paddingTop: 48 }}>
         <Link to="/" className="btn"><span className="arrow">→</span> כל התערוכות</Link>
@@ -69,12 +70,13 @@ export default function Exhibition() {
       </nav>
 
       <Lightbox works={works} index={open} onClose={() => setOpen(null)} onIndex={setOpen} />
+      <EditBar exhibitionId={ex.id} />
     </Page>
   )
 }
 
 // Desktop: the page scroll drives a horizontal walk along a lit wall.
-function Wall({ works, onOpen, code }) {
+function Wall({ works, onOpen, code, exId }) {
   const track = useRef(null)
   const row = useRef(null)
   const [dist, setDist] = useState(0)
@@ -118,7 +120,7 @@ function Wall({ works, onOpen, code }) {
           {works.map((w, i) => (
             <motion.div key={w.id} initial={{ opacity: 0, y: 60, rotateY: -10 }} animate={{ opacity: 1, y: 0, rotateY: 0 }}
               transition={{ duration: 1.2, ease: EASE, delay: 0.3 + i * 0.12 }} style={{ transformStyle: 'preserve-3d', flex: '0 0 auto' }}>
-              <WallWork w={w} i={i} h={hang} onOpen={onOpen} />
+              <WallWork w={w} i={i} h={hang} onOpen={onOpen} exId={exId} />
             </motion.div>
           ))}
           <div style={{ flex: '0 0 12vw' }} aria-hidden="true" />
@@ -138,11 +140,11 @@ function Wall({ works, onOpen, code }) {
   )
 }
 
-function Stack({ works, onOpen }) {
+function Stack({ works, onOpen, exId }) {
   return (
     <section className="wall-stack" aria-label="עבודות התערוכה" style={{ borderTop: '1px solid var(--ink)' }}>
       {works.map((w, i) => (
-        <Reveal key={w.id}><WallWork w={w} i={i} onOpen={onOpen} stacked /></Reveal>
+        <Reveal key={w.id}><WallWork w={w} i={i} onOpen={onOpen} stacked exId={exId} /></Reveal>
       ))}
     </section>
   )

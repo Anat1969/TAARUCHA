@@ -75,3 +75,5 @@
   .work-card { grid-template-columns: 1fr; }
   .work-idx { flex-direction: row; }
 }
+.flash { animation: flash 1.8s ease; }
+@keyframes flash { 0%, 100% { box-shadow: var(--shadow-1); } 30% { box-shadow: 0 0 0 3px var(--ink), var(--shadow-2); } }

@@ -1,5 +1,6 @@
 import { splitBody, videoEmbed, TYPE_LABEL, pad, asset } from '../lib/data'
 import { Img } from './Motion'
+import { WorkEditLink } from './EditBar'
 
 export function Prose({ body, skipPoem }) {
   const parts = splitBody(body)
@@ -47,7 +48,7 @@ export function VideoPlayer({ w }) {
 }
 
 // A single work on the wall. `h` is the hanging height (CSS length) shared by the row.
-export function WallWork({ w, i, h, onOpen, stacked }) {
+export function WallWork({ w, i, h, onOpen, stacked, exId }) {
   const open = () => onOpen?.(i)
   const imgStyle = stacked ? { width: '100%', height: 'auto' } : { height: h, width: 'auto' }
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open() } }
@@ -60,6 +61,7 @@ export function WallWork({ w, i, h, onOpen, stacked }) {
           {splitBody(w.body).length > 1 && <div style={{ marginTop: 20 }}><Prose body={w.body} skipPoem /></div>}
         </div>
         <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
       </figure>
     )
   }
@@ -70,6 +72,7 @@ export function WallWork({ w, i, h, onOpen, stacked }) {
         <div className="work__spot" aria-hidden="true" />
         <VideoPlayer w={w} />
         <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
       </figure>
     )
   }
@@ -96,6 +99,7 @@ export function WallWork({ w, i, h, onOpen, stacked }) {
           </div>
         </div>
         <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
       </figure>
     )
   }
@@ -105,6 +109,7 @@ export function WallWork({ w, i, h, onOpen, stacked }) {
       <div className="work__spot" aria-hidden="true" />
       {image}
       <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
     </figure>
   )
 }

@@ -1,36 +1,27 @@
 import { useCallback, useEffect, useState } from 'react'
-import { Routes, Route, NavLink, Link, useNavigate, useParams } from 'react-router-dom'
+import { Routes, Route, NavLink, Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
 import { pad, TYPE_LABEL, asset, SITE } from '../lib/data'
 import { uploadFile, slugify } from './upload'
+import { useAuth, GoogleMark } from '../lib/auth'
 import './studio.css'
 
 const EASE = [0.2, 0.7, 0.1, 1]
 
 export default function Studio() {
-  const [session, setSession] = useState(undefined)
-  const [isAdmin, setIsAdmin] = useState(null)
+  const { session, isAdmin, ready, signOut } = useAuth()
+  useEffect(() => { document.title = 'סטודיו · תערוכות' }, [])
 
-  useEffect(() => {
-    document.title = 'סטודיו · תערוכות'
-    supabase.auth.getSession().then(({ data }) => setSession(data.session))
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, s) => setSession(s))
-    return () => sub.subscription.unsubscribe()
-  }, [])
-
-  useEffect(() => {
-    if (!session) { setIsAdmin(null); return }
-    supabase.from(T.admins).select('user_id').eq('user_id', session.user.id).maybeSingle()
-      .then(({ data }) => setIsAdmin(!!data))
-  }, [session])
-
-  if (session === undefined || (session && isAdmin === null)) return <div className="st state"><div className="loader" /></div>
+  if (session === undefined || (session && !ready)) return <div className="st state"><div className="loader" /></div>
   if (!session) return <Login />
   if (!isAdmin) return (
     <div className="st state">
-      <p className="lede">לחשבון הזה אין הרשאת עריכה.</p>
-      <button className="sbtn" onClick={() => supabase.auth.signOut()}>יציאה</button>
+      <p className="lede">החשבון {session.user.email} אינו מורשה לערוך את האתר.</p>
+      <div className="actions">
+        <button className="sbtn" onClick={signOut}>כניסה עם חשבון אחר</button>
+        <Link className="sbtn ghost" to="/" style={{ display: 'inline-flex', alignItems: 'center' }}>חזרה לאתר</Link>
+      </div>
     </div>
   )
 
@@ -44,8 +35,8 @@ export default function Studio() {
         <nav className="mono" aria-label="ניווט סטודיו">
           <NavLink to="/studio" end>תערוכות</NavLink>
           <NavLink to="/studio/settings">אודות והגדרות</NavLink>
-          <a href={SITE('/')} target="_blank" rel="noreferrer">צפייה באתר</a>
-          <button onClick={() => supabase.auth.signOut()}>יציאה</button>
+          <Link to="/">צפייה באתר</Link>
+          <button onClick={signOut}>יציאה</button>
         </nav>
       </header>
       <main className="st-main">
@@ -96,30 +87,19 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
 
 /* ---------------- login ---------------- */
 function Login() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [err, setErr] = useState('')
-  const [busy, setBusy] = useState(false)
-  const submit = async (e) => {
-    e.preventDefault(); setBusy(true); setErr('')
-    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
-    if (error) setErr('הכניסה נכשלה. בדקי את הדוא״ל והסיסמה.')
-    setBusy(false)
-  }
+  const { signIn } = useAuth()
   return (
     <div className="st" style={{ display: 'grid', placeItems: 'center', padding: 24 }}>
-      <motion.form onSubmit={submit} className="panel" style={{ width: 'min(420px, 100%)', display: 'flex', flexDirection: 'column', gap: 18 }}
+      <motion.div className="panel" style={{ width: 'min(420px, 100%)', display: 'flex', flexDirection: 'column', gap: 18 }}
         initial={{ opacity: 0, y: 30, rotateX: 8 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ duration: 0.9, ease: EASE }}>
         <span className="mono mute">סטודיו</span>
         <h1 className="st-title">כניסה</h1>
-        <Field label="דוא״ל"><input type="email" autoComplete="email" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
-        <Field label="סיסמה"><input type="password" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></Field>
-        {err && <span role="alert" style={{ color: '#8B2A1F' }}>{err}</span>}
+        <p style={{ margin: 0, color: 'var(--ink-2)' }}>העריכה פתוחה רק לחשבון Google המורשה.</p>
         <div className="actions">
-          <button className="sbtn primary" disabled={busy}>{busy ? 'נכנסת…' : 'כניסה'}</button>
+          <button className="sbtn primary" onClick={() => signIn()} style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}><GoogleMark /> כניסה עם Google</button>
           <Link to="/" className="mono mute">חזרה לאתר</Link>
         </div>
-      </motion.form>
+      </motion.div>
     </div>
   )
 }
@@ -165,7 +145,7 @@ function List() {
               </div>
               <div className="actions">
                 <Link className="sbtn" to={`/studio/e/${r.id}`} style={{ display: 'inline-flex', alignItems: 'center' }}>עריכה</Link>
-                <a className="sbtn ghost" href={SITE(`/e/${r.slug}`)} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
+                <Link className="sbtn ghost" to={`/e/${r.slug}`} style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</Link>
               </div>
             </motion.div>
           ))}
@@ -194,6 +174,17 @@ function Editor() {
     setEx(data)
   }, [id, toast])
   useEffect(() => { load() }, [load])
+
+  // Arriving from the exhibition page with #w-<id> or #add: scroll there once the works are drawn.
+  const { hash } = useLocation()
+  useEffect(() => {
+    if (!ex || !hash) return
+    const t = setTimeout(() => {
+      const el = document.getElementById(hash.slice(1))
+      if (el) { el.scrollIntoView({ behavior: 'smooth', block: 'center' }); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1800) }
+    }, 400)
+    return () => clearTimeout(t)
+  }, [ex, hash, works.length])
 
   if (!ex) return <div className="loader" />
   const set = (k) => (e) => setEx({ ...ex, [k]: e.target.value })
@@ -257,7 +248,7 @@ function Editor() {
         <div className="actions">
           <span className={`badge ${published ? 'pub' : ''}`}>{published ? 'מפורסמת' : 'טיוטה'}</span>
           <button className="sbtn" onClick={() => save({ status: published ? 'draft' : 'published' })} disabled={saving}>{published ? 'החזרה לטיוטה' : 'פרסום'}</button>
-          <a className="sbtn ghost" href={SITE(`/e/${ex.slug}`)} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
+          <Link className="sbtn ghost" to={`/e/${ex.slug}`} style={{ display: 'inline-flex', alignItems: 'center' }}>חזרה לדף התערוכה</Link>
         </div>
       </div>
 
@@ -278,7 +269,7 @@ function Editor() {
         </div>
       </section>
 
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, borderTop: '1px solid var(--ink)', paddingTop: 16 }}>
+      <div id="add" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, borderTop: '1px solid var(--ink)', paddingTop: 16 }}>
         <h2 style={{ margin: 0, fontWeight: 200, fontSize: 32 }}>עבודות · {pad(works.length)}</h2>
         <div className="actions">
           <span className="mono mute">הוספת עבודה:</span>
@@ -333,7 +324,7 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
 
   const needsMedia = w.type !== 'text'
   return (
-    <section className="panel work-card" aria-label={`עבודה ${i + 1}`}>
+    <section id={`w-${w.id}`} className="panel work-card" aria-label={`עבודה ${i + 1}`}>
       <div className="work-idx">
         <span>W-{pad(i + 1)}</span>
         <button onClick={() => onMove(-1)} disabled={i === 0} aria-label="הזזה למעלה">למעלה</button>
@@ -382,7 +373,6 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
 /* ---------------- settings ---------------- */
 function Settings() {
   const [s, setS] = useState(null)
-  const [pw, setPw] = useState('')
   const [busy, setBusy] = useState(false)
   const [toast, toastNode] = useToast()
   useEffect(() => { supabase.from(T.settings).select('*').eq('id', 1).maybeSingle().then(({ data }) => setS(data || { id: 1 })) }, [])
@@ -393,13 +383,6 @@ function Settings() {
     const { error } = await supabase.from(T.settings).upsert({ ...s, id: 1, updated_at: new Date().toISOString() })
     setBusy(false)
     error ? toast('השמירה נכשלה', true) : toast('נשמר')
-  }
-  const changePw = async (e) => {
-    e.preventDefault()
-    if (pw.length < 10) return toast('סיסמה של 10 תווים לפחות', true)
-    const { error } = await supabase.auth.updateUser({ password: pw })
-    if (error) return toast('שינוי הסיסמה נכשל: ' + error.message, true)
-    setPw(''); toast('הסיסמה עודכנה')
   }
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
@@ -414,10 +397,6 @@ function Settings() {
         </div>
         <div className="actions" style={{ marginTop: 20 }}><button className="sbtn primary" onClick={save} disabled={busy}>שמירה</button></div>
       </section>
-      <form className="panel" onSubmit={changePw} style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'flex-end' }}>
-        <Field label="סיסמה חדשה"><input type="password" autoComplete="new-password" value={pw} onChange={(e) => setPw(e.target.value)} /></Field>
-        <button className="sbtn">החלפת סיסמה</button>
-      </form>
       {toastNode}
     </div>
   )
