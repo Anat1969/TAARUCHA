@@ -6,6 +6,8 @@ import { Page, Lines, Reveal, EASE } from '../components/Motion'
 import { WallWork } from '../components/Work'
 import Lightbox from '../components/Lightbox'
 import EditBar from '../components/EditBar'
+import PageDrop from '../components/PageDrop'
+import { Img } from '../components/Motion'
 
 function useIsNarrow() {
   const q = '(max-width: 900px)'
@@ -21,14 +23,15 @@ function useIsNarrow() {
 
 export default function Exhibition() {
   const { slug } = useParams()
-  const { data: ex, loading, error } = useAsync(() => fetchExhibition(slug), [slug])
+  const [rev, setRev] = useState(0)
+  const { data: ex, loading, error } = useAsync(() => fetchExhibition(slug), [slug, rev])
   const { data: all } = useAsync(fetchExhibitions, [])
   const [open, setOpen] = useState(null)
   const narrow = useIsNarrow()
 
   useEffect(() => { if (ex) document.title = `${ex.title} · ענת דוד שטיבלמן` }, [ex])
 
-  if (loading) return <Page className="state"><div className="loader" /><span className="mono mute">פותחים את האולם</span></Page>
+  if (loading && !ex) return <Page className="state"><div className="loader" /><span className="mono mute">פותחים את האולם</span></Page>
   if (error || !ex) return <Page className="state"><p className="lede">התערוכה לא נמצאה.</p><Link className="btn" to="/">לכל התערוכות</Link></Page>
 
   const works = ex.works || []
@@ -57,6 +60,12 @@ export default function Exhibition() {
           </dl>
         </Reveal>
       </section>
+
+      <PageDrop ex={ex} works={works} onAdded={() => setRev((r) => r + 1)} />
+
+      {works.length === 0 && ex.cover_url && (
+        <Reveal className="ex-cover wrap"><div className="frame"><Img src={ex.cover_url} alt={ex.title} /></div></Reveal>
+      )}
 
       {works.length > 0 && (narrow
         ? <Stack works={works} onOpen={setOpen} exId={ex.id} />

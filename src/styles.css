@@ -367,3 +367,23 @@ main { overflow-x: clip; }
 .lb__doc { color: var(--on-deep); border: 1px solid rgba(255,255,255,.35); padding: 12px 16px; align-self: flex-start; transition: background .3s var(--ease); }
 .lb__doc:hover { background: rgba(255,255,255,.1); }
 .draft-flag { position: fixed; z-index: 60; top: 84px; left: 50%; translate: -50% 0; padding: 10px 18px; background: #1b1b1a; color: var(--on-deep); box-shadow: var(--shadow-1); }
+
+/* ---------- Upload straight onto the exhibition page (admin) ---------- */
+.pagedrop { display: flex; flex-direction: column; gap: 10px; padding-bottom: clamp(32px, 4vw, 56px); perspective: 1000px; }
+.pagedrop__zone {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
+  min-height: 220px; padding: 28px 20px; border: 1px dashed #8C8C87;
+  background: radial-gradient(60% 90% at 50% 0%, rgba(255,255,255,.9), transparent 70%), repeating-linear-gradient(135deg, rgba(0,0,0,.025) 0 12px, transparent 12px 24px), linear-gradient(180deg, #ECECE9, #E0E0DC);
+  box-shadow: inset 0 18px 40px -30px rgba(0,0,0,.35), var(--shadow-2); transition: all .4s var(--ease);
+}
+.pagedrop__zone:hover, .pagedrop__zone.over { border-color: var(--ink); transform: translateY(-3px); }
+.pagedrop__zone.over { background-color: #fff; }
+.pagedrop__title { font-weight: 100; font-size: clamp(28px, 3.6vw, 52px); line-height: 1.1; }
+.pagedrop__btn { min-height: 44px; padding: 0 20px; display: inline-flex; align-items: center; background: var(--ink); color: var(--paper); box-shadow: var(--shadow-1); }
+.pagedrop__zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.pagedrop__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.pagedrop__list li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 12px; background: rgba(255,255,255,.6); border-inline-start: 2px solid var(--ink); }
+.pagedrop__list li.done { border-color: #3E6B48; }
+.pagedrop__list li.err { border-color: #8B2A1F; color: #8B2A1F; }
+.ex-cover { padding-bottom: 48px; }
+.ex-cover .frame { max-width: 900px; margin: 0 auto; box-shadow: var(--shadow-2); }
