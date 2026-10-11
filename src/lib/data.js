@@ -66,7 +66,7 @@ export function splitBody(body) {
   return (body || '').split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean)
 }
 
-export const TYPE_LABEL = { image: 'דימוי', text: 'טקסט', video: 'וידאו', composite: 'דימוי וטקסט' }
+export const TYPE_LABEL = { image: 'דימוי', text: 'טקסט', video: 'וידאו', composite: 'דימוי וטקסט', document: 'מסמך' }
 
 // Media stored as "/media/..." lives in the site's public folder; prefix it with the deploy base.
 export function asset(url) {

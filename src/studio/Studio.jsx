@@ -3,7 +3,7 @@ import { Routes, Route, NavLink, Link, useNavigate, useParams, useLocation } fro
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
 import { pad, TYPE_LABEL, asset, SITE } from '../lib/data'
-import { uploadFile, slugify } from './upload'
+import { uploadFile, slugify, workFromFile, pdfPreview, isPdf, kindOf } from './upload'
 import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
 import './studio.css'
 
@@ -89,6 +89,35 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
       {busy ? <div className="loader" /> : value ? (kind === 'video' ? <video src={asset(value)} muted /> : <img src={asset(value)} alt="" />) : null}
       <span className="mono mute">{busy ? 'מעלה…' : value ? 'החלפה: גררי קובץ חדש או לחצי' : label}</span>
       <input type="file" accept={accept} aria-label={label} onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = '' }} />
+    </div>
+  )
+}
+
+// The main way to fill an exhibition: drop any number of files of any kind; each becomes a work.
+function GalleryDrop({ onFiles, queue }) {
+  const [over, setOver] = useState(false)
+  const busy = queue.some((q) => q.state === 'up')
+  return (
+    <div className="gdrop-wrap">
+      <div className={`gdrop ${over ? 'over' : ''}`}
+        onDragOver={(e) => { e.preventDefault(); setOver(true) }}
+        onDragLeave={() => setOver(false)}
+        onDrop={(e) => { e.preventDefault(); setOver(false); const f = [...(e.dataTransfer.files || [])]; if (f.length) onFiles(f) }}>
+        <span className="gdrop__title">{busy ? 'מעלה…' : 'גררי לכאן את חומרי התערוכה'}</span>
+        <span className="mono mute">תמונות · PDF · פליירים · מסמכים · סרטונים — כמה קבצים בבת אחת, עד 50MB לקובץ</span>
+        <span className="sbtn primary gdrop__btn">בחירת קבצים</span>
+        <input type="file" multiple aria-label="בחירת קבצים להעלאה" onChange={(e) => { const f = [...(e.target.files || [])]; if (f.length) onFiles(f); e.target.value = '' }} />
+      </div>
+      {queue.length > 0 && (
+        <ul className="gqueue mono" aria-live="polite">
+          {queue.map((q) => (
+            <li key={q.id} className={q.state}>
+              <span className="gqueue__name">{q.name}</span>
+              <span>{q.state === 'up' ? 'מעלה…' : q.state === 'done' ? 'נוסף לקיר' : q.error}</span>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   )
 }
@@ -194,6 +223,7 @@ function Editor() {
   const [works, setWorks] = useState([])
   const [saving, setSaving] = useState(false)
   const [coverBusy, setCoverBusy] = useState(false)
+  const [queue, setQueue] = useState([])
   const [toast, toastNode] = useToast()
 
   const load = useCallback(async () => {
@@ -204,6 +234,19 @@ function Editor() {
     setEx(data)
   }, [id, toast])
   useEffect(() => { load() }, [load])
+
+  // Covers uploaded as PDF before previews existed: render page 1 once and keep that as the cover.
+  const pdfCover = ex && isPdf(ex.cover_url) ? ex.cover_url : null
+  useEffect(() => {
+    if (!pdfCover) return
+    let alive = true
+    pdfPreview(pdfCover).then(({ file }) => uploadFile(file, `ex-${id}`)).then(async (url) => {
+      if (!alive) return
+      const { error } = await supabase.from(T.exhibitions).update({ cover_url: url }).eq('id', id)
+      if (!error) setEx((e) => ({ ...e, cover_url: url }))
+    }).catch(() => {})
+    return () => { alive = false }
+  }, [pdfCover, id])
 
   // Arriving from the exhibition page with #w-<id> or #add: scroll there once the works are drawn.
   const { hash } = useLocation()
@@ -241,9 +284,39 @@ function Editor() {
 
   const onCover = async (file) => {
     setCoverBusy(true)
-    try { const url = await uploadFile(file, `ex-${ex.id}`); await save({ cover_url: url }) }
+    try {
+      const img = kindOf(file) === 'pdf' ? (await pdfPreview(file)).file : file
+      const url = await uploadFile(img, `ex-${ex.id}`); await save({ cover_url: url })
+    }
     catch (e) { toast('ההעלאה נכשלה: ' + e.message, true) }
     setCoverBusy(false)
+  }
+
+  const addFiles = async (files) => {
+    const items = files.map((f, k) => ({ id: `${Date.now()}-${k}`, name: f.name, state: 'up', file: f }))
+    setQueue((q) => [...q.filter((x) => x.state === 'up'), ...items.map(({ file, ...rest }) => rest)])
+    let pos = (works.length ? Math.max(...works.map((w) => w.position)) : 0)
+    const added = []
+    let cover = ex.cover_url && !isPdf(ex.cover_url) ? ex.cover_url : null
+    // A few uploads at a time; positions are reserved up front so the wall keeps the drop order.
+    const jobs = items.map((it) => ({ it, position: ++pos }))
+    const run = async ({ it, position }) => {
+      try {
+        const fields = await workFromFile(it.file, `ex-${ex.id}`)
+        const { data, error } = await supabase.from(T.works).insert({ exhibition_id: ex.id, year: ex.year, position, ...fields }).select().single()
+        if (error) throw error
+        added.push(data)
+        setWorks((ws) => [...ws, data].sort((a, b) => a.position - b.position))
+        if (!cover && data.media_url && data.type !== 'video') cover = data.media_url
+        setQueue((q) => q.map((x) => (x.id === it.id ? { ...x, state: 'done' } : x)))
+      } catch (e) {
+        setQueue((q) => q.map((x) => (x.id === it.id ? { ...x, state: 'err', error: e.message || 'ההעלאה נכשלה' } : x)))
+      }
+    }
+    const pool = [...jobs]
+    await Promise.all(Array.from({ length: 3 }, async () => { while (pool.length) await run(pool.shift()) }))
+    if (cover && cover !== ex.cover_url) await save({ cover_url: cover })
+    if (added.length) toast(`${added.length} ${added.length === 1 ? 'קובץ נוסף' : 'קבצים נוספו'} לקיר`)
   }
 
   const addWork = async (type) => {
@@ -291,7 +364,7 @@ function Editor() {
           <Field label="כתובת בדף (slug)" hint={`/e/${slugify(ex.slug)}`}><input value={ex.slug || ''} onChange={set('slug')} dir="ltr" /></Field>
           <Field label="סדר בדף הבית" hint="מספר גבוה מופיע ראשון"><input type="number" value={ex.position ?? 0} onChange={(e) => setEx({ ...ex, position: Number(e.target.value) })} /></Field>
           <Field label="טקסט אוצרותי" hint="שורה ריקה מפרידה בין פסקאות" full><textarea value={ex.curatorial_text || ''} onChange={set('curatorial_text')} /></Field>
-          <Field label="דימוי שער" full><Drop value={ex.cover_url} onFile={onCover} busy={coverBusy} /></Field>
+          <Field label="דימוי שער" hint="תמונה או PDF (העמוד הראשון יהפוך לתמונה). אם אין שער, הקובץ הראשון שמועלה יהיה השער." full><Drop value={isPdf(ex.cover_url) ? null : ex.cover_url} onFile={onCover} busy={coverBusy} accept="image/*,application/pdf" /></Field>
         </div>
         <div className="actions" style={{ marginTop: 20, justifyContent: 'space-between' }}>
           <button className="sbtn primary" onClick={() => save()} disabled={saving}>{saving ? 'שומר…' : 'שמירת פרטים'}</button>
@@ -299,10 +372,20 @@ function Editor() {
         </div>
       </section>
 
+      {!published && (
+        <div className="draft-note">
+          <span>התערוכה בטיוטה: רק את רואה אותה. כדי שתופיע באתר לכולם יש לפרסם.</span>
+          <button className="sbtn primary" onClick={() => save({ status: 'published' })} disabled={saving}>פרסום עכשיו</button>
+        </div>
+      )}
+
       <div id="add" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, borderTop: '1px solid var(--ink)', paddingTop: 16 }}>
         <h2 style={{ margin: 0, fontWeight: 200, fontSize: 32 }}>עבודות · {pad(works.length)}</h2>
+      </div>
+      <GalleryDrop onFiles={addFiles} queue={queue} />
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 16 }}>
         <div className="actions">
-          <span className="mono mute">הוספת עבודה:</span>
+          <span className="mono mute">או עבודה ריקה:</span>
           {Object.entries(TYPE_LABEL).map(([t, l]) => <button key={t} className="sbtn" onClick={() => addWork(t)}>{l} +</button>)}
         </div>
       </div>
@@ -347,7 +430,12 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
   }
   const onFile = async (file) => {
     setUp(true)
-    try { const url = await uploadFile(file, `ex-${exId}`); await save({ media_url: url }) }
+    try {
+      if (w.type === 'document' || ['pdf', 'document'].includes(kindOf(file))) {
+        const { title, ...fields } = await workFromFile(file, `ex-${exId}`)
+        await save(fields)
+      } else await save({ media_url: await uploadFile(file, `ex-${exId}`) })
+    }
     catch (e) { toast('ההעלאה נכשלה: ' + e.message, true) }
     setUp(false)
   }
@@ -384,7 +472,12 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
             <input dir="ltr" value={w.video_url || ''} onChange={set('video_url')} placeholder="https://vimeo.com/…" />
           </Field>
         )}
-        {needsMedia && (
+        {w.type === 'document' && (
+          <Field label="מסמך" hint={w.file_name || ''} full>
+            <Drop value={w.media_url} onFile={onFile} busy={up} accept="*/*" label="גררי מסמך חדש (PDF, Word, מצגת…) או לחצי" />
+          </Field>
+        )}
+        {needsMedia && w.type !== 'document' && (
           <Field label={w.type === 'video' ? 'קובץ וידאו' : 'דימוי'} full>
             <Drop value={w.media_url} onFile={onFile} busy={up}
               kind={w.type === 'video' ? 'video' : 'image'}

@@ -40,6 +40,7 @@ export default function Exhibition() {
 
   return (
     <Page>
+      {ex.status !== 'published' && <div className="draft-flag mono" role="status">טיוטה · רק את רואה את הדף הזה</div>}
       <section className="ex-intro">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <motion.div className="mono mute" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }}>
