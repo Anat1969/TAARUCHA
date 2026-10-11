@@ -349,3 +349,21 @@ main { overflow-x: clip; }
   .editbar__dot { display: none; }
   .editbar__btn { flex: 1 1 40%; justify-content: center; }
 }
+
+/* ---------- Documents on the wall ---------- */
+.frame.sheet { background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.06), 6px 6px 0 -1px #F4F4F1, 6px 6px 0 0 rgba(0,0,0,.08), var(--shadow-2); }
+.doc-open { align-self: flex-start; color: var(--ink-2); border-bottom: 1px solid currentColor; padding: 4px 0; transition: color .3s var(--ease); }
+.doc-open:hover { color: var(--ink); }
+.doccard {
+  display: flex; flex-direction: column; justify-content: space-between; gap: 18px;
+  aspect-ratio: 210 / 297; min-height: 260px; padding: 28px 24px; color: var(--ink);
+  background: linear-gradient(160deg, #FFFFFF, #F1F1EE 70%, #E6E6E2);
+  box-shadow: 6px 6px 0 -1px #F4F4F1, 6px 6px 0 0 rgba(0,0,0,.08), var(--shadow-2);
+  transform: perspective(900px) rotateY(-4deg); transition: transform .8s var(--ease);
+}
+.doccard:hover { transform: perspective(900px) rotateY(0deg) translateY(-4px); }
+.doccard__ext { font-family: var(--mono); font-size: 13px; letter-spacing: .2em; border: 1px solid var(--ink); align-self: flex-start; padding: 4px 8px; }
+.doccard__name { font-weight: 200; font-size: clamp(22px, 2.2vw, 32px); line-height: 1.2; }
+.lb__doc { color: var(--on-deep); border: 1px solid rgba(255,255,255,.35); padding: 12px 16px; align-self: flex-start; transition: background .3s var(--ease); }
+.lb__doc:hover { background: rgba(255,255,255,.1); }
+.draft-flag { position: fixed; z-index: 60; top: 84px; left: 50%; translate: -50% 0; padding: 10px 18px; background: #1b1b1a; color: var(--on-deep); box-shadow: var(--shadow-1); }

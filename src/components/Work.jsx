@@ -47,6 +47,18 @@ export function VideoPlayer({ w }) {
   )
 }
 
+// A document with no preview (Word, slides…): a sheet of paper with its format.
+export function DocCard({ w, h }) {
+  const ext = (w.file_name || w.file_url || '').split('.').pop().toUpperCase().slice(0, 5)
+  return (
+    <a className="doccard" href={asset(w.file_url)} target="_blank" rel="noopener" style={h ? { height: h } : undefined}>
+      <span className="doccard__ext">{ext}</span>
+      <span className="doccard__name">{w.title || w.file_name}</span>
+      <span className="mono">פתיחה ←</span>
+    </a>
+  )
+}
+
 // A single work on the wall. `h` is the hanging height (CSS length) shared by the row.
 export function WallWork({ w, i, h, onOpen, stacked, exId }) {
   const open = () => onOpen?.(i)
@@ -72,6 +84,27 @@ export function WallWork({ w, i, h, onOpen, stacked, exId }) {
         <div className="work__spot" aria-hidden="true" />
         <VideoPlayer w={w} />
         <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
+      </figure>
+    )
+  }
+
+  if (w.type === 'document') {
+    return (
+      <figure className="work">
+        <div className="work__spot" aria-hidden="true" />
+        {w.media_url ? (
+          <div className="work__body" role="button" tabIndex={0} onClick={open} onKeyDown={key} aria-label={`הגדלת המסמך ${w.title || ''}`}>
+            <div className="frame sheet" style={stacked ? undefined : { height: h }}>
+              <Img src={w.media_url} alt={w.title} style={imgStyle} />
+            </div>
+            <div className="work__cast" aria-hidden="true" />
+          </div>
+        ) : (
+          <DocCard w={w} h={stacked ? undefined : h} />
+        )}
+        <Label w={w} i={i} />
+        {w.file_url && <a className="doc-open mono" href={asset(w.file_url)} target="_blank" rel="noopener">פתיחת המסמך ←</a>}
         <WorkEditLink exhibitionId={exId} workId={w.id} />
       </figure>
     )

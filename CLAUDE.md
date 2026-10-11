@@ -29,7 +29,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 ## Data
 
 - `taarucha_exhibitions`: slug, code (EX 01), title, subtitle, curatorial_text (blank line = new paragraph), year, cover_url, status draft|published, position (higher = first)
-- `taarucha_works`: exhibition_id, type image|text|video|composite, kicker, title, body, media_url, video_url (YouTube/Vimeo), year, medium, layout, position
+- `taarucha_works`: exhibition_id, type image|text|video|composite|document, file_url + file_name (original document; media_url = PDF page-1 preview), kicker, title, body, media_url, video_url (YouTube/Vimeo), year, medium, layout, position
 - `taarucha_settings`: single row id=1 (name, tagline, bio, email, instagram)
 - `taarucha_admins`: user_id and/or email. `taarucha_is_admin()` / rpc `taarucha_whoami()` = listed user id or listed email from the JWT.
 - Storage bucket `taarucha-media` (public read, admin write).
@@ -38,7 +38,8 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 ## Editing
 
 - Exhibition page: visitors see a quiet "עריכה" tab → `/studio?next=<page>` login → back to the same page. The admin sees a floating edit bar and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
-- Sign-in: email + password (or an email login link). The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
+- Main upload path: the studio's gallery drop takes many files of any kind at once; each becomes a work (image, video, PDF → document with a page-1 preview rendered client-side by pdfjs, other files → document card). The first image becomes the cover if none. A PDF cover is converted to an image.
+- Sign-in: email + password, email pre-filled, "סטודיו" button in the site header. The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
 
 ## Design language
 
@@ -63,3 +64,4 @@ npm run build
 - RTL horizontal scroll: measure the row with `width: max-content` + `offsetWidth`, not `scrollWidth`. Motion wrappers inside a flex row need `flex: 0 0 auto`.
 - Test every button before pushing: Playwright against `vite preview` with Supabase routes mocked, including a fake admin session in localStorage (`sb-<ref>-auth-token`).
 - Merge to `main` yourself (the owner only refreshes the live site). A PR left open means she sees nothing.
+- "I uploaded and can't see it": check status (drafts are hidden from the public) and whether files went to works or only to the cover. The editor shows a draft banner with a publish button.

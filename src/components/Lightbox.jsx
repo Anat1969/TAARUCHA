@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Prose, VideoPlayer } from './Work'
+import { Prose, VideoPlayer, DocCard } from './Work'
 import { pad, TYPE_LABEL, asset } from '../lib/data'
 import { EASE } from './Motion'
 
@@ -30,6 +30,8 @@ export default function Lightbox({ works, index, onClose, onIndex }) {
           <div className="lb__media">
             {w.type === 'video' ? (
               <div style={{ width: '100%' }}><VideoPlayer w={w} /></div>
+            ) : w.type === 'document' && !w.media_url ? (
+              <DocCard w={w} />
             ) : w.media_url ? (
               <motion.img key={w.id} src={asset(w.media_url)} alt={w.title || ''}
                 className={zoom ? 'zoomed' : ''}
@@ -49,6 +51,7 @@ export default function Lightbox({ works, index, onClose, onIndex }) {
             <h2 style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(28px, 3vw, 44px)', lineHeight: 1.15 }}>{w.title}</h2>
             {w.body && <Prose body={w.body} />}
             <span className="mono" style={{ color: 'var(--on-deep-mute)' }}>{[w.year, w.medium].filter(Boolean).join(' · ')}</span>
+            {w.file_url && <a className="lb__doc mono" href={asset(w.file_url)} target="_blank" rel="noopener">פתיחת המסמך המלא ←</a>}
             <div className="lb__nav mono">
               <button onClick={() => onIndex(index - 1)} disabled={index === 0}>→ הקודמת</button>
               <button onClick={() => onIndex(index + 1)} disabled={index === works.length - 1}>הבאה ←</button>

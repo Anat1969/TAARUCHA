@@ -77,3 +77,35 @@
 }
 .flash { animation: flash 1.8s ease; }
 @keyframes flash { 0%, 100% { box-shadow: var(--shadow-1); } 30% { box-shadow: 0 0 0 3px var(--ink), var(--shadow-2); } }
+
+/* Gallery drop: the main way to fill an exhibition */
+.gdrop-wrap { display: flex; flex-direction: column; gap: 12px; }
+.gdrop {
+  position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center;
+  min-height: 240px; padding: 32px 20px; perspective: 900px;
+  border: 1px dashed #8C8C87;
+  background:
+    radial-gradient(60% 80% at 50% 0%, rgba(255,255,255,.85), transparent 70%),
+    repeating-linear-gradient(135deg, rgba(0,0,0,.025) 0 12px, transparent 12px 24px),
+    linear-gradient(180deg, #ECECE9, #E2E2DE);
+  box-shadow: inset 0 18px 40px -30px rgba(0,0,0,.35), var(--shadow-1);
+  transition: all .4s var(--ease);
+}
+.gdrop:hover, .gdrop.over { border-color: var(--ink); transform: translateY(-2px); box-shadow: inset 0 18px 40px -30px rgba(0,0,0,.35), var(--shadow-2, 0 30px 60px -30px rgba(0,0,0,.45)); }
+.gdrop.over { background-color: #fff; }
+.gdrop__title { font-weight: 100; font-size: clamp(28px, 3.4vw, 46px); line-height: 1.1; }
+.gdrop__btn { display: inline-flex; align-items: center; pointer-events: none; }
+.gdrop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.gqueue { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; font-size: 12px; }
+.gqueue li { display: flex; justify-content: space-between; gap: 16px; padding: 8px 12px; background: rgba(255,255,255,.55); border-inline-start: 2px solid #A3A39F; }
+.gqueue li.up { border-color: var(--ink); animation: gpulse 1.4s ease-in-out infinite; }
+.gqueue li.done { border-color: #3E6B48; }
+.gqueue li.err { border-color: #8B2A1F; color: #8B2A1F; }
+.gqueue__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; direction: ltr; min-width: 0; }
+@keyframes gpulse { 50% { background: rgba(255,255,255,.9); } }
+
+.draft-note {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 14px 18px; background: linear-gradient(90deg, #1b1b1a, #2a2a28); color: var(--on-deep); box-shadow: var(--shadow-1);
+}
+.draft-note .sbtn.primary { background: var(--paper); color: var(--ink); border-color: var(--paper); }
