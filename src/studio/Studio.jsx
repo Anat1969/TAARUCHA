@@ -285,11 +285,18 @@ function Editor() {
   const onCover = async (file) => {
     setCoverBusy(true)
     try {
+      // An empty exhibition: the cover file is also its first work, so the wall is never blank.
+      if (!works.length) {
+        const fields = await workFromFile(file, `ex-${ex.id}`)
+        const { data } = await supabase.from(T.works).insert({ exhibition_id: ex.id, year: ex.year, position: 1, ...fields }).select().single()
+        if (data) setWorks([data])
+        if (fields.media_url && fields.type !== 'video') { await save({ cover_url: fields.media_url }); return }
+      }
       const img = kindOf(file) === 'pdf' ? (await pdfPreview(file)).file : file
       const url = await uploadFile(img, `ex-${ex.id}`); await save({ cover_url: url })
     }
     catch (e) { toast('ההעלאה נכשלה: ' + e.message, true) }
-    setCoverBusy(false)
+    finally { setCoverBusy(false) }
   }
 
   const addFiles = async (files) => {

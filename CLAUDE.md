@@ -38,6 +38,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 ## Editing
 
 - Exhibition page: visitors see a quiet "עריכה" tab → `/studio?next=<page>` login → back to the same page. The admin sees a floating edit bar and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
+- Upload straight on the exhibition page: the admin sees a large drop zone under the intro (`PageDrop`), same behaviour as the studio's. An exhibition with no works shows its cover; a cover uploaded to an empty exhibition also becomes its first work.
 - Main upload path: the studio's gallery drop takes many files of any kind at once; each becomes a work (image, video, PDF → document with a page-1 preview rendered client-side by pdfjs, other files → document card). The first image becomes the cover if none. A PDF cover is converted to an image.
 - Sign-in: email + password, email pre-filled, "סטודיו" button in the site header. The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
 
@@ -65,3 +66,4 @@ npm run build
 - Test every button before pushing: Playwright against `vite preview` with Supabase routes mocked, including a fake admin session in localStorage (`sb-<ref>-auth-token`).
 - Merge to `main` yourself (the owner only refreshes the live site). A PR left open means she sees nothing.
 - "I uploaded and can't see it": check status (drafts are hidden from the public) and whether files went to works or only to the cover. The editor shows a draft banner with a publish button.
+- Never leave an exhibition page blank: if the owner says "I see nothing", check works count, not only status; turn stray cover uploads into works (SQL) and fix the path that caused it.
