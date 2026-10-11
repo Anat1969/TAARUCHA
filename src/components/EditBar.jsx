@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { useAuth, GoogleMark } from '../lib/auth'
+import { useAuth } from '../lib/auth'
 import { EASE } from './Motion'
 
 // Edit entry point inside an exhibition page. Anonymous visitors see a quiet "עריכה" tab;
-// the authorised Google account sees a floating edit bar that opens this exhibition in the studio.
+// the authorised account sees a floating edit bar that opens this exhibition in the studio.
 export default function EditBar({ exhibitionId }) {
-  const { session, isAdmin, ready, signIn, signOut } = useAuth()
+  const { session, isAdmin, ready, signOut } = useAuth()
+  const { pathname } = useLocation()
   if (session === undefined) return null
 
   return (
@@ -28,11 +29,9 @@ export default function EditBar({ exhibitionId }) {
           <button className="editbar__btn ghost" onClick={signOut}>יציאה</button>
         </motion.div>
       ) : !session ? (
-        <motion.button key="login" className="edit-tab mono" onClick={() => signIn()}
-          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, delay: 1 }}
-          aria-label="כניסה לעריכה עם חשבון Google">
-          <GoogleMark /> עריכה
-        </motion.button>
+        <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, delay: 1 }}>
+          <Link className="edit-tab mono" to={`/studio?next=${encodeURIComponent(pathname)}`} aria-label="כניסה לעריכה">עריכה</Link>
+        </motion.div>
       ) : null}
     </AnimatePresence>
   )
