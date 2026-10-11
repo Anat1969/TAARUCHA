@@ -95,8 +95,8 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
 
 /* ---------------- login ---------------- */
 function Login() {
-  const { signIn, signInWithPassword, sendLink } = useAuth()
-  const [email, setEmail] = useState('')
+  const { signIn, signInWithPassword } = useAuth()
+  const [email, setEmail] = useState('shtanat5@gmail.com')
   const [password, setPassword] = useState('')
   const [busy, setBusy] = useState(false)
   const [msg, setMsg] = useState(null)
@@ -109,13 +109,6 @@ function Login() {
     const err = await signInWithPassword(email, password)
     setBusy(false)
     if (err) setMsg({ err: true, text: err })
-  }
-  const link = async () => {
-    if (!email.trim()) return setMsg({ err: true, text: 'כתבי קודם את כתובת הדוא״ל' })
-    setBusy(true); setMsg(null)
-    const err = await sendLink(email, window.location.href)
-    setBusy(false)
-    setMsg(err ? { err: true, text: err } : { text: 'נשלח קישור כניסה לדוא״ל. פתחי אותו מהמכשיר הזה.' })
   }
   const withGoogle = async () => { const err = await signIn(); if (err) setMsg({ err: true, text: err }) }
 
@@ -131,7 +124,6 @@ function Login() {
         {msg && <p role="status" style={{ margin: 0, color: msg.err ? '#8B2A1F' : 'var(--ink-2)' }}>{msg.text}</p>}
         <div className="actions">
           <button className="sbtn primary" type="submit" disabled={busy}>{busy ? 'רגע…' : 'כניסה'}</button>
-          <button className="sbtn ghost" type="button" onClick={link} disabled={busy}>שליחת קישור כניסה לדוא״ל</button>
         </div>
         {google && (
           <button className="sbtn" type="button" onClick={withGoogle} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}><GoogleMark /> כניסה עם Google</button>

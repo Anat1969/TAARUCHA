@@ -17,6 +17,7 @@ export default function Header() {
         <NavLink to="/" end>תערוכות</NavLink>
         <NavLink to="/archive">ארכיון</NavLink>
         <NavLink to="/about">אודות</NavLink>
+        <Link to="/studio" className="hdr__studio">סטודיו</Link>
       </nav>
     </motion.header>
   )

@@ -97,6 +97,9 @@ button { font: inherit; color: inherit; }
 }
 .hdr__nav a:hover, .hdr__nav a.active { color: var(--ink); }
 .hdr__nav a:hover::after, .hdr__nav a.active::after { transform: scaleX(1); }
+.hdr__nav a.hdr__studio { padding: 10px 14px; margin-inline-start: 4px; border: 1px solid var(--ink); color: var(--ink); box-shadow: 0 8px 20px -14px rgba(0,0,0,.5); transition: all .3s var(--ease); }
+.hdr__nav a.hdr__studio::after { display: none; }
+.hdr__nav a.hdr__studio:hover { background: var(--ink); color: var(--paper); transform: translateY(-1px); }
 
 /* ---------- Typography ---------- */
 .display { margin: 0; font-weight: 100; font-size: clamp(56px, 8.4vw, 148px); line-height: .92; letter-spacing: -.015em; }
