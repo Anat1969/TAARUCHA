@@ -56,19 +56,12 @@ export function useAuth() {
     const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
     return error ? heb(error) : null
   }, [])
-  const sendLink = useCallback(async (email, returnTo) => {
-    const { error } = await supabase.auth.signInWithOtp({
-      email: email.trim(),
-      options: { shouldCreateUser: false, emailRedirectTo: returnTo || window.location.href },
-    })
-    return error ? heb(error) : null
-  }, [])
   const updatePassword = useCallback(async (password) => {
     const { error } = await supabase.auth.updateUser({ password })
     return error ? heb(error) : null
   }, [])
   const signOut = useCallback(() => supabase.auth.signOut(), [])
-  return { ...ctx, signIn, signInWithPassword, sendLink, updatePassword, signOut }
+  return { ...ctx, signIn, signInWithPassword, updatePassword, signOut }
 }
 
 export function GoogleMark() {
