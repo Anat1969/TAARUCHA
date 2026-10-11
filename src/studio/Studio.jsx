@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Routes, Route, NavLink, Link, useNavigate, useParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
-import { pad, TYPE_LABEL } from '../lib/data'
+import { pad, TYPE_LABEL, asset, SITE } from '../lib/data'
 import { uploadFile, slugify } from './upload'
 import './studio.css'
 
@@ -44,7 +44,7 @@ export default function Studio() {
         <nav className="mono" aria-label="ניווט סטודיו">
           <NavLink to="/studio" end>תערוכות</NavLink>
           <NavLink to="/studio/settings">אודות והגדרות</NavLink>
-          <a href="/" target="_blank" rel="noreferrer">צפייה באתר</a>
+          <a href={SITE('/')} target="_blank" rel="noreferrer">צפייה באתר</a>
           <button onClick={() => supabase.auth.signOut()}>יציאה</button>
         </nav>
       </header>
@@ -87,7 +87,7 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
       onDragOver={(e) => { e.preventDefault(); setOver(true) }}
       onDragLeave={() => setOver(false)}
       onDrop={(e) => { e.preventDefault(); setOver(false); const f = e.dataTransfer.files?.[0]; if (f) onFile(f) }}>
-      {busy ? <div className="loader" /> : value ? (kind === 'video' ? <video src={value} muted /> : <img src={value} alt="" />) : null}
+      {busy ? <div className="loader" /> : value ? (kind === 'video' ? <video src={asset(value)} muted /> : <img src={asset(value)} alt="" />) : null}
       <span className="mono mute">{busy ? 'מעלה…' : value ? 'החלפה: גררי קובץ חדש או לחצי' : label}</span>
       <input type="file" accept={accept} aria-label={label} onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = '' }} />
     </div>
@@ -157,7 +157,7 @@ function List() {
         <div className="st-list">
           {rows.map((r, i) => (
             <motion.div key={r.id} className="panel st-row" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE, delay: i * 0.05 }}>
-              {r.cover_url ? <img className="st-thumb" src={r.cover_url} alt="" /> : <div className="st-thumb" />}
+              {r.cover_url ? <img className="st-thumb" src={asset(r.cover_url)} alt="" /> : <div className="st-thumb" />}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
                 <span className="mono mute">{r.code} · {r.year} · {pad(r.works?.[0]?.count || 0)} עבודות</span>
                 <span style={{ fontWeight: 200, fontSize: 26, lineHeight: 1.15 }}>{r.title}</span>
@@ -165,7 +165,7 @@ function List() {
               </div>
               <div className="actions">
                 <Link className="sbtn" to={`/studio/e/${r.id}`} style={{ display: 'inline-flex', alignItems: 'center' }}>עריכה</Link>
-                <a className="sbtn ghost" href={`/e/${r.slug}`} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
+                <a className="sbtn ghost" href={SITE(`/e/${r.slug}`)} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
               </div>
             </motion.div>
           ))}
@@ -257,7 +257,7 @@ function Editor() {
         <div className="actions">
           <span className={`badge ${published ? 'pub' : ''}`}>{published ? 'מפורסמת' : 'טיוטה'}</span>
           <button className="sbtn" onClick={() => save({ status: published ? 'draft' : 'published' })} disabled={saving}>{published ? 'החזרה לטיוטה' : 'פרסום'}</button>
-          <a className="sbtn ghost" href={`/e/${ex.slug}`} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
+          <a className="sbtn ghost" href={SITE(`/e/${ex.slug}`)} target="_blank" rel="noreferrer" style={{ display: 'inline-flex', alignItems: 'center' }}>תצוגה</a>
         </div>
       </div>
 

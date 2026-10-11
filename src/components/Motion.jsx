@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useState } from 'react'
+import { asset } from '../lib/data'
 
 export const EASE = [0.2, 0.7, 0.1, 1]
 
@@ -84,7 +85,7 @@ export function Img({ src, alt, style, className, onClick, eager }) {
   const [loaded, setLoaded] = useState(false)
   return (
     <motion.img
-      src={src}
+      src={asset(src)}
       alt={alt || ''}
       className={className}
       style={style}

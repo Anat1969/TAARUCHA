@@ -67,3 +67,11 @@ export function splitBody(body) {
 }
 
 export const TYPE_LABEL = { image: 'דימוי', text: 'טקסט', video: 'וידאו', composite: 'דימוי וטקסט' }
+
+// Media stored as "/media/..." lives in the site's public folder; prefix it with the deploy base.
+export function asset(url) {
+  if (!url) return url
+  if (url.startsWith('/') && !url.startsWith('//')) return import.meta.env.BASE_URL.replace(/\/$/, '') + url
+  return url
+}
+export const SITE = (path = '') => import.meta.env.BASE_URL.replace(/\/$/, '') + path

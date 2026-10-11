@@ -1,4 +1,4 @@
-import { splitBody, videoEmbed, TYPE_LABEL, pad } from '../lib/data'
+import { splitBody, videoEmbed, TYPE_LABEL, pad, asset } from '../lib/data'
 import { Img } from './Motion'
 
 export function Prose({ body, skipPoem }) {
@@ -38,7 +38,7 @@ export function VideoPlayer({ w }) {
       {embed ? (
         <iframe src={embed} title={w.title || 'וידאו'} allow="autoplay; fullscreen; picture-in-picture" allowFullScreen loading="lazy" />
       ) : w.media_url || w.video_url ? (
-        <video src={w.media_url || w.video_url} controls playsInline preload="metadata" />
+        <video src={asset(w.media_url || w.video_url)} controls playsInline preload="metadata" />
       ) : (
         <div className="mono" style={{ position: 'absolute', inset: 0, display: 'grid', placeItems: 'center', color: '#A3A39F' }}>[וידאו]</div>
       )}

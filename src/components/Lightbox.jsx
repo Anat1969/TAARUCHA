@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Prose, VideoPlayer } from './Work'
-import { pad, TYPE_LABEL } from '../lib/data'
+import { pad, TYPE_LABEL, asset } from '../lib/data'
 import { EASE } from './Motion'
 
 export default function Lightbox({ works, index, onClose, onIndex }) {
@@ -31,7 +31,7 @@ export default function Lightbox({ works, index, onClose, onIndex }) {
             {w.type === 'video' ? (
               <div style={{ width: '100%' }}><VideoPlayer w={w} /></div>
             ) : w.media_url ? (
-              <motion.img key={w.id} src={w.media_url} alt={w.title || ''}
+              <motion.img key={w.id} src={asset(w.media_url)} alt={w.title || ''}
                 className={zoom ? 'zoomed' : ''}
                 style={zoom ? { transform: 'scale(2)', transformOrigin: `${zoom.x}% ${zoom.y}%` } : undefined}
                 onClick={(e) => {
