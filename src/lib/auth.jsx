@@ -24,25 +24,51 @@ export function AuthProvider({ children }) {
   return <AuthCtx.Provider value={{ session, isAdmin, ready }}>{children}</AuthCtx.Provider>
 }
 
+const SB_URL = import.meta.env.VITE_SUPABASE_URL || 'https://ktqmwpbzcnzkhjskqisy.supabase.co'
+const SB_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_IkreG7naPa1h-d4kGp1gpA_sLU4tg5q'
+
+// Whether Google sign-in is switched on in Supabase. Resolves to null when the check itself fails.
+let googleCheck
+export function googleEnabled() {
+  googleCheck ??= fetch(`${SB_URL}/auth/v1/settings`, { headers: { apikey: SB_KEY } })
+    .then((r) => r.json()).then((cfg) => !!cfg?.external?.google).catch(() => null)
+  return googleCheck
+}
+
+const AUTH_ERR = {
+  'Invalid login credentials': 'דוא״ל או סיסמה שגויים',
+  'Email not confirmed': 'כתובת הדוא״ל עדיין לא אומתה',
+}
+const heb = (error) => AUTH_ERR[error?.message] || error?.message
+
 export function useAuth() {
   const ctx = useContext(AuthCtx)
   const signIn = useCallback(async (returnTo) => {
     const redirectTo = returnTo || window.location.href
-    try {
-      const url = import.meta.env.VITE_SUPABASE_URL || 'https://ktqmwpbzcnzkhjskqisy.supabase.co'
-      const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_IkreG7naPa1h-d4kGp1gpA_sLU4tg5q'
-      const res = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } })
-      const cfg = await res.json()
-      if (!cfg?.external?.google) { alert('הכניסה עם Google עדיין לא הופעלה באתר.'); return }
-    } catch { /* if the check fails, try the sign-in anyway */ }
+    if ((await googleEnabled()) === false) return 'הכניסה עם Google עדיין לא הופעלה. אפשר להיכנס עם דוא״ל וסיסמה.'
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo, queryParams: { prompt: 'select_account' } },
     })
-    if (error) alert('הכניסה עם Google נכשלה: ' + error.message)
+    return error ? 'הכניסה עם Google נכשלה: ' + heb(error) : null
+  }, [])
+  const signInWithPassword = useCallback(async (email, password) => {
+    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password })
+    return error ? heb(error) : null
+  }, [])
+  const sendLink = useCallback(async (email, returnTo) => {
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.trim(),
+      options: { shouldCreateUser: false, emailRedirectTo: returnTo || window.location.href },
+    })
+    return error ? heb(error) : null
+  }, [])
+  const updatePassword = useCallback(async (password) => {
+    const { error } = await supabase.auth.updateUser({ password })
+    return error ? heb(error) : null
   }, [])
   const signOut = useCallback(() => supabase.auth.signOut(), [])
-  return { ...ctx, signIn, signOut }
+  return { ...ctx, signIn, signInWithPassword, sendLink, updatePassword, signOut }
 }
 
 export function GoogleMark() {

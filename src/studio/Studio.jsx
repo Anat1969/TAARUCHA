@@ -4,14 +4,22 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
 import { pad, TYPE_LABEL, asset, SITE } from '../lib/data'
 import { uploadFile, slugify } from './upload'
-import { useAuth, GoogleMark } from '../lib/auth'
+import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
 import './studio.css'
 
 const EASE = [0.2, 0.7, 0.1, 1]
 
 export default function Studio() {
   const { session, isAdmin, ready, signOut } = useAuth()
+  const nav = useNavigate()
+  const { search } = useLocation()
   useEffect(() => { document.title = 'סטודיו · תערוכות' }, [])
+
+  // Arriving from an exhibition's "עריכה" tab: once signed in, go back to that page in edit mode.
+  const next = new URLSearchParams(search).get('next')
+  useEffect(() => {
+    if (session && ready && isAdmin && next?.startsWith('/') && !next.startsWith('//')) nav(next, { replace: true })
+  }, [session, ready, isAdmin, next, nav])
 
   if (session === undefined || (session && !ready)) return <div className="st state"><div className="loader" /></div>
   if (!session) return <Login />
@@ -87,19 +95,49 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
 
 /* ---------------- login ---------------- */
 function Login() {
-  const { signIn } = useAuth()
+  const { signIn, signInWithPassword, sendLink } = useAuth()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [busy, setBusy] = useState(false)
+  const [msg, setMsg] = useState(null)
+  const [google, setGoogle] = useState(false)
+  useEffect(() => { googleEnabled().then((on) => setGoogle(on === true)) }, [])
+
+  const submit = async (e) => {
+    e.preventDefault()
+    setBusy(true); setMsg(null)
+    const err = await signInWithPassword(email, password)
+    setBusy(false)
+    if (err) setMsg({ err: true, text: err })
+  }
+  const link = async () => {
+    if (!email.trim()) return setMsg({ err: true, text: 'כתבי קודם את כתובת הדוא״ל' })
+    setBusy(true); setMsg(null)
+    const err = await sendLink(email, window.location.href)
+    setBusy(false)
+    setMsg(err ? { err: true, text: err } : { text: 'נשלח קישור כניסה לדוא״ל. פתחי אותו מהמכשיר הזה.' })
+  }
+  const withGoogle = async () => { const err = await signIn(); if (err) setMsg({ err: true, text: err }) }
+
   return (
     <div className="st" style={{ display: 'grid', placeItems: 'center', padding: 24 }}>
-      <motion.div className="panel" style={{ width: 'min(420px, 100%)', display: 'flex', flexDirection: 'column', gap: 18 }}
+      <motion.form className="panel" onSubmit={submit} style={{ width: 'min(420px, 100%)', display: 'flex', flexDirection: 'column', gap: 18 }}
         initial={{ opacity: 0, y: 30, rotateX: 8 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} transition={{ duration: 0.9, ease: EASE }}>
         <span className="mono mute">סטודיו</span>
         <h1 className="st-title">כניסה</h1>
-        <p style={{ margin: 0, color: 'var(--ink-2)' }}>העריכה פתוחה רק לחשבון Google המורשה.</p>
+        <p style={{ margin: 0, color: 'var(--ink-2)' }}>העריכה פתוחה רק לחשבון המורשה.</p>
+        <Field label="דוא״ל"><input type="email" dir="ltr" autoComplete="username" required value={email} onChange={(e) => setEmail(e.target.value)} /></Field>
+        <Field label="סיסמה"><input type="password" dir="ltr" autoComplete="current-password" required value={password} onChange={(e) => setPassword(e.target.value)} /></Field>
+        {msg && <p role="status" style={{ margin: 0, color: msg.err ? '#8B2A1F' : 'var(--ink-2)' }}>{msg.text}</p>}
         <div className="actions">
-          <button className="sbtn primary" onClick={() => signIn()} style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}><GoogleMark /> כניסה עם Google</button>
-          <Link to="/" className="mono mute">חזרה לאתר</Link>
+          <button className="sbtn primary" type="submit" disabled={busy}>{busy ? 'רגע…' : 'כניסה'}</button>
+          <button className="sbtn ghost" type="button" onClick={link} disabled={busy}>שליחת קישור כניסה לדוא״ל</button>
         </div>
-      </motion.div>
+        {google && (
+          <button className="sbtn" type="button" onClick={withGoogle} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 10 }}><GoogleMark /> כניסה עם Google</button>
+        )}
+        <Link to="/" className="mono mute">חזרה לאתר</Link>
+      </motion.form>
     </div>
   )
 }
@@ -397,7 +435,34 @@ function Settings() {
         </div>
         <div className="actions" style={{ marginTop: 20 }}><button className="sbtn primary" onClick={save} disabled={busy}>שמירה</button></div>
       </section>
+      <PasswordPanel toast={toast} />
       {toastNode}
     </div>
+  )
+}
+
+function PasswordPanel({ toast }) {
+  const { updatePassword } = useAuth()
+  const [pw, setPw] = useState('')
+  const [pw2, setPw2] = useState('')
+  const [busy, setBusy] = useState(false)
+  const submit = async (e) => {
+    e.preventDefault()
+    if (pw.length < 8) return toast('סיסמה של 8 תווים לפחות', true)
+    if (pw !== pw2) return toast('הסיסמאות אינן זהות', true)
+    setBusy(true)
+    const err = await updatePassword(pw)
+    setBusy(false)
+    if (err) return toast('החלפת הסיסמה נכשלה: ' + err, true)
+    setPw(''); setPw2(''); toast('הסיסמה הוחלפה')
+  }
+  return (
+    <form className="panel" onSubmit={submit}>
+      <div className="form">
+        <Field label="סיסמה חדשה"><input type="password" dir="ltr" autoComplete="new-password" value={pw} onChange={(e) => setPw(e.target.value)} /></Field>
+        <Field label="אימות סיסמה"><input type="password" dir="ltr" autoComplete="new-password" value={pw2} onChange={(e) => setPw2(e.target.value)} /></Field>
+      </div>
+      <div className="actions" style={{ marginTop: 20 }}><button className="sbtn primary" type="submit" disabled={busy}>החלפת סיסמה</button></div>
+    </form>
   )
 }

@@ -23,7 +23,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 - `src/pages/` Home, Exhibition (horizontal wall walk), Archive, About, NotFound
 - `src/components/` Atmosphere (light, grid, grain), Header, Footer, Motion (Page, Lines, Reveal, Tilt, Img), Work, Lightbox, EditBar
 - `src/studio/` Studio (list, exhibition editor, work editor, settings), upload helper, studio.css
-- `src/lib/` supabase client, data queries and helpers (`asset()` prefixes local `/media/` paths), auth context (Google sign-in)
+- `src/lib/` supabase client, data queries and helpers (`asset()` prefixes local `/media/` paths), auth context (email/password, email link, Google when enabled)
 - `public/media/` images shipped with the repo (first exhibition's flyers). New uploads go to the Supabase bucket.
 
 ## Data
@@ -37,8 +37,8 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 ## Editing
 
-- Exhibition page: visitors see a quiet "עריכה" tab → Google sign-in → back to the same page. The admin sees a floating edit bar and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
-- Google sign-in needs the Google provider enabled in Supabase Auth. Until then the tab shows a clear message (checked via `/auth/v1/settings`).
+- Exhibition page: visitors see a quiet "עריכה" tab → `/studio?next=<page>` login → back to the same page. The admin sees a floating edit bar and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
+- Sign-in: email + password (or an email login link). The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
 
 ## Design language
 
@@ -62,3 +62,4 @@ npm run build
 - The sandbox cannot reach supabase.co: seed and change data with the Supabase MCP (SQL), ship seed media in `public/media`.
 - RTL horizontal scroll: measure the row with `width: max-content` + `offsetWidth`, not `scrollWidth`. Motion wrappers inside a flex row need `flex: 0 0 auto`.
 - Test every button before pushing: Playwright against `vite preview` with Supabase routes mocked, including a fake admin session in localStorage (`sb-<ref>-auth-token`).
+- Merge to `main` yourself (the owner only refreshes the live site). A PR left open means she sees nothing.
