@@ -28,6 +28,13 @@ export function useAuth() {
   const ctx = useContext(AuthCtx)
   const signIn = useCallback(async (returnTo) => {
     const redirectTo = returnTo || window.location.href
+    try {
+      const url = import.meta.env.VITE_SUPABASE_URL || 'https://ktqmwpbzcnzkhjskqisy.supabase.co'
+      const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_IkreG7naPa1h-d4kGp1gpA_sLU4tg5q'
+      const res = await fetch(`${url}/auth/v1/settings`, { headers: { apikey: key } })
+      const cfg = await res.json()
+      if (!cfg?.external?.google) { alert('הכניסה עם Google עדיין לא הופעלה באתר.'); return }
+    } catch { /* if the check fails, try the sign-in anyway */ }
     const { error } = await supabase.auth.signInWithOAuth({
       provider: 'google',
       options: { redirectTo, queryParams: { prompt: 'select_account' } },
