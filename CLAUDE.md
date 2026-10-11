@@ -42,6 +42,10 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 - Main upload path: the studio's gallery drop takes many files of any kind at once; each becomes a work (image, video, PDF → document with a page-1 preview rendered client-side by pdfjs, other files → document card). The first image becomes the cover if none. A PDF cover is converted to an image.
 - Sign-in: email + password, email pre-filled, "סטודיו" button in the site header. The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
 
+## Studio layout
+
+- Compact by default: title edited inline in a sticky top bar with save / publish / view; subtitle and curatorial text beside a small cover; code, year, slug and order folded under "פרטים נוספים". Upload is one short strip. Each work is a one-line row (thumb, title edited inline, type, order, "עריכה") that opens in place. No explanatory hints.
+
 ## Design language
 
 - Option A "קיר": the exhibition is a walk along a lit wall. Architectural, minimal, grayscale only (#EDEDEA paper → #121212 ink); colour comes only from the works.
@@ -67,3 +71,4 @@ npm run build
 - Merge to `main` yourself (the owner only refreshes the live site). A PR left open means she sees nothing.
 - "I uploaded and can't see it": check status (drafts are hidden from the public) and whether files went to works or only to the cover. The editor shows a draft banner with a publish button.
 - Never leave an exhibition page blank: if the owner says "I see nothing", check works count, not only status; turn stray cover uploads into works (SQL) and fix the path that caused it.
+- Studio screens: less text, less area. Fold rarely used fields, edit inline, no hint lines (the owner asked to distil the editor).

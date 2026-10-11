@@ -79,7 +79,7 @@ function Field({ label, hint, full, children }) {
   )
 }
 
-function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן קובץ או לחצי לבחירה', busy, kind = 'image' }) {
+function Drop({ value, onFile, accept = 'image/*', label = 'גררי קובץ או לחצי', busy, kind = 'image' }) {
   const [over, setOver] = useState(false)
   return (
     <div className={`drop ${over ? 'over' : ''}`}
@@ -87,7 +87,7 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
       onDragLeave={() => setOver(false)}
       onDrop={(e) => { e.preventDefault(); setOver(false); const f = e.dataTransfer.files?.[0]; if (f) onFile(f) }}>
       {busy ? <div className="loader" /> : value ? (kind === 'video' ? <video src={asset(value)} muted /> : <img src={asset(value)} alt="" />) : null}
-      <span className="mono mute">{busy ? 'מעלה…' : value ? 'החלפה: גררי קובץ חדש או לחצי' : label}</span>
+      <span className="mono mute">{busy ? 'מעלה…' : value ? 'החלפה' : label}</span>
       <input type="file" accept={accept} aria-label={label} onChange={(e) => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = '' }} />
     </div>
   )
@@ -96,26 +96,22 @@ function Drop({ value, onFile, accept = 'image/*', label = 'גררי לכאן ק
 // The main way to fill an exhibition: drop any number of files of any kind; each becomes a work.
 function GalleryDrop({ onFiles, queue }) {
   const [over, setOver] = useState(false)
-  const busy = queue.some((q) => q.state === 'up')
+  const up = queue.filter((q) => q.state === 'up').length
+  const errs = queue.filter((q) => q.state === 'err')
   return (
     <div className="gdrop-wrap">
       <div className={`gdrop ${over ? 'over' : ''}`}
         onDragOver={(e) => { e.preventDefault(); setOver(true) }}
         onDragLeave={() => setOver(false)}
         onDrop={(e) => { e.preventDefault(); setOver(false); const f = [...(e.dataTransfer.files || [])]; if (f.length) onFiles(f) }}>
-        <span className="gdrop__title">{busy ? 'מעלה…' : 'גררי לכאן את חומרי התערוכה'}</span>
-        <span className="mono mute">תמונות · PDF · פליירים · מסמכים · סרטונים — כמה קבצים בבת אחת, עד 50MB לקובץ</span>
-        <span className="sbtn primary gdrop__btn">בחירת קבצים</span>
+        <span className="gdrop__title">{up ? `מעלה ${queue.length - up} / ${queue.length}…` : 'גררי קבצים לכאן'}</span>
+        <span className="sbtn primary gdrop__btn">בחירה</span>
+        <span className="mono mute gdrop__hint">כל סוג · כמה בבת אחת</span>
         <input type="file" multiple aria-label="בחירת קבצים להעלאה" onChange={(e) => { const f = [...(e.target.files || [])]; if (f.length) onFiles(f); e.target.value = '' }} />
       </div>
-      {queue.length > 0 && (
+      {errs.length > 0 && (
         <ul className="gqueue mono" aria-live="polite">
-          {queue.map((q) => (
-            <li key={q.id} className={q.state}>
-              <span className="gqueue__name">{q.name}</span>
-              <span>{q.state === 'up' ? 'מעלה…' : q.state === 'done' ? 'נוסף לקיר' : q.error}</span>
-            </li>
-          ))}
+          {errs.map((q) => <li key={q.id} className="err"><span className="gqueue__name">{q.name}</span><span>{q.error}</span></li>)}
         </ul>
       )}
     </div>
@@ -224,6 +220,7 @@ function Editor() {
   const [saving, setSaving] = useState(false)
   const [coverBusy, setCoverBusy] = useState(false)
   const [queue, setQueue] = useState([])
+  const [dirty, setDirty] = useState(false)
   const [toast, toastNode] = useToast()
 
   const load = useCallback(async () => {
@@ -260,7 +257,7 @@ function Editor() {
   }, [ex, hash, works.length])
 
   if (!ex) return <div className="loader" />
-  const set = (k) => (e) => setEx({ ...ex, [k]: e.target.value })
+  const set = (k) => (e) => { setEx({ ...ex, [k]: e.target.value }); setDirty(true) }
 
   const save = async (patch = {}) => {
     setSaving(true)
@@ -272,6 +269,7 @@ function Editor() {
     setSaving(false)
     if (error) return toast(error.code === '23505' ? 'הכתובת (slug) כבר תפוסה' : 'השמירה נכשלה: ' + error.message, true)
     setEx({ ...next, slug: fields.slug })
+    setDirty(false)
     toast('נשמר')
   }
 
@@ -324,6 +322,7 @@ function Editor() {
     await Promise.all(Array.from({ length: 3 }, async () => { while (pool.length) await run(pool.shift()) }))
     if (cover && cover !== ex.cover_url) await save({ cover_url: cover })
     if (added.length) toast(`${added.length} ${added.length === 1 ? 'קובץ נוסף' : 'קבצים נוספו'} לקיר`)
+    setTimeout(() => setQueue((q) => q.filter((x) => x.state !== 'done')), 1500)
   }
 
   const addWork = async (type) => {
@@ -349,64 +348,60 @@ function Editor() {
 
   const published = ex.status === 'published'
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <Link to="/studio" className="mono mute">→ כל התערוכות</Link>
-          <h1 className="st-title">{ex.title || 'ללא שם'}</h1>
-        </div>
+    <div className="ed">
+      <header className="ed-top">
+        <Link to="/studio" className="mono mute">→ תערוכות</Link>
+        <input className="ed-title" value={ex.title || ''} onChange={set('title')} aria-label="שם התערוכה" placeholder="שם התערוכה" />
         <div className="actions">
-          <span className={`badge ${published ? 'pub' : ''}`}>{published ? 'מפורסמת' : 'טיוטה'}</span>
-          <button className="sbtn" onClick={() => save({ status: published ? 'draft' : 'published' })} disabled={saving}>{published ? 'החזרה לטיוטה' : 'פרסום'}</button>
-          <Link className="sbtn ghost" to={`/e/${ex.slug}`} style={{ display: 'inline-flex', alignItems: 'center' }}>חזרה לדף התערוכה</Link>
+          {dirty && <button className="sbtn primary" onClick={() => save()} disabled={saving}>{saving ? 'שומר…' : 'שמירה'}</button>}
+          {published
+            ? <button className="sbtn ghost" onClick={() => save({ status: 'draft' })} disabled={saving} title="הסתרה מהאתר">באתר · הסתרה</button>
+            : <button className="sbtn primary" onClick={() => save({ status: 'published' })} disabled={saving}>טיוטה · פרסום</button>}
+          <Link className="sbtn ghost" to={`/e/${ex.slug}`} style={{ display: 'inline-flex', alignItems: 'center' }}>צפייה</Link>
         </div>
-      </div>
+      </header>
 
-      <section className="panel" aria-label="פרטי התערוכה">
-        <div className="form">
-          <Field label="שם התערוכה"><input value={ex.title || ''} onChange={set('title')} /></Field>
-          <Field label="תת־כותרת"><input value={ex.subtitle || ''} onChange={set('subtitle')} /></Field>
-          <Field label="קוד" hint="למשל EX 02"><input value={ex.code || ''} onChange={set('code')} /></Field>
-          <Field label="שנה"><input value={ex.year || ''} onChange={set('year')} /></Field>
-          <Field label="כתובת בדף (slug)" hint={`/e/${slugify(ex.slug)}`}><input value={ex.slug || ''} onChange={set('slug')} dir="ltr" /></Field>
-          <Field label="סדר בדף הבית" hint="מספר גבוה מופיע ראשון"><input type="number" value={ex.position ?? 0} onChange={(e) => setEx({ ...ex, position: Number(e.target.value) })} /></Field>
-          <Field label="טקסט אוצרותי" hint="שורה ריקה מפרידה בין פסקאות" full><textarea value={ex.curatorial_text || ''} onChange={set('curatorial_text')} /></Field>
-          <Field label="דימוי שער" hint="תמונה או PDF (העמוד הראשון יהפוך לתמונה). אם אין שער, הקובץ הראשון שמועלה יהיה השער." full><Drop value={isPdf(ex.cover_url) ? null : ex.cover_url} onFile={onCover} busy={coverBusy} accept="image/*,application/pdf" /></Field>
+      <section className="panel ed-info" aria-label="פרטי התערוכה">
+        <div className="ed-cover">
+          <Drop value={isPdf(ex.cover_url) ? null : ex.cover_url} onFile={onCover} busy={coverBusy} accept="image/*,application/pdf" label="שער" />
         </div>
-        <div className="actions" style={{ marginTop: 20, justifyContent: 'space-between' }}>
-          <button className="sbtn primary" onClick={() => save()} disabled={saving}>{saving ? 'שומר…' : 'שמירת פרטים'}</button>
-          <button className="sbtn danger" onClick={remove}>מחיקת התערוכה</button>
+        <div className="ed-fields">
+          <input value={ex.subtitle || ''} onChange={set('subtitle')} placeholder="תת־כותרת" aria-label="תת־כותרת" />
+          <textarea value={ex.curatorial_text || ''} onChange={set('curatorial_text')} placeholder="טקסט אוצרותי" aria-label="טקסט אוצרותי" rows={3} />
+          <details className="ed-more">
+            <summary className="mono">פרטים נוספים</summary>
+            <div className="ed-more__grid">
+              <Field label="קוד"><input value={ex.code || ''} onChange={set('code')} /></Field>
+              <Field label="שנה"><input value={ex.year || ''} onChange={set('year')} /></Field>
+              <Field label="כתובת"><input value={ex.slug || ''} onChange={set('slug')} dir="ltr" /></Field>
+              <Field label="סדר בדף הבית"><input type="number" value={ex.position ?? 0} onChange={(e) => { setEx({ ...ex, position: Number(e.target.value) }); setDirty(true) }} /></Field>
+            </div>
+            <button className="linkbtn danger mono" onClick={remove}>מחיקת התערוכה</button>
+          </details>
         </div>
       </section>
 
-      {!published && (
-        <div className="draft-note">
-          <span>התערוכה בטיוטה: רק את רואה אותה. כדי שתופיע באתר לכולם יש לפרסם.</span>
-          <button className="sbtn primary" onClick={() => save({ status: 'published' })} disabled={saving}>פרסום עכשיו</button>
-        </div>
-      )}
-
-      <div id="add" style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between', alignItems: 'flex-end', gap: 16, borderTop: '1px solid var(--ink)', paddingTop: 16 }}>
-        <h2 style={{ margin: 0, fontWeight: 200, fontSize: 32 }}>עבודות · {pad(works.length)}</h2>
+      <div id="add" className="ed-works-head">
+        <h2>עבודות · {pad(works.length)}</h2>
+        <select className="ed-add mono" value="" onChange={(e) => e.target.value && addWork(e.target.value)} aria-label="הוספת עבודה ריקה">
+          <option value="">+ עבודה ריקה</option>
+          {Object.entries(TYPE_LABEL).map(([t, l]) => <option key={t} value={t}>{l}</option>)}
+        </select>
       </div>
       <GalleryDrop onFiles={addFiles} queue={queue} />
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-end', gap: 16 }}>
-        <div className="actions">
-          <span className="mono mute">או עבודה ריקה:</span>
-          {Object.entries(TYPE_LABEL).map(([t, l]) => <button key={t} className="sbtn" onClick={() => addWork(t)}>{l} +</button>)}
-        </div>
-      </div>
 
-      <AnimatePresence initial={false}>
-        {works.map((w, i) => (
-          <motion.div key={w.id} layout initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.5, ease: EASE }}>
-            <WorkEditor w={w} i={i} total={works.length} exId={ex.id} toast={toast}
-              onMove={(d) => move(i, d)}
-              onSaved={(nw) => setWorks(works.map((x) => (x.id === nw.id ? nw : x)))}
-              onDeleted={() => setWorks(works.filter((x) => x.id !== w.id))} />
-          </motion.div>
-        ))}
-      </AnimatePresence>
+      <div className="ed-list">
+        <AnimatePresence initial={false}>
+          {works.map((w, i) => (
+            <motion.div key={w.id} layout initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, height: 0 }} transition={{ duration: 0.4, ease: EASE }}>
+              <WorkEditor w={w} i={i} total={works.length} exId={ex.id} toast={toast}
+                onMove={(d) => move(i, d)}
+                onSaved={(nw) => setWorks((ws) => ws.map((x) => (x.id === nw.id ? nw : x)))}
+                onDeleted={() => setWorks((ws) => ws.filter((x) => x.id !== w.id))} />
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
       {toastNode}
     </div>
   )
@@ -447,55 +442,61 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
     setUp(false)
   }
 
-  const needsMedia = w.type !== 'text'
+  const { hash } = useLocation()
+  const [open, setOpen] = useState(() => hash === `#w-${initial.id}`)
+  const thumb = w.media_url && w.type !== 'video' ? asset(w.media_url) : null
+  const saveTitle = () => { if (w.title !== initial.title) save({ title: w.title }) }
+
   return (
-    <section id={`w-${w.id}`} className="panel work-card" aria-label={`עבודה ${i + 1}`}>
-      <div className="work-idx">
-        <span>W-{pad(i + 1)}</span>
-        <button onClick={() => onMove(-1)} disabled={i === 0} aria-label="הזזה למעלה">למעלה</button>
-        <button onClick={() => onMove(1)} disabled={i === total - 1} aria-label="הזזה למטה">למטה</button>
+    <section id={`w-${w.id}`} className={`wrow ${open ? 'open' : ''}`} aria-label={`עבודה ${i + 1}`}>
+      <div className="wrow__line">
+        <button className="wrow__thumb" onClick={() => setOpen(!open)} aria-label="פרטי העבודה">
+          {thumb ? <img src={thumb} alt="" /> : <span className="mono">{TYPE_LABEL[w.type]?.slice(0, 4)}</span>}
+        </button>
+        <span className="mono mute wrow__idx">W-{pad(i + 1)}</span>
+        <input className="wrow__title" value={w.title || ''} placeholder="ללא כותרת" aria-label="כותרת"
+          onChange={(e) => setW({ ...w, title: e.target.value })} onBlur={saveTitle}
+          onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur() }} />
+        <span className="mono mute wrow__type">{TYPE_LABEL[w.type]}</span>
+        <span className="wrow__move">
+          <button onClick={() => onMove(-1)} disabled={i === 0} aria-label="הזזה למעלה">↑</button>
+          <button onClick={() => onMove(1)} disabled={i === total - 1} aria-label="הזזה למטה">↓</button>
+        </span>
+        <button className="wrow__open mono" onClick={() => setOpen(!open)} aria-expanded={open}>{open ? 'סגירה' : 'עריכה'}</button>
       </div>
-      <div className="form">
-        <Field label="סוג">
-          <select value={w.type} onChange={set('type')}>
-            {Object.entries(TYPE_LABEL).map(([t, l]) => <option key={t} value={t}>{l}</option>)}
-          </select>
-        </Field>
-        <Field label="כותרת"><input value={w.title || ''} onChange={set('title')} /></Field>
-        <Field label="כותרת־על" hint="למשל: כיוון 1 · השכונות הוותיקות"><input value={w.kicker || ''} onChange={set('kicker')} /></Field>
-        <Field label="שנה · מדיום">
-          <span style={{ display: 'flex', gap: 8 }}>
-            <input style={{ width: 96 }} value={w.year || ''} onChange={set('year')} aria-label="שנה" />
-            <input style={{ flex: 1, minWidth: 0 }} value={w.medium || ''} onChange={set('medium')} aria-label="מדיום" />
-          </span>
-        </Field>
-        {w.type !== 'image' && (
-          <Field label="טקסט" hint="פסקה ראשונה עם שורות קצרות מוצגת כשיר על הקיר. שאלה בסוף מודגשת." full>
-            <textarea value={w.body || ''} onChange={set('body')} />
-          </Field>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div className="wrow__body" initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} transition={{ duration: 0.35, ease: EASE }}>
+            <div className="wrow__grid">
+              <div className="wrow__media">
+                {w.type !== 'text' && (
+                  <Drop value={w.type === 'video' ? w.media_url : w.media_url} onFile={onFile} busy={up}
+                    kind={w.type === 'video' ? 'video' : 'image'} label="החלפת קובץ"
+                    accept={w.type === 'video' ? 'video/*' : w.type === 'document' ? '*/*' : 'image/*'} />
+                )}
+              </div>
+              <div className="wrow__fields">
+                <span className="wrow__pair">
+                  <select value={w.type} onChange={set('type')} aria-label="סוג">
+                    {Object.entries(TYPE_LABEL).map(([t, l]) => <option key={t} value={t}>{l}</option>)}
+                  </select>
+                  <input value={w.year || ''} onChange={set('year')} placeholder="שנה" aria-label="שנה" style={{ width: 90 }} />
+                  <input value={w.medium || ''} onChange={set('medium')} placeholder="מדיום" aria-label="מדיום" />
+                </span>
+                <input value={w.kicker || ''} onChange={set('kicker')} placeholder="כותרת־על" aria-label="כותרת־על" />
+                {w.type !== 'image' && <textarea value={w.body || ''} onChange={set('body')} placeholder="טקסט" aria-label="טקסט" rows={4} />}
+                {w.type === 'video' && <input dir="ltr" value={w.video_url || ''} onChange={set('video_url')} placeholder="קישור יוטיוב / וימאו" aria-label="קישור לווידאו" />}
+                {w.file_name && <span className="mono mute" dir="ltr">{w.file_name}</span>}
+                <div className="actions" style={{ justifyContent: 'space-between' }}>
+                  <button className="sbtn primary" onClick={() => save()} disabled={busy || !dirty}>{busy ? 'שומר…' : dirty ? 'שמירה' : 'נשמר'}</button>
+                  <button className="linkbtn danger mono" onClick={del}>מחיקה</button>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         )}
-        {w.type === 'video' && (
-          <Field label="קישור לווידאו" hint="יוטיוב או וימאו. אפשר גם להעלות קובץ למטה (עד 50MB)." full>
-            <input dir="ltr" value={w.video_url || ''} onChange={set('video_url')} placeholder="https://vimeo.com/…" />
-          </Field>
-        )}
-        {w.type === 'document' && (
-          <Field label="מסמך" hint={w.file_name || ''} full>
-            <Drop value={w.media_url} onFile={onFile} busy={up} accept="*/*" label="גררי מסמך חדש (PDF, Word, מצגת…) או לחצי" />
-          </Field>
-        )}
-        {needsMedia && w.type !== 'document' && (
-          <Field label={w.type === 'video' ? 'קובץ וידאו' : 'דימוי'} full>
-            <Drop value={w.media_url} onFile={onFile} busy={up}
-              kind={w.type === 'video' ? 'video' : 'image'}
-              accept={w.type === 'video' ? 'video/mp4,video/webm' : 'image/*'} />
-          </Field>
-        )}
-        <div className="actions full" style={{ justifyContent: 'space-between' }}>
-          <button className="sbtn primary" onClick={() => save()} disabled={busy || !dirty}>{busy ? 'שומר…' : dirty ? 'שמירה' : 'נשמר'}</button>
-          <button className="sbtn danger" onClick={del}>מחיקה</button>
-        </div>
-      </div>
+      </AnimatePresence>
     </section>
   )
 }
