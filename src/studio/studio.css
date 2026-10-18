@@ -118,6 +118,10 @@
 .ed-fields input:focus, .ed-fields textarea:focus, .wrow__fields input:focus, .wrow__fields textarea:focus, .wrow__fields select:focus { outline: none; border-color: var(--ink); }
 .ed-more summary { cursor: pointer; font-size: 11px; color: var(--mute); padding: 4px 0; }
 .ed-more[open] summary { color: var(--ink); }
+.ed-links { display: flex; flex-direction: column; gap: 6px; margin: 8px 0 10px; }
+.ed-links__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 6px; }
+.ed-links__row input { min-height: 34px; padding: 5px 8px; font-size: 13px; border: 1px solid var(--line); background: transparent; color: var(--ink); font-family: inherit; }
+.ed-links__row input:focus { outline: none; border-color: var(--ink); }
 .ed-more__grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin: 8px 0 10px; }
 .ed-more__grid .field input { min-height: 38px; padding: 6px 8px; }
 .linkbtn { background: none; border: 0; padding: 6px 0; cursor: pointer; font-size: 11px; color: var(--ink-2); border-bottom: 1px solid currentColor; }

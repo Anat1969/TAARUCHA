@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { Routes, Route, NavLink, Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
-import { pad, TYPE_LABEL, asset, SITE } from '../lib/data'
+import { pad, TYPE_LABEL, asset, SITE, exLinks } from '../lib/data'
 import { uploadFile, slugify, workFromFile, pdfPreview, isPdf, kindOf } from './upload'
 import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
 import './studio.css'
@@ -264,11 +264,12 @@ function Editor() {
     const next = { ...ex, ...patch }
     const { id: _id, created_at, ...fields } = next
     fields.slug = slugify(fields.slug)
+    fields.links = exLinks(fields)
     fields.updated_at = new Date().toISOString()
     const { error } = await supabase.from(T.exhibitions).update(fields).eq('id', ex.id)
     setSaving(false)
     if (error) return toast(error.code === '23505' ? 'הכתובת (slug) כבר תפוסה' : 'השמירה נכשלה: ' + error.message, true)
-    setEx({ ...next, slug: fields.slug })
+    setEx({ ...next, slug: fields.slug, links: fields.links })
     setDirty(false)
     toast('נשמר')
   }
@@ -368,6 +369,25 @@ function Editor() {
         <div className="ed-fields">
           <input value={ex.subtitle || ''} onChange={set('subtitle')} placeholder="תת־כותרת" aria-label="תת־כותרת" />
           <textarea value={ex.curatorial_text || ''} onChange={set('curatorial_text')} placeholder="טקסט אוצרותי" aria-label="טקסט אוצרותי" rows={3} />
+          <details className="ed-more">
+            <summary className="mono">קישורים{exLinks(ex).length ? ` · ${exLinks(ex).length}` : ''}</summary>
+            <div className="ed-links">
+              {[0, 1, 2].map((k) => {
+                const l = (ex.links || [])[k] || {}
+                const setLink = (f) => (e) => {
+                  const links = [0, 1, 2].map((j) => ({ ...((ex.links || [])[j] || {}) }))
+                  links[k][f] = e.target.value
+                  setEx({ ...ex, links }); setDirty(true)
+                }
+                return (
+                  <div className="ed-links__row" key={k}>
+                    <input value={l.label || ''} onChange={setLink('label')} placeholder="שם · פרויקט / אפליקציה" aria-label={`שם קישור ${k + 1}`} />
+                    <input value={l.url || ''} onChange={setLink('url')} placeholder="כתובת · claude.ai או האפליקציה" aria-label={`כתובת קישור ${k + 1}`} dir="ltr" />
+                  </div>
+                )
+              })}
+            </div>
+          </details>
           <details className="ed-more">
             <summary className="mono">פרטים נוספים</summary>
             <div className="ed-more__grid">

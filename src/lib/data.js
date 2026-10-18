@@ -75,3 +75,15 @@ export function asset(url) {
   return url
 }
 export const SITE = (path = '') => import.meta.env.BASE_URL.replace(/\/$/, '') + path
+
+// Up to three named links per exhibition (the Claude project / chat, the app itself).
+export function linkHref(url) {
+  const u = (url || '').trim()
+  if (!u) return ''
+  return /^[a-z][\w+.-]*:/i.test(u) ? u : `https://${u}`
+}
+export function exLinks(ex) {
+  return (Array.isArray(ex?.links) ? ex.links : [])
+    .map((l) => ({ label: (l?.label || '').trim(), url: linkHref(l?.url) }))
+    .filter((l) => l.url)
+}

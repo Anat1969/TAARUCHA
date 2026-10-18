@@ -28,7 +28,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 ## Data
 
-- `taarucha_exhibitions`: slug, code (EX 01), title, subtitle, curatorial_text (blank line = new paragraph), year, cover_url, status draft|published, position (higher = first)
+- `taarucha_exhibitions`: slug, code (EX 01), title, subtitle, curatorial_text (blank line = new paragraph), year, cover_url, status draft|published, position (higher = first), links jsonb (up to 3 {label, url}: Claude project / chat or the app; quiet mono links under the exhibition meta, edited under "קישורים" in the studio)
 - `taarucha_works`: exhibition_id, type image|text|video|composite|document, file_url + file_name (original document; media_url = PDF page-1 preview), kicker, title, body, media_url, video_url (YouTube/Vimeo), year, medium, layout, position
 - `taarucha_settings`: single row id=1 (name, tagline, bio, email, instagram)
 - `taarucha_admins`: user_id and/or email. `taarucha_is_admin()` / rpc `taarucha_whoami()` = listed user id or listed email from the JWT.
