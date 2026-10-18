@@ -1,7 +1,7 @@
 import { useParams, Link } from 'react-router-dom'
 import { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react'
 import { motion, useScroll, useTransform, useSpring, useVelocity, useMotionValueEvent } from 'framer-motion'
-import { useAsync, fetchExhibition, fetchExhibitions, splitBody, pad, TYPE_LABEL } from '../lib/data'
+import { useAsync, fetchExhibition, fetchExhibitions, splitBody, pad, TYPE_LABEL, exLinks } from '../lib/data'
 import { Page, Lines, Reveal, EASE } from '../components/Motion'
 import { WallWork } from '../components/Work'
 import Lightbox from '../components/Lightbox'
@@ -58,6 +58,13 @@ export default function Exhibition() {
             <div><dt>עבודות</dt><dd>{pad(works.length)}</dd></div>
             <div><dt>מדיה</dt><dd>{media || '—'}</dd></div>
           </dl>
+          {exLinks(ex).length > 0 && (
+            <nav className="ex-links mono" aria-label="קישורים">
+              {exLinks(ex).map((l, i) => (
+                <a key={i} href={l.url} target="_blank" rel="noopener noreferrer">{l.label || hostOf(l.url)}</a>
+              ))}
+            </nav>
+          )}
         </Reveal>
       </section>
 
@@ -158,4 +165,8 @@ function Stack({ works, onOpen, exId }) {
       ))}
     </section>
   )
+}
+
+function hostOf(url) {
+  try { return new URL(url).hostname.replace(/^www\./, '') } catch { return url }
 }
