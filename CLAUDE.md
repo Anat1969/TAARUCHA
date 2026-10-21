@@ -20,7 +20,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 ## Structure
 
-- `src/pages/` Home, Exhibition (horizontal wall walk), Archive, About, NotFound
+- `src/pages/` Home (museum plan tour), Exhibition (horizontal wall walk), Archive, About, NotFound
 - `src/components/` Atmosphere (light, grid, grain), Header, Footer, Motion (Page, Lines, Reveal, Tilt, Img), Work, Lightbox, EditBar
 - `src/studio/` Studio (list, exhibition editor, work editor, settings), upload helper, studio.css
 - `src/lib/` supabase client, data queries and helpers (`asset()` prefixes local `/media/` paths), auth context (email/password, email link, Google when enabled)
@@ -28,9 +28,9 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 ## Data
 
-- `taarucha_exhibitions`: slug, code (EX 01), title, subtitle, curatorial_text (blank line = new paragraph), year, cover_url, status draft|published, position (higher = first), links jsonb (up to 3 {label, url}: Claude project / chat or the app; quiet mono links under the exhibition meta, edited under "קישורים" in the studio)
+- `taarucha_exhibitions`: slug, code (EX 01), title, subtitle, curatorial_text (blank line = new paragraph), year, cover_url, status draft|published, position (higher = first), links jsonb (up to 3 {label, url}: Claude project / chat or the app; quiet mono links under the exhibition meta, edited under "קישורים" in the studio), kind temporary|permanent, inquiry (type of research behind the exhibition), published_at (set by the studio when publishing; the public order is published_at desc)
 - `taarucha_works`: exhibition_id, type image|text|video|composite|document, file_url + file_name (original document; media_url = PDF page-1 preview), kicker, title, body, media_url, video_url (YouTube/Vimeo), year, medium, layout, position
-- `taarucha_settings`: single row id=1 (name, tagline, bio, email, instagram)
+- `taarucha_settings`: single row id=1 (name, tagline, bio, email, instagram, logo_url)
 - `taarucha_admins`: user_id and/or email. `taarucha_is_admin()` / rpc `taarucha_whoami()` = listed user id or listed email from the JWT.
 - Storage bucket `taarucha-media` (public read, admin write).
 - RLS: anyone reads published exhibitions and their works; only admins write.
@@ -42,6 +42,14 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 - Main upload path: the studio's gallery drop takes many files of any kind at once; each becomes a work (image, video, PDF → document with a page-1 preview rendered client-side by pdfjs, other files → document card). The first image becomes the cover if none. A PDF cover is converted to an image.
 - Sign-in: email + password, email pre-filled, "סטודיו" button in the site header. The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
 
+## Museum (home page)
+
+- Home = an axonometric plan of a museum (`src/pages/Home.jsx`), walked room by room (הקודם / הבא / מבט על, or click a room). `museumRooms()` in `lib/data.js` assigns rooms:
+  newest published exhibition (any kind) → main hall; next two temporary → side galleries; permanent → permanent wing; older temporary → archive only. Fixed rooms: curator (/about), lobby, archive.
+- Archive lists every published exhibition with its current room, then all works.
+- Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the owner's mark (ADS monogram, or the logo uploaded in studio settings) opens the panel "מאחורי התערוכות": who she is + אודות, each exhibition's inquiry type and research/dev links (the current one first), העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, סטודיו.
+- Installable: `public/manifest.webmanifest`, `public/sw.js` (pages from network, images/assets cached), icons `icon-192/512.png` rendered from `public/icon.svg`.
+
 ## Studio layout
 
 - Compact by default: title edited inline in a sticky top bar with save / publish / view; subtitle and curatorial text beside a small cover; code, year, slug and order folded under "פרטים נוספים". Upload is one short strip. Each work is a one-line row (thumb, title edited inline, type, order, "עריכה") that opens in place. No explanatory hints.
@@ -50,7 +58,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 - Option A "קיר": the exhibition is a walk along a lit wall. Architectural, minimal, grayscale only (#EDEDEA paper → #121212 ink); colour comes only from the works.
 - IBM Plex Sans Hebrew 100–300 for display, IBM Plex Mono for labels. Thin weights only at large sizes; body text keeps 4.5:1 contrast.
-- Always: animation, depth, shadow, perspective, gradients, layers. Never flat. Never icons (the Google mark on the sign-in button is the only exception).
+- Always: animation, depth, shadow, perspective, gradients, layers. Never flat. Never icons, except the app mark and the owner's logo in the header (she asked for them) and the Google mark on sign-in.
 - Wall labels in mono (W-01 · title / kicker / year · medium), scale bar as progress, spotlight and floor shadow per work.
 - Hebrew, RTL, works at phone width (wall becomes a vertical stack under 900px).
 
@@ -72,3 +80,5 @@ npm run build
 - "I uploaded and can't see it": check status (drafts are hidden from the public) and whether files went to works or only to the cover. The editor shows a draft banner with a publish button.
 - Never leave an exhibition page blank: if the owner says "I see nothing", check works count, not only status; turn stray cover uploads into works (SQL) and fix the path that caused it.
 - Studio screens: less text, less area. Fold rarely used fields, edit inline, no hint lines (the owner asked to distil the editor).
+- DDL that creates triggers on `taarucha_exhibitions` hangs the Supabase MCP (lock wait, 60s timeout). Plain `alter table add column` works; keep logic like publish stamps in the app.
+- "Always show the latest exhibition" means the newest published one, by publish date, not the manual position.
