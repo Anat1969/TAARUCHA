@@ -194,7 +194,7 @@ function List() {
             <motion.div key={r.id} className="panel st-row" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: EASE, delay: i * 0.05 }}>
               {r.cover_url ? <img className="st-thumb" src={asset(r.cover_url)} alt="" /> : <div className="st-thumb" />}
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
-                <span className="mono mute">{r.code} · {r.year} · {pad(r.works?.[0]?.count || 0)} עבודות</span>
+                <span className="mono mute">{r.code} · {r.kind === 'permanent' ? 'קבועה' : 'מתחלפת'} · {r.year} · {pad(r.works?.[0]?.count || 0)} עבודות</span>
                 <span style={{ fontWeight: 200, fontSize: 26, lineHeight: 1.15 }}>{r.title}</span>
                 <span><span className={`badge ${r.status === 'published' ? 'pub' : ''}`}>{r.status === 'published' ? 'מפורסמת' : 'טיוטה'}</span></span>
               </div>
@@ -261,6 +261,8 @@ function Editor() {
 
   const save = async (patch = {}) => {
     setSaving(true)
+    // Publishing moves the exhibition into the main hall: the newest published one leads.
+    if (patch.status === 'published' && ex.status !== 'published') patch = { ...patch, published_at: new Date().toISOString() }
     const next = { ...ex, ...patch }
     const { id: _id, created_at, ...fields } = next
     fields.slug = slugify(fields.slug)
@@ -368,6 +370,18 @@ function Editor() {
         </div>
         <div className="ed-fields">
           <input value={ex.subtitle || ''} onChange={set('subtitle')} placeholder="תת־כותרת" aria-label="תת־כותרת" />
+          <div className="ed-room">
+            <div className="ed-seg mono" role="group" aria-label="סוג התערוכה">
+              {[['temporary', 'מתחלפת'], ['permanent', 'קבועה']].map(([k, l]) => (
+                <button key={k} type="button" className={(ex.kind || 'temporary') === k ? 'on' : ''} aria-pressed={(ex.kind || 'temporary') === k}
+                  onClick={() => { setEx({ ...ex, kind: k }); setDirty(true) }}>{l}</button>
+              ))}
+            </div>
+            <input value={ex.inquiry || ''} onChange={set('inquiry')} placeholder="סוג החקירה" aria-label="סוג החקירה" list="inquiry-kinds" />
+            <datalist id="inquiry-kinds">
+              {['מחקר עירוני', 'מחקר תכנוני', 'מחקר טקסט ופרשנות', 'מחקר חזותי', 'מחקר חומר', 'מחקר היסטורי', 'פיתוח כלי דיגיטלי', 'מחקר עם AI'].map((v) => <option key={v} value={v} />)}
+            </datalist>
+          </div>
           <textarea value={ex.curatorial_text || ''} onChange={set('curatorial_text')} placeholder="טקסט אוצרותי" aria-label="טקסט אוצרותי" rows={3} />
           <details className="ed-more">
             <summary className="mono">קישורים{exLinks(ex).length ? ` · ${exLinks(ex).length}` : ''}</summary>
@@ -525,6 +539,7 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
 function Settings() {
   const [s, setS] = useState(null)
   const [busy, setBusy] = useState(false)
+  const [logoBusy, setLogoBusy] = useState(false)
   const [toast, toastNode] = useToast()
   useEffect(() => { supabase.from(T.settings).select('*').eq('id', 1).maybeSingle().then(({ data }) => setS(data || { id: 1 })) }, [])
   if (!s) return <div className="loader" />
@@ -542,6 +557,14 @@ function Settings() {
         <div className="form">
           <Field label="שם"><input value={s.name || ''} onChange={set('name')} /></Field>
           <Field label="שורת תיאור"><input value={s.tagline || ''} onChange={set('tagline')} /></Field>
+          <Field label="לוגו">
+            <Drop value={s.logo_url} busy={logoBusy} label="לוגו" onFile={async (f) => {
+              setLogoBusy(true)
+              try { setS({ ...s, logo_url: await uploadFile(f, 'brand') }); toast('הלוגו עלה · לשמור') }
+              catch (e) { toast('ההעלאה נכשלה: ' + e.message, true) }
+              finally { setLogoBusy(false) }
+            }} />
+          </Field>
           <Field label="דוא״ל ליצירת קשר"><input dir="ltr" value={s.email || ''} onChange={set('email')} /></Field>
           <Field label="קישור לאינסטגרם"><input dir="ltr" value={s.instagram || ''} onChange={set('instagram')} /></Field>
           <Field label="טקסט אודות" full><textarea value={s.bio || ''} onChange={set('bio')} /></Field>

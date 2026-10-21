@@ -6,9 +6,33 @@ export async function fetchExhibitions() {
     .from(T.exhibitions)
     .select('*, works:taarucha_works(id, media_url, type)')
     .eq('status', 'published')
-    .order('position', { ascending: false })
+    .order('published_at', { ascending: false, nullsFirst: false })
+    .order('created_at', { ascending: false })
   if (error) throw error
   return data
+}
+
+// The museum: the newest exhibition always takes the main hall; the next two temporary ones
+// hang in the side galleries; permanent ones keep their wing. Older temporary ones leave the
+// rooms but stay in the archive. `list` is newest first.
+export const KIND_LABEL = { temporary: 'תערוכה מתחלפת', permanent: 'תערוכה קבועה' }
+export function museumRooms(list = []) {
+  const [hall, ...rest] = list
+  const temp = rest.filter((e) => e.kind !== 'permanent')
+  const perm = rest.filter((e) => e.kind === 'permanent')
+  return {
+    hall: hall || null,
+    galleries: temp.slice(0, 2),
+    permanent: perm.slice(0, 4),
+    stored: [...temp.slice(2), ...perm.slice(4)],
+  }
+}
+export function roomOf(ex, rooms) {
+  if (!ex || !rooms) return ''
+  if (rooms.hall?.id === ex.id) return 'באולם המרכזי'
+  if (rooms.galleries.some((e) => e.id === ex.id)) return 'בגלריה המתחלפת'
+  if (rooms.permanent.some((e) => e.id === ex.id)) return 'באגף הקבע'
+  return 'במחסן הארכיון'
 }
 
 export async function fetchExhibition(slug) {
@@ -82,6 +106,9 @@ export function linkHref(url) {
   if (!u) return ''
   return /^[a-z][\w+.-]*:/i.test(u) ? u : `https://${u}`
 }
+export const DEV_CHAT = 'https://claude.ai/code/session_019j4Rp61uAYJcXkFNsQMoVf'
+export function hostOf(url) { try { return new URL(url).hostname.replace(/^www\./, '') } catch { return url } }
+
 export function exLinks(ex) {
   return (Array.isArray(ex?.links) ? ex.links : [])
     .map((l) => ({ label: (l?.label || '').trim(), url: linkHref(l?.url) }))
