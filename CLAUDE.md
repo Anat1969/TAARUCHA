@@ -55,6 +55,11 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 - Compact by default: title edited inline in a sticky top bar with save / publish / view; subtitle and curatorial text beside a small cover; code, year, slug and order folded under "פרטים נוספים". Upload is one short strip. Each work is a one-line row (thumb, title edited inline, type, order, "עריכה") that opens in place. No explanatory hints.
 
+## Autosave and links
+
+- Studio autosave (`useAutosave` in Studio.jsx): exhibition fields, work rows and settings save themselves 1.2s after typing stops, and at once on tab hide, page leave or leaving the editor. The "שמירה" button stays as the manual path; the top bar shows "נשמר אוטומטית".
+- Every address is a link: `OpenLink` ("פתיחה") beside each exhibition link, video URL and Instagram field, and the exhibition's links are clickable straight from the studio list.
+
 ## Design language
 
 - Option A "קיר": the exhibition is a walk along a lit wall. Architectural, minimal, grayscale only (#EDEDEA paper → #121212 ink); colour comes only from the works.
@@ -85,3 +90,5 @@ npm run build
 - "Always show the latest exhibition" means the newest published one, by publish date, not the manual position.
 - "I uploaded a new exhibition and it's not in the hall": it was a draft. Six exhibitions sat unpublished because uploading never published. Now any upload publishes; check status first in SQL.
 - "All works on the walls": every exhibition gets a room and every work hangs on its walls; nothing is pushed off the plan.
+- Save must never depend on remembering the button: autosave everything editable, flush on leave.
+- Never make her copy and paste an address: any URL shown or typed in the app is a one-click link.
