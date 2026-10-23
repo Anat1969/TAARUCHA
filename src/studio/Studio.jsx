@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Routes, Route, NavLink, Link, useNavigate, useParams, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase, T } from '../lib/supabase'
-import { pad, TYPE_LABEL, asset, SITE, exLinks } from '../lib/data'
+import { pad, TYPE_LABEL, asset, SITE, exLinks, linkHref, hostOf } from '../lib/data'
 import { uploadFile, slugify, workFromFile, pdfPreview, isPdf, kindOf } from './upload'
 import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
 import './studio.css'
@@ -68,6 +68,35 @@ function useToast() {
     </AnimatePresence>
   )
   return [show, node]
+}
+
+// Backup for a forgotten "שמירה": unsaved edits save themselves a moment after typing stops,
+// and at once when the tab is hidden, the page is left or the editor closes.
+function useAutosave(dirty, value, save, delay = 1200) {
+  const saveRef = useRef(save)
+  saveRef.current = save
+  const pending = useRef(false)
+  useEffect(() => {
+    pending.current = dirty
+    if (!dirty) return
+    const t = setTimeout(() => { pending.current = false; saveRef.current({}, { quiet: true }) }, delay)
+    return () => clearTimeout(t)
+  }, [dirty, value, delay])
+  useEffect(() => {
+    const flush = () => { if (pending.current) { pending.current = false; saveRef.current({}, { quiet: true }) } }
+    const onHide = () => { if (document.visibilityState === 'hidden') flush() }
+    const onLeave = (e) => { if (pending.current) { flush(); e.preventDefault(); e.returnValue = '' } }
+    document.addEventListener('visibilitychange', onHide)
+    window.addEventListener('beforeunload', onLeave)
+    return () => { document.removeEventListener('visibilitychange', onHide); window.removeEventListener('beforeunload', onLeave); flush() }
+  }, [])
+}
+
+// A typed address is a link straight away: one click opens it, no copy and paste.
+function OpenLink({ url, children = 'פתיחה' }) {
+  const href = linkHref(url)
+  if (!href) return null
+  return <a className="openlink mono" href={href} target="_blank" rel="noopener noreferrer" title={href}>{children}</a>
 }
 
 function Field({ label, hint, full, children }) {
@@ -196,7 +225,8 @@ function List() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6, minWidth: 0 }}>
                 <span className="mono mute">{r.code} · {r.kind === 'permanent' ? 'קבועה' : 'מתחלפת'} · {r.year} · {pad(r.works?.[0]?.count || 0)} עבודות</span>
                 <span style={{ fontWeight: 200, fontSize: 26, lineHeight: 1.15 }}>{r.title}</span>
-                <span><span className={`badge ${r.status === 'published' ? 'pub' : ''}`}>{r.status === 'published' ? 'מפורסמת' : 'טיוטה'}</span></span>
+                <span className="st-row__links"><span className={`badge ${r.status === 'published' ? 'pub' : ''}`}>{r.status === 'published' ? 'מפורסמת' : 'טיוטה'}</span>
+                  {exLinks(r).map((l, k) => <OpenLink key={k} url={l.url}>{l.label || hostOf(l.url)}</OpenLink>)}</span>
               </div>
               <div className="actions">
                 <Link className="sbtn" to={`/studio/e/${r.id}`} style={{ display: 'inline-flex', alignItems: 'center' }}>עריכה</Link>
@@ -256,10 +286,13 @@ function Editor() {
     return () => clearTimeout(t)
   }, [ex, hash, works.length])
 
-  if (!ex) return <div className="loader" />
   const set = (k) => (e) => { setEx({ ...ex, [k]: e.target.value }); setDirty(true) }
+  const exRef = useRef(ex)
+  exRef.current = ex
+  const [autoSaved, setAutoSaved] = useState(false)
 
-  const save = async (patch = {}) => {
+  const save = async (patch = {}, { quiet } = {}) => {
+    if (!ex) return
     setSaving(true)
     // Publishing moves the exhibition into the main hall: the newest published one leads.
     if (patch.status === 'published' && ex.status !== 'published') patch = { ...patch, published_at: new Date().toISOString() }
@@ -271,10 +304,18 @@ function Editor() {
     const { error } = await supabase.from(T.exhibitions).update(fields).eq('id', ex.id)
     setSaving(false)
     if (error) return toast(error.code === '23505' ? 'הכתובת (slug) כבר תפוסה' : 'השמירה נכשלה: ' + error.message, true)
+    if (quiet) {
+      // Typing may have gone on during the request: keep it, and stay dirty so it saves next.
+      if (exRef.current === ex) setDirty(false)
+      setAutoSaved(true)
+      return
+    }
     setEx({ ...next, slug: fields.slug, links: fields.links })
     setDirty(false)
+    setAutoSaved(false)
     toast('נשמר')
   }
+  useAutosave(dirty, ex, save)
 
   const remove = async () => {
     if (!confirm(`למחוק את "${ex.title}" ואת כל העבודות שבה? אי אפשר לבטל.`)) return
@@ -351,6 +392,7 @@ function Editor() {
     if (r1.error || r2.error) { toast('הסידור נכשל', true); load() }
   }
 
+  if (!ex) return <div className="loader" />
   const published = ex.status === 'published'
   return (
     <div className="ed">
@@ -358,7 +400,9 @@ function Editor() {
         <Link to="/studio" className="mono mute">→ תערוכות</Link>
         <input className="ed-title" value={ex.title || ''} onChange={set('title')} aria-label="שם התערוכה" placeholder="שם התערוכה" />
         <div className="actions">
-          {dirty && <button className="sbtn primary" onClick={() => save()} disabled={saving}>{saving ? 'שומר…' : 'שמירה'}</button>}
+          {dirty
+            ? <button className="sbtn primary" onClick={() => save()} disabled={saving}>{saving ? 'שומר…' : 'שמירה'}</button>
+            : autoSaved && <span className="mono mute autosaved" role="status">נשמר אוטומטית</span>}
           {published
             ? <button className="sbtn ghost" onClick={() => save({ status: 'draft' })} disabled={saving} title="הסתרה מהאתר">באתר · הסתרה</button>
             : <button className="sbtn primary" onClick={() => save({ status: 'published' })} disabled={saving}>טיוטה · פרסום</button>}
@@ -399,6 +443,7 @@ function Editor() {
                   <div className="ed-links__row" key={k}>
                     <input value={l.label || ''} onChange={setLink('label')} placeholder="שם · פרויקט / אפליקציה" aria-label={`שם קישור ${k + 1}`} />
                     <input value={l.url || ''} onChange={setLink('url')} placeholder="כתובת · claude.ai או האפליקציה" aria-label={`כתובת קישור ${k + 1}`} dir="ltr" />
+                    {linkHref(l.url) ? <OpenLink url={l.url} /> : <span className="openlink off mono" aria-hidden="true">פתיחה</span>}
                   </div>
                 )
               })}
@@ -450,16 +495,22 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
   const [up, setUp] = useState(false)
   useEffect(() => { setW(initial); setDirty(false) }, [initial])
   const set = (k) => (e) => { setW({ ...w, [k]: e.target.value }); setDirty(true) }
+  const wRef = useRef(w)
+  wRef.current = w
 
-  const save = async (patch = {}) => {
+  const save = async (patch = {}, { quiet } = {}) => {
     setBusy(true)
     const next = { ...w, ...patch }
     const { id, created_at, exhibition_id, ...fields } = next
     const { error } = await supabase.from(T.works).update(fields).eq('id', w.id)
     setBusy(false)
     if (error) return toast('השמירה נכשלה: ' + error.message, true)
-    setDirty(false); onSaved(next); toast(`W-${pad(i + 1)} נשמרה`)
+    // An autosave that raced further typing leaves the row dirty, so the new text saves next.
+    if (quiet && wRef.current !== w) return
+    setDirty(false); onSaved(next)
+    if (!quiet) toast(`W-${pad(i + 1)} נשמרה`)
   }
+  useAutosave(dirty, w, save)
   const del = async () => {
     if (!confirm('למחוק את העבודה?')) return
     const { error } = await supabase.from(T.works).delete().eq('id', w.id)
@@ -491,7 +542,7 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
         </button>
         <span className="mono mute wrow__idx">W-{pad(i + 1)}</span>
         <input className="wrow__title" value={w.title || ''} placeholder="ללא כותרת" aria-label="כותרת"
-          onChange={(e) => setW({ ...w, title: e.target.value })} onBlur={saveTitle}
+          onChange={(e) => { setW({ ...w, title: e.target.value }); setDirty(true) }} onBlur={saveTitle}
           onKeyDown={(e) => { if (e.key === 'Enter') e.currentTarget.blur() }} />
         <span className="mono mute wrow__type">{TYPE_LABEL[w.type]}</span>
         <span className="wrow__move">
@@ -522,7 +573,12 @@ function WorkEditor({ w: initial, i, total, exId, toast, onMove, onSaved, onDele
                 </span>
                 <input value={w.kicker || ''} onChange={set('kicker')} placeholder="כותרת־על" aria-label="כותרת־על" />
                 {w.type !== 'image' && <textarea value={w.body || ''} onChange={set('body')} placeholder="טקסט" aria-label="טקסט" rows={4} />}
-                {w.type === 'video' && <input dir="ltr" value={w.video_url || ''} onChange={set('video_url')} placeholder="קישור יוטיוב / וימאו" aria-label="קישור לווידאו" />}
+                {w.type === 'video' && (
+                  <span className="wrow__pair">
+                    <input dir="ltr" value={w.video_url || ''} onChange={set('video_url')} placeholder="קישור יוטיוב / וימאו" aria-label="קישור לווידאו" />
+                    <OpenLink url={w.video_url} />
+                  </span>
+                )}
                 {w.file_name && <span className="mono mute" dir="ltr">{w.file_name}</span>}
                 <div className="actions" style={{ justifyContent: 'space-between' }}>
                   <button className="sbtn primary" onClick={() => save()} disabled={busy || !dirty}>{busy ? 'שומר…' : dirty ? 'שמירה' : 'נשמר'}</button>
@@ -542,16 +598,24 @@ function Settings() {
   const [s, setS] = useState(null)
   const [busy, setBusy] = useState(false)
   const [logoBusy, setLogoBusy] = useState(false)
+  const [dirty, setDirty] = useState(false)
   const [toast, toastNode] = useToast()
   useEffect(() => { supabase.from(T.settings).select('*').eq('id', 1).maybeSingle().then(({ data }) => setS(data || { id: 1 })) }, [])
-  if (!s) return <div className="loader" />
-  const set = (k) => (e) => setS({ ...s, [k]: e.target.value })
-  const save = async () => {
+  const set = (k) => (e) => { setS({ ...s, [k]: e.target.value }); setDirty(true) }
+  const sRef = useRef(s)
+  sRef.current = s
+  const save = async (_patch, { quiet } = {}) => {
+    if (!s) return
     setBusy(true)
     const { error } = await supabase.from(T.settings).upsert({ ...s, id: 1, updated_at: new Date().toISOString() })
     setBusy(false)
-    error ? toast('השמירה נכשלה', true) : toast('נשמר')
+    if (error) return toast('השמירה נכשלה', true)
+    if (quiet && sRef.current !== s) return
+    setDirty(false)
+    if (!quiet) toast('נשמר')
   }
+  useAutosave(dirty, s, save)
+  if (!s) return <div className="loader" />
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
       <h1 className="st-title">אודות והגדרות</h1>
@@ -562,16 +626,16 @@ function Settings() {
           <Field label="לוגו">
             <Drop value={s.logo_url} busy={logoBusy} label="לוגו" onFile={async (f) => {
               setLogoBusy(true)
-              try { setS({ ...s, logo_url: await uploadFile(f, 'brand') }); toast('הלוגו עלה · לשמור') }
+              try { setS({ ...s, logo_url: await uploadFile(f, 'brand') }); setDirty(true); toast('הלוגו עלה') }
               catch (e) { toast('ההעלאה נכשלה: ' + e.message, true) }
               finally { setLogoBusy(false) }
             }} />
           </Field>
           <Field label="דוא״ל ליצירת קשר"><input dir="ltr" value={s.email || ''} onChange={set('email')} /></Field>
-          <Field label="קישור לאינסטגרם"><input dir="ltr" value={s.instagram || ''} onChange={set('instagram')} /></Field>
+          <Field label="קישור לאינסטגרם"><input dir="ltr" value={s.instagram || ''} onChange={set('instagram')} /><OpenLink url={s.instagram} /></Field>
           <Field label="טקסט אודות" full><textarea value={s.bio || ''} onChange={set('bio')} /></Field>
         </div>
-        <div className="actions" style={{ marginTop: 20 }}><button className="sbtn primary" onClick={save} disabled={busy}>שמירה</button></div>
+        <div className="actions" style={{ marginTop: 20 }}><button className="sbtn primary" onClick={() => save()} disabled={busy || !dirty}>{busy ? 'שומר…' : dirty ? 'שמירה' : 'נשמר'}</button></div>
       </section>
       <PasswordPanel toast={toast} />
       {toastNode}
