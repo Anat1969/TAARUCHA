@@ -4,10 +4,11 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAsync, fetchExhibitions, fetchSettings, splitBody, pad, museumRooms, KIND_LABEL, asset } from '../lib/data'
 import { Page, Img, EASE } from '../components/Motion'
 
-// The plan is drawn in a fixed 1200 x 760 world and scaled to the stage.
-const W = 1200, H = 760
+// The plan is drawn in a 1200-wide world (its depth grows with the galleries) and scaled to the stage.
+const W = 1200
 
-// Fixed footprint of the building. The newest exhibition always stands in the hall.
+// The building. The newest exhibition always stands in the hall; every other one has a room:
+// permanent ones in the back wing, temporary ones beside the hall and then in gallery rows.
 function buildPlan(rooms, settings, total) {
   const out = []
   const perm = rooms.permanent
@@ -23,12 +24,24 @@ function buildPlan(rooms, settings, total) {
     })
   }
   const g = rooms.galleries
-  out.push({ id: g[0] ? `g-${g[0].id}` : 'g-a', kind: 'gallery', ex: g[0], x: 900, y: 230, w: 300, h: 330, label: 'גלריה מתחלפת א', to: g[0] && `/e/${g[0].slug}` })
+  const gal = (ex, i, x, y, w, h) => ({ id: ex ? `g-${ex.id}` : `g-${i}`, kind: 'gallery', ex, x, y, w, h, label: `גלריה ${pad(i + 1)}`, to: ex && `/e/${ex.slug}` })
+  out.push(gal(g[0], 0, 900, 230, 300, 330))
   out.push({ id: rooms.hall ? `h-${rooms.hall.id}` : 'h', kind: 'hall', ex: rooms.hall, x: 320, y: 230, w: 560, h: 330, label: 'האולם המרכזי', to: rooms.hall && `/e/${rooms.hall.slug}` })
-  out.push({ id: g[1] ? `g-${g[1].id}` : 'g-b', kind: 'gallery', ex: g[1], x: 0, y: 230, w: 300, h: 330, label: 'גלריה מתחלפת ב', to: g[1] && `/e/${g[1].slug}` })
-  out.push({ id: 'about', kind: 'about', x: 820, y: 580, w: 380, h: 180, label: 'חדר האוצרת', to: '/about', settings })
-  out.push({ id: 'lobby', kind: 'lobby', x: 420, y: 580, w: 380, h: 180, label: 'כניסה', to: null })
-  out.push({ id: 'archive', kind: 'archive', x: 0, y: 580, w: 400, h: 180, label: 'הארכיון', to: '/archive', stored: rooms.stored, total })
+  out.push(gal(g[1], 1, 0, 230, 300, 330))
+  // Further temporary exhibitions: rows of four galleries, newest nearest the hall, right to left.
+  const more = g.slice(2)
+  const gw = (W - 3 * 20) / 4
+  let y = 580
+  more.forEach((ex, k) => {
+    const col = k % 4
+    if (k && col === 0) y += 240
+    out.push(gal(ex, k + 2, W - (col + 1) * gw - col * 20, y, gw, 220))
+  })
+  if (more.length) y += 240
+  out.push({ id: 'about', kind: 'about', x: 820, y, w: 380, h: 180, label: 'חדר האוצרת', to: '/about', settings })
+  out.push({ id: 'lobby', kind: 'lobby', x: 420, y, w: 380, h: 180, label: 'כניסה', to: null })
+  out.push({ id: 'archive', kind: 'archive', x: 0, y, w: 400, h: 180, label: 'הארכיון', to: '/archive', stored: rooms.stored, total })
+  out.H = y + 180
   return out
 }
 
@@ -67,11 +80,11 @@ function Museum({ list, settings }) {
             <span className="line-mask"><motion.span style={{ display: 'block' }} initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}>סיור במוזיאון</motion.span></span>
           </h1>
         </div>
-        <p className="lede">התערוכה האחרונה שעלתה תמיד באולם המרכזי. הקודמות עוברות לגלריות ומשם לארכיון. הקבועות נשארות באגף שלהן.</p>
+        <p className="lede">התערוכה האחרונה שעלתה תמיד באולם המרכזי. כל תערוכה מקבלת חדר, וכל העבודות שלה תלויות על קירותיו. הקבועות באגף שלהן, ובארכיון הכול נשמר.</p>
       </section>
 
       <div className="tour">
-        <Stage plan={plan} sel={room.id} overview={overview} onPick={pick} />
+        <Stage plan={plan} H={plan.H} sel={room.id} overview={overview} onPick={pick} />
         <div className="tour__controls mono" role="group" aria-label="סיור">
           <button onClick={() => go(-1)} aria-label="החדר הקודם">הקודם</button>
           <span className="tour__count">{pad(at + 1)} / {pad(tour.length)}</span>
@@ -102,7 +115,7 @@ function Museum({ list, settings }) {
   )
 }
 
-function useFit(ref) {
+function useFit(ref, H) {
   const [k, setK] = useState(0.6)
   useEffect(() => {
     const el = ref.current
@@ -113,15 +126,15 @@ function useFit(ref) {
     })
     ro.observe(el)
     return () => ro.disconnect()
-  }, [ref])
+  }, [ref, H])
   return k
 }
 
-function Stage({ plan, sel, overview, onPick }) {
+function Stage({ plan, H, sel, overview, onPick }) {
   const ref = useRef(null)
-  const k = useFit(ref)
+  const k = useFit(ref, H)
   const r = plan.find((p) => p.id === sel)
-  const zoom = overview || !r ? 0.74 : Math.min(1.7, Math.max(1.15, 520 / Math.max(r.w, r.h * 1.4)))
+  const zoom = overview || !r ? 0.9 : Math.min(1.7, Math.max(1.15, 520 / Math.max(r.w, r.h * 1.4)))
   const cx = overview || !r ? W / 2 : r.x + r.w / 2
   const cy = overview || !r ? H / 2 : r.y + r.h / 2
   const s = k * zoom
@@ -158,6 +171,12 @@ function Room({ p, on, onPick }) {
   const cover = p.ex?.cover_url
   const empty = !p.ex && !['about', 'archive', 'lobby'].includes(p.kind)
   const pickable = !empty && p.kind !== 'lobby'
+  // Every work of the exhibition hangs on the room's walls: the long wall first, the rest on the side wall.
+  const works = [...(p.ex?.works || [])].sort((a, b) => (a.position ?? 0) - (b.position ?? 0))
+  const hang = works.length ? works : cover ? [{ id: 'cover', media_url: cover, type: 'image' }] : []
+  const fit = Math.max(1, Math.floor(p.w / 70))
+  const back = hang.slice(0, Math.max(fit, Math.ceil(hang.length / 2)))
+  const side = hang.slice(back.length)
   return (
     <motion.div className={`room room--${p.kind} ${on ? 'on' : ''} ${empty ? 'empty' : ''}`}
       style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
@@ -171,12 +190,15 @@ function Room({ p, on, onPick }) {
         {p.kind === 'archive' && <span className="room__title">{pad(p.total)}</span>}
         {p.kind === 'lobby' && <span className="room__door" />}
       </button>
-      <span className="room__wall room__wall--back">
-        {cover && <img src={asset(cover)} alt="" className="room__art" loading="lazy" />}
-      </span>
-      <span className="room__wall room__wall--side" />
+      <span className="room__wall room__wall--back">{back.map((w) => <Art key={w.id} w={w} />)}</span>
+      <span className="room__wall room__wall--side">{side.map((w) => <Art key={w.id} w={w} />)}</span>
     </motion.div>
   )
+}
+
+function Art({ w }) {
+  if (w.media_url && w.type !== 'video') return <img src={asset(w.media_url)} alt="" className="room__art" loading="lazy" />
+  return <span className={`room__art room__art--${w.type}`} />
 }
 
 function RoomCard({ room }) {

@@ -4,7 +4,7 @@ import { supabase, T } from './supabase'
 export async function fetchExhibitions() {
   const { data, error } = await supabase
     .from(T.exhibitions)
-    .select('*, works:taarucha_works(id, media_url, type)')
+    .select('*, works:taarucha_works(id, media_url, type, title, position)')
     .eq('status', 'published')
     .order('published_at', { ascending: false, nullsFirst: false })
     .order('created_at', { ascending: false })
@@ -13,8 +13,8 @@ export async function fetchExhibitions() {
 }
 
 // The museum: the newest exhibition always takes the main hall; the next two temporary ones
-// hang in the side galleries; permanent ones keep their wing. Older temporary ones leave the
-// rooms but stay in the archive. `list` is newest first.
+// hang in the side galleries beside it, the rest in the gallery rows behind the lobby;
+// permanent ones keep their wing. Every exhibition has a room. `list` is newest first.
 export const KIND_LABEL = { temporary: 'תערוכה מתחלפת', permanent: 'תערוכה קבועה' }
 export function museumRooms(list = []) {
   const [hall, ...rest] = list
@@ -22,15 +22,16 @@ export function museumRooms(list = []) {
   const perm = rest.filter((e) => e.kind === 'permanent')
   return {
     hall: hall || null,
-    galleries: temp.slice(0, 2),
-    permanent: perm.slice(0, 4),
-    stored: [...temp.slice(2), ...perm.slice(4)],
+    galleries: temp,
+    permanent: perm,
+    stored: [],
   }
 }
 export function roomOf(ex, rooms) {
   if (!ex || !rooms) return ''
   if (rooms.hall?.id === ex.id) return 'באולם המרכזי'
-  if (rooms.galleries.some((e) => e.id === ex.id)) return 'בגלריה המתחלפת'
+  const g = rooms.galleries.findIndex((e) => e.id === ex.id)
+  if (g >= 0) return g < 2 ? 'בגלריה ליד האולם' : `בגלריה ${String(g + 1).padStart(2, '0')}`
   if (rooms.permanent.some((e) => e.id === ex.id)) return 'באגף הקבע'
   return 'במחסן הארכיון'
 }

@@ -30,7 +30,11 @@ export default function PageDrop({ ex, works, onAdded }) {
       }
     }
     await Promise.all(Array.from({ length: 3 }, async () => { while (jobs.length) await run(jobs.shift()) }))
-    if (cover && !ex.cover_url) await supabase.from(T.exhibitions).update({ cover_url: cover }).eq('id', ex.id)
+    const patch = {}
+    if (cover && !ex.cover_url) patch.cover_url = cover
+    // Works on the wall means the exhibition is open: a draft that receives files is published.
+    if (ex.status !== 'published' && list.length) Object.assign(patch, { status: 'published', published_at: new Date().toISOString() })
+    if (Object.keys(patch).length) await supabase.from(T.exhibitions).update(patch).eq('id', ex.id)
     onAdded()
   }
 

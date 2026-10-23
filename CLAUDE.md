@@ -45,7 +45,8 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 ## Museum (home page)
 
 - Home = an axonometric plan of a museum (`src/pages/Home.jsx`), walked room by room (הקודם / הבא / מבט על, or click a room). `museumRooms()` in `lib/data.js` assigns rooms:
-  newest published exhibition (any kind) → main hall; next two temporary → side galleries; permanent → permanent wing; older temporary → archive only. Fixed rooms: curator (/about), lobby, archive.
+  newest published exhibition (any kind) → main hall; next two temporary → galleries beside the hall; further temporary ones → rows of four galleries (the building grows); permanent → permanent wing. Every published exhibition has a room, and every one of its works hangs on that room's walls (long wall, then side wall). Fixed rooms: curator (/about), lobby, archive.
+- Uploading files to a draft (studio gallery drop or PageDrop) publishes it and stamps published_at, so it enters the hall at once. "הסתרה" in the studio still hides it.
 - Archive lists every published exhibition with its current room, then all works.
 - Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the owner's mark (ADS monogram, or the logo uploaded in studio settings) opens the panel "מאחורי התערוכות": who she is + אודות, each exhibition's inquiry type and research/dev links (the current one first), העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, סטודיו.
 - Installable: `public/manifest.webmanifest`, `public/sw.js` (pages from network, images/assets cached), icons `icon-192/512.png` rendered from `public/icon.svg`.
@@ -82,3 +83,5 @@ npm run build
 - Studio screens: less text, less area. Fold rarely used fields, edit inline, no hint lines (the owner asked to distil the editor).
 - DDL that creates triggers on `taarucha_exhibitions` hangs the Supabase MCP (lock wait, 60s timeout). Plain `alter table add column` works; keep logic like publish stamps in the app.
 - "Always show the latest exhibition" means the newest published one, by publish date, not the manual position.
+- "I uploaded a new exhibition and it's not in the hall": it was a draft. Six exhibitions sat unpublished because uploading never published. Now any upload publishes; check status first in SQL.
+- "All works on the walls": every exhibition gets a room and every work hangs on its walls; nothing is pushed off the plan.

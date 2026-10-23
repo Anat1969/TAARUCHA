@@ -323,7 +323,9 @@ function Editor() {
     }
     const pool = [...jobs]
     await Promise.all(Array.from({ length: 3 }, async () => { while (pool.length) await run(pool.shift()) }))
-    if (cover && cover !== ex.cover_url) await save({ cover_url: cover })
+    // Works on the wall means the exhibition is open: a draft that receives files is published.
+    const open = added.length && ex.status !== 'published' ? { status: 'published' } : {}
+    if ((cover && cover !== ex.cover_url) || open.status) await save({ ...(cover && cover !== ex.cover_url ? { cover_url: cover } : {}), ...open })
     if (added.length) toast(`${added.length} ${added.length === 1 ? 'קובץ נוסף' : 'קבצים נוספו'} לקיר`)
     setTimeout(() => setQueue((q) => q.filter((x) => x.state !== 'done')), 1500)
   }
