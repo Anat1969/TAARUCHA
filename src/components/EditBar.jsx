@@ -1,40 +1,36 @@
-import { Link, useLocation } from 'react-router-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../lib/auth'
-import { EASE } from './Motion'
+import { usePageMenu } from './Header'
 
-// Edit entry point inside an exhibition page. Anonymous visitors see a quiet "עריכה" tab;
-// the authorised account sees a floating edit bar that opens this exhibition in the studio.
+// Edit entry point inside an exhibition page, as items of the A&I logo button (no floating bar):
+// visitors get "כניסה לעריכה"; the authorised account gets this exhibition's edit actions.
 export default function EditBar({ exhibitionId }) {
   const { session, isAdmin, ready, signOut } = useAuth()
   const { pathname } = useLocation()
-  if (session === undefined) return null
+  const navigate = useNavigate()
+  const email = session?.user?.email
 
-  return (
-    <AnimatePresence mode="wait">
-      {session && ready && isAdmin ? (
-        <motion.div key="admin" className="editbar" role="region" aria-label="מצב עריכה"
-          initial={{ y: 80, opacity: 0, rotateX: 20 }} animate={{ y: 0, opacity: 1, rotateX: 0 }} exit={{ y: 80, opacity: 0 }}
-          transition={{ duration: 0.8, ease: EASE }}>
-          <span className="editbar__dot" aria-hidden="true" />
-          <span className="mono">מצב עריכה</span>
-          <Link className="editbar__btn" to={`/studio/e/${exhibitionId}`}>עריכת התערוכה</Link>
-          <Link className="editbar__btn" to={`/studio/e/${exhibitionId}#add`}>הוספת עבודה</Link>
-          <Link className="editbar__btn ghost" to="/studio">כל התערוכות</Link>
-          <button className="editbar__btn ghost" onClick={signOut}>יציאה</button>
-        </motion.div>
-      ) : session && ready && !isAdmin ? (
-        <motion.div key="denied" className="editbar" initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 80, opacity: 0 }} transition={{ duration: 0.6, ease: EASE }}>
-          <span className="mono">{session.user.email} אינו מורשה לעריכה</span>
-          <button className="editbar__btn ghost" onClick={signOut}>יציאה</button>
-        </motion.div>
-      ) : !session ? (
-        <motion.div key="login" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.6, delay: 1 }}>
-          <Link className="edit-tab mono" to={`/studio?next=${encodeURIComponent(pathname)}`} aria-label="כניסה לעריכה">עריכה</Link>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
+  usePageMenu(
+    session === undefined
+      ? { items: [], status: '' }
+      : session && ready && isAdmin
+        ? {
+            status: 'מצב עריכה',
+            items: [
+              { label: 'עריכת התערוכה', onSelect: () => navigate(`/studio/e/${exhibitionId}`) },
+              { label: 'הוספת עבודה', onSelect: () => navigate(`/studio/e/${exhibitionId}#add`) },
+              { label: 'כל התערוכות', onSelect: () => navigate('/studio') },
+              { label: 'יציאה', onSelect: signOut },
+            ],
+          }
+        : session && ready && !isAdmin
+          ? { status: '', items: [{ label: `${email} אינו מורשה לעריכה`, disabled: true }, { label: 'יציאה', onSelect: signOut }] }
+          : !session
+            ? { status: '', items: [{ label: 'כניסה לעריכה', onSelect: () => navigate(`/studio?next=${encodeURIComponent(pathname)}`) }] }
+            : { items: [], status: '' },
+    [session, ready, isAdmin, exhibitionId, pathname],
   )
+  return null
 }
 
 // Small per-work edit shortcut shown on the wall to the authorised account.

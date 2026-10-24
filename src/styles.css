@@ -101,17 +101,8 @@ button { font: inherit; color: inherit; }
 .hdr__nav > a:hover, .hdr__nav > a.active { color: var(--ink); }
 .hdr__nav > a:hover::after, .hdr__nav > a.active::after { transform: scaleX(1); }
 
-/* The owner's mark opens the panel behind the exhibitions: research, development, about. */
+/* The A&I logo button (ai-menu) opens the panel behind the exhibitions from its menu. */
 .logo { position: relative; perspective: 1200px; }
-.logo__btn {
-  width: 46px; height: 46px; padding: 0; display: grid; place-items: center; cursor: pointer; overflow: hidden;
-  border: 1px solid var(--ink); background: linear-gradient(145deg, #F7F7F4, #DCDCD7);
-  box-shadow: 0 1px 0 rgba(255,255,255,.8) inset, 0 10px 22px -12px rgba(0,0,0,.55); transition: all .4s var(--ease);
-}
-.logo__btn:hover, .logo__btn.on { background: var(--ink); color: var(--paper); transform: translateY(-1px) rotateX(10deg); }
-.logo__mono { direction: ltr; display: grid; grid-template-columns: repeat(3, auto); gap: 1px; font-family: var(--mono); font-size: 11px; letter-spacing: .02em; line-height: 1; }
-.logo__mono span:nth-child(2) { transform: translateY(5px); }
-.logo__img { width: 100%; height: 100%; object-fit: cover; }
 .logo__panel {
   position: absolute; top: calc(100% + 14px); inset-inline-end: 0; z-index: 60; width: min(420px, calc(100vw - 32px));
   max-height: calc(100vh - 110px); overflow-y: auto; transform-origin: top left;
@@ -136,12 +127,6 @@ button { font: inherit; color: inherit; }
 .logo__exlinks { display: flex; flex-wrap: wrap; gap: 4px 14px; }
 .logo__exlinks a { color: var(--mute); border-bottom: 1px solid transparent; }
 .logo__exlinks a:hover { color: var(--ink); border-color: var(--ink); }
-.logo__tools { flex-direction: row !important; flex-wrap: wrap; gap: 6px !important; }
-.logo__tools a, .logo__tools button {
-  min-height: 40px; padding: 0 14px; display: inline-flex; align-items: center; cursor: pointer;
-  border: 1px solid rgba(18,18,18,.25); background: rgba(255,255,255,.5); font: inherit; letter-spacing: .08em; transition: all .3s var(--ease);
-}
-.logo__tools a:hover, .logo__tools button:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
 @media (max-width: 600px) {
   .hdr { flex-wrap: nowrap; }
   .hdr__by { display: none; }
@@ -358,46 +343,11 @@ main { overflow-x: clip; }
 }
 
 /* ---------- Edit mode ---------- */
-.editbar {
-  position: fixed; z-index: 80; bottom: 20px; left: 50%; transform-origin: bottom center;
-  translate: -50% 0; display: flex; flex-wrap: wrap; align-items: center; gap: 10px;
-  max-width: calc(100vw - 32px); padding: 10px 12px 10px 16px;
-  background: linear-gradient(135deg, rgba(22,22,21,.94), rgba(44,44,42,.9));
-  color: var(--on-deep); border: 1px solid rgba(255,255,255,.1);
-  box-shadow: 0 2px 2px rgba(0,0,0,.1), 0 24px 60px -18px rgba(0,0,0,.7);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-}
-.editbar__dot { width: 8px; height: 8px; border-radius: 50%; background: #E9E9E6; box-shadow: 0 0 0 0 rgba(233,233,230,.6); animation: pulse 2s infinite; }
-@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(233,233,230,.5) } 70% { box-shadow: 0 0 0 10px rgba(233,233,230,0) } 100% { box-shadow: 0 0 0 0 rgba(233,233,230,0) } }
-.editbar__btn {
-  min-height: 40px; padding: 0 14px; display: inline-flex; align-items: center; cursor: pointer;
-  font-family: var(--mono); font-size: 11px; letter-spacing: .08em;
-  background: var(--on-deep); color: var(--ink); border: 1px solid var(--on-deep);
-  transition: transform .3s var(--ease), background .3s var(--ease);
-}
-.editbar__btn:hover { transform: translateY(-2px); }
-.editbar__btn.ghost { background: transparent; color: var(--on-deep); border-color: rgba(255,255,255,.28); }
-.editbar__btn.ghost:hover { background: rgba(255,255,255,.1); }
-.edit-tab {
-  position: fixed; z-index: 70; bottom: 18px; left: 18px; min-height: 44px; padding: 0 16px;
-  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
-  background: rgba(237,237,234,.82); border: 1px solid rgba(18,18,18,.14); color: var(--ink-2);
-  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px -14px rgba(0,0,0,.35); transition: all .35s var(--ease);
-}
-.edit-tab:hover { color: var(--ink); border-color: var(--ink); transform: translateY(-2px); box-shadow: var(--shadow-1); }
 .work-edit {
   align-self: flex-start; min-height: 32px; padding: 0 12px; display: inline-flex; align-items: center;
   background: var(--ink); color: var(--paper); box-shadow: var(--shadow-1);
 }
 .work-edit:hover { background: #333331; }
-@media (max-width: 600px) {
-  .editbar { left: 12px; right: 12px; translate: 0 0; justify-content: center; gap: 8px; }
-  .editbar > .mono { flex: 1 1 100%; text-align: center; }
-  .editbar__dot { display: none; }
-  .editbar__btn { flex: 1 1 40%; justify-content: center; }
-}
-
 /* ---------- Documents on the wall ---------- */
 .frame.sheet { background: #fff; box-shadow: 0 1px 0 rgba(0,0,0,.06), 6px 6px 0 -1px #F4F4F1, 6px 6px 0 0 rgba(0,0,0,.08), var(--shadow-2); }
 .doc-open { align-self: flex-start; color: var(--ink-2); border-bottom: 1px solid currentColor; padding: 4px 0; transition: color .3s var(--ease); }

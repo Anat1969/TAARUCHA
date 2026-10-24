@@ -37,7 +37,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 ## Editing
 
-- Exhibition page: visitors see a quiet "עריכה" tab → `/studio?next=<page>` login → back to the same page. The admin sees a floating edit bar and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
+- Exhibition page: visitors find "כניסה לעריכה" in the A&I logo button → `/studio?next=<page>` login → back to the same page. The admin finds this exhibition's edit actions (עריכת התערוכה, הוספת עבודה, כל התערוכות, יציאה) in the A&I logo button (`usePageMenu` in Header.jsx; no floating edit bar), and per-work "עריכת העבודה" links into `/studio/e/:id#w-<workId>`.
 - Upload straight on the exhibition page: the admin sees a large drop zone under the intro (`PageDrop`), same behaviour as the studio's. An exhibition with no works shows its cover; a cover uploaded to an empty exhibition also becomes its first work.
 - Main upload path: the studio's gallery drop takes many files of any kind at once; each becomes a work (image, video, PDF → document with a page-1 preview rendered client-side by pdfjs, other files → document card). The first image becomes the cover if none. A PDF cover is converted to an image.
 - Sign-in: email + password, email pre-filled, "סטודיו" button in the site header. The Google button appears only when `/auth/v1/settings` reports Google enabled; it is still off (needs Supabase + Google Cloud dashboard setup, not reachable from the session). Password change lives in the studio's settings page.
@@ -48,7 +48,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
   newest published exhibition (any kind) → main hall; next two temporary → galleries beside the hall; further temporary ones → rows of four galleries (the building grows); permanent → permanent wing. Every published exhibition has a room, and every one of its works hangs on that room's walls (long wall, then side wall). Fixed rooms: curator (/about), lobby, archive.
 - Uploading files to a draft (studio gallery drop or PageDrop) publishes it and stamps published_at, so it enters the hall at once. "הסתרה" in the studio still hides it.
 - Archive lists every published exhibition with its current room, then all works.
-- Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the owner's mark (ADS monogram, or the logo uploaded in studio settings) opens the panel "מאחורי התערוכות": who she is + אודות, each exhibition's inquiry type and research/dev links (the current one first), העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, סטודיו.
+- Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the A&I logo button (`<ai-menu>`): העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, the page's edit actions, אודות, סטודיו, and "מאחורי התערוכות", which opens the panel with who she is and each exhibition's inquiry type and research/dev links (the current one first).
 - Installable: `public/manifest.webmanifest`, `public/sw.js` (pages from network, images/assets cached), icons `icon-192/512.png` rendered from `public/icon.svg`.
 
 ## Studio layout
@@ -92,3 +92,6 @@ npm run build
 - "All works on the walls": every exhibition gets a room and every work hangs on its walls; nothing is pushed off the plan.
 - Save must never depend on remembering the button: autosave everything editable, flush on leave.
 - Never make her copy and paste an address: any URL shown or typed in the app is a one-click link.
+
+## A&I logo button
+The top bar holds only the app name (links home), content navigation, and ONE logo button "אד' ענת שטיבלמן A&I" (`<ai-menu>` from https://appofapp-gh.vercel.app/ai-menu.js). Every editing and development action (העתקת קישור, שיחת הפיתוח, פרויקט המחקר, התקנת האפליקציה, edit mode, add, delete) lives only inside it, never as loose buttons. Standard: https://github.com/Anat1969/AppOfApp-GH/blob/main/docs/ai-menu-standard.md

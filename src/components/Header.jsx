@@ -1,8 +1,7 @@
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { useAsync, fetchExhibitions, fetchSettings, exLinks, hostOf, museumRooms, roomOf, DEV_CHAT, asset } from '../lib/data'
-import { useInstall } from '../lib/install'
+import { useAsync, fetchExhibitions, fetchSettings, exLinks, hostOf, museumRooms, roomOf, DEV_CHAT } from '../lib/data'
 import { EASE } from './Motion'
 
 // The app's mark: a museum plan seen from above, a hall flanked by two galleries.
@@ -16,10 +15,16 @@ export function AppMark({ size = 30 }) {
   )
 }
 
-// The owner's mark. An uploaded logo (studio settings) replaces the typographic monogram.
-function LogoMark({ url }) {
-  if (url) return <img className="logo__img" src={asset(url)} alt="" />
-  return <span className="logo__mono" aria-hidden="true"><span>A</span><span>D</span><span>S</span></span>
+// Actions a page adds to the A&I logo button (the exhibition page's edit actions).
+let pageMenu = { items: [], status: '' }
+const pageMenuSubs = new Set()
+export function usePageMenu(menu, deps) {
+  useEffect(() => {
+    pageMenu = menu
+    pageMenuSubs.forEach((f) => f())
+    return () => { pageMenu = { items: [], status: '' }; pageMenuSubs.forEach((f) => f()) }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
 }
 
 export default function Header() {
@@ -39,15 +44,20 @@ export default function Header() {
   )
 }
 
+// The A&I logo button (<ai-menu> from https://appofapp-gh.vercel.app/ai-menu.js). Copy link, dev chat and install
+// come from it; its items open "מאחורי התערוכות" (who she is, each exhibition's inquiry and research links), about,
+// the studio, and the current page's edit actions.
 function LogoMenu() {
   const [open, setOpen] = useState(false)
-  const [copied, setCopied] = useState(false)
+  const [, tick] = useState(0)
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const { data: s } = useAsync(fetchSettings, [])
   const { data: list } = useAsync(fetchExhibitions, [])
-  const { canInstall, install } = useInstall()
   const ref = useRef(null)
+  const menuRef = useRef(null)
 
+  useEffect(() => { const f = () => tick((n) => n + 1); pageMenuSubs.add(f); return () => pageMenuSubs.delete(f) }, [])
   useEffect(() => { setOpen(false) }, [pathname])
   useEffect(() => {
     if (!open) return
@@ -58,21 +68,26 @@ function LogoMenu() {
     return () => { window.removeEventListener('keydown', onKey); window.removeEventListener('pointerdown', onDown) }
   }, [open])
 
+  useEffect(() => {
+    const el = menuRef.current
+    if (!el) return
+    el.items = [
+      ...pageMenu.items,
+      { label: 'מאחורי התערוכות', hint: 'מחקר לפי תערוכה', onSelect: () => setOpen(true) },
+      { label: 'אודות', onSelect: () => navigate('/about') },
+      { label: 'סטודיו', onSelect: () => navigate('/studio') },
+    ]
+    el.status = pageMenu.status
+  })
+
   // The exhibition in front of the visitor comes first.
   const slug = pathname.startsWith('/e/') ? decodeURIComponent(pathname.slice(3)) : null
   const rooms = museumRooms(list || [])
   const items = [...(list || [])].sort((a, b) => (b.slug === slug) - (a.slug === slug))
 
-  const copy = () => {
-    navigator.clipboard?.writeText(window.location.href).catch(() => {})
-    setCopied(true); setTimeout(() => setCopied(false), 1800)
-  }
-
   return (
     <div className="logo" ref={ref}>
-      <button className={`logo__btn ${open ? 'on' : ''}`} onClick={() => setOpen((o) => !o)} aria-expanded={open} aria-controls="logo-panel" aria-label="מאחורי התערוכות: מחקר, פיתוח, אודות">
-        <LogoMark url={s?.logo_url} />
-      </button>
+      <ai-menu ref={menuRef} chat={DEV_CHAT} />
       <AnimatePresence>
         {open && (
           <motion.div id="logo-panel" className="logo__panel" role="dialog" aria-label="מאחורי התערוכות"
@@ -106,13 +121,6 @@ function LogoMenu() {
                   )
                 })}
               </ul>
-            </section>
-
-            <section className="logo__tools mono" aria-label="האפליקציה">
-              <button onClick={copy}>{copied ? 'הקישור הועתק' : 'העתקת קישור'}</button>
-              <a href={DEV_CHAT} target="_blank" rel="noopener noreferrer">שיחת הפיתוח</a>
-              {canInstall && <button onClick={install}>התקנת האפליקציה</button>}
-              <Link to="/studio">סטודיו</Link>
             </section>
           </motion.div>
         )}
