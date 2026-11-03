@@ -3,6 +3,7 @@ import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motio
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { useAsync, fetchExhibitions, fetchSettings, splitBody, pad, museumRooms, KIND_LABEL, asset } from '../lib/data'
 import { Page, Img, EASE } from '../components/Motion'
+import HomeDrop from '../components/HomeDrop'
 
 // The plan is drawn in a 1200-wide world (its depth grows with the galleries) and scaled to the stage.
 const W = 1200
@@ -55,7 +56,7 @@ export default function Home() {
 
   if (loading) return <Page className="state"><div className="loader" /><span className="mono mute">פותחים את הדלתות</span></Page>
   if (error) return <Page className="state"><p className="lede">לא הצלחנו לטעון את התערוכות. נסו לרענן את הדף.</p></Page>
-  if (!data?.length) return <Page className="state"><p className="lede">עוד אין תערוכות שפורסמו.</p></Page>
+  if (!data?.length) return <Page className="state"><p className="lede">עוד אין תערוכות שפורסמו.</p><HomeDrop /></Page>
   return <Museum list={data} settings={settings || {}} />
 }
 
@@ -85,6 +86,8 @@ function Museum({ list, settings }) {
         </div>
         <p className="lede">התערוכה האחרונה שעלתה תמיד באולם המרכזי. כל תערוכה מקבלת חדר, וכל העבודות שלה תלויות על קירותיו. הקבועות באגף שלהן, ובארכיון הכול נשמר.</p>
       </section>
+
+      <HomeDrop />
 
       <div className="tour">
         <Stage plan={plan} H={plan.H} sel={room.id} overview={overview} onPick={pick} />

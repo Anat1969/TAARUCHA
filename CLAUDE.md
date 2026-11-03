@@ -46,6 +46,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 
 - Home = an axonometric plan of a museum (`src/pages/Home.jsx`), walked room by room (הקודם / הבא / מבט על, or click a room). `museumRooms()` in `lib/data.js` assigns rooms:
   newest published exhibition (any kind) → main hall; next two temporary → galleries beside the hall; further temporary ones → rows of four galleries (the building grows); permanent → permanent wing. Every published exhibition has a room, and every one of its works hangs on that room's walls (long wall, then side wall). Fixed rooms: curator (/about), lobby, archive.
+- New exhibition in one step, three doors, one helper (`src/lib/create.js` `createExhibition`): the logo menu item "תערוכה חדשה" (shown to the owner: admin session, or a device flagged `taarucha-owner` in localStorage) → `/studio/new` → editor; the admin-only drop zone on the home page (`HomeDrop`) creates the exhibition, names it after the first file and hangs the files in the editor; the studio list button.
 - Uploading files to a draft (studio gallery drop or PageDrop) publishes it and stamps published_at, so it enters the hall at once. "הסתרה" in the studio still hides it.
 - Archive lists every published exhibition with its current room, then all works.
 - Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the A&I logo button (`<ai-menu>`): העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, the page's edit actions, אודות, סטודיו, and "מאחורי התערוכות", which opens the panel with who she is and each exhibition's inquiry type and research/dev links (the current one first).
@@ -96,3 +97,4 @@ npm run build
 
 ## A&I logo button
 The top bar holds only the app name (links home), content navigation, and ONE logo button "אד' ענת שטיבלמן A&I" (`<ai-menu>` from https://appofapp-gh.vercel.app/ai-menu.js). Every editing and development action (העתקת קישור, שיחת הפיתוח, פרויקט המחקר, התקנת האפליקציה, edit mode, add, delete) lives only inside it, never as loose buttons. Standard: https://github.com/Anat1969/AppOfApp-GH/blob/main/docs/ai-menu-standard.md
+- "Where did the new-exhibition button go?": it was three clicks deep after the studio link left the header. Creating an exhibition and uploading must be reachable in one step from the home page and the logo menu.

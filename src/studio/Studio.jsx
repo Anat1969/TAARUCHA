@@ -5,6 +5,7 @@ import { supabase, T } from '../lib/supabase'
 import { pad, TYPE_LABEL, asset, SITE, exLinks, linkHref, hostOf } from '../lib/data'
 import { uploadFile, slugify, workFromFile, pdfPreview, isPdf, kindOf } from './upload'
 import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
+import { createExhibition, takePendingFiles } from '../lib/create'
 import './studio.css'
 
 const EASE = [0.2, 0.7, 0.1, 1]
@@ -50,6 +51,7 @@ export default function Studio() {
       <main className="st-main">
         <Routes>
           <Route index element={<List />} />
+          <Route path="new" element={<NewExhibition />} />
           <Route path="e/:id" element={<Editor />} />
           <Route path="settings" element={<Settings />} />
         </Routes>
@@ -202,13 +204,8 @@ function List() {
   useEffect(() => { load() }, [load])
 
   const create = async () => {
-    const next = (rows?.length ? Math.max(...rows.map((r) => r.position)) : 0) + 1
-    const { data, error } = await supabase.from(T.exhibitions).insert({
-      title: 'תערוכה חדשה', slug: `ex-${pad(next)}-${Date.now().toString(36)}`, code: `EX ${pad(next)}`,
-      year: String(new Date().getFullYear()), position: next, status: 'draft',
-    }).select().single()
-    if (error) return toast('יצירה נכשלה: ' + error.message, true)
-    nav(`/studio/e/${data.id}`)
+    try { nav(`/studio/e/${(await createExhibition()).id}`) }
+    catch (e) { toast('יצירה נכשלה: ' + e.message, true) }
   }
 
   return (
@@ -239,6 +236,19 @@ function List() {
       {toastNode}
     </div>
   )
+}
+
+/* ---------------- new exhibition (one click from the logo menu) ---------------- */
+let creating = null
+function NewExhibition() {
+  const nav = useNavigate()
+  const [err, setErr] = useState(null)
+  useEffect(() => {
+    // One exhibition per visit, even when the effect runs twice.
+    creating = creating || createExhibition()
+    creating.then((ex) => nav(`/studio/e/${ex.id}#add`, { replace: true })).catch((e) => setErr(e.message)).finally(() => { creating = null })
+  }, [nav])
+  return err ? <p className="lede">יצירה נכשלה: {err}</p> : <div className="loader" />
 }
 
 /* ---------------- exhibition editor ---------------- */
@@ -370,6 +380,13 @@ function Editor() {
     if (added.length) toast(`${added.length} ${added.length === 1 ? 'קובץ נוסף' : 'קבצים נוספו'} לקיר`)
     setTimeout(() => setQueue((q) => q.filter((x) => x.state !== 'done')), 1500)
   }
+
+  // Files dropped on the home page before this exhibition existed: hang them as soon as it opens.
+  useEffect(() => {
+    const files = ex && takePendingFiles(ex.id)
+    if (files) addFiles(files)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ex?.id])
 
   const addWork = async (type) => {
     const position = (works.length ? Math.max(...works.map((w) => w.position)) : 0) + 1
