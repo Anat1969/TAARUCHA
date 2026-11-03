@@ -1,0 +1,458 @@
+[
+ {
+  "slug": "refua-harvey",
+  "title": "הארווי: הדם חוזר במעגל",
+  "subtitle": "רפואה · ידע",
+  "curatorial_text": "הדם מסתובב במעגל: הלב מזרים בשעה יותר דם ממה שהגוף יכול לייצר.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-quote.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-quote.jpg",
+    "title": "התחלתי לחשוב שמא יש תנועה, כביכול, במעגל.",
+    "kicker": "ציטוט",
+    "body": "התחלתי לחשוב שמא יש תנועה, כביכול, במעגל.\n\nויליאם הארווי (William Harvey), William Harvey, De Motu Cordis, 1628",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-fromto.jpg",
+    "title": "מנהר שנגמר אל מעגל",
+    "kicker": "ממה למה",
+    "body": "נאמר · גלנוס, כ-170: הדם נוצר בכבד מן המזון, ונצרך באיברים.\n\nידוע · הארווי, 1628: הדם מסתובב במעגל: הלב מזרים בשעה יותר דם ממה שהגוף יכול לייצר.\n\nהארווי חישב שהלב מזרים בשעה יותר דם ממה שהגוף יכול לייצר. מכאן הסיק: הדם חוזר, במעגל.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-insight.jpg",
+    "title": "בעורק הריאה זורם דם דל בחמצן.",
+    "kicker": "תובנה",
+    "body": "עורק מוגדר לפי הכיוון, מהלב החוצה. לא לפי החמצן.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-haiku.jpg",
+    "title": "דם יוצא לעיר",
+    "kicker": "הייקו",
+    "body": "דם יוצא לעיר\nשב דרך הוורידים\nסוגר מעגל\n\nהארווי ראה מעגל, במקום שבו אחרים ראו נהר שנגמר.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/harvey-essay.jpg",
+    "title": "מחזור הדם בשמונה שלבים",
+    "kicker": "מאמר",
+    "body": "במנוחה הלב מזרים כ-5 ליטר דם בדקה.\n\nדם דל בחמצן חוזר מהגוף דרך הוורידים הנבובים אל העלייה הימנית. הדם עובר דרך המסתם התלת-צניפי אל החדר הימני.\n\nהחדר הימני דוחף את הדם בעורק הריאה אל הריאות. בנימי הריאה הדם קולט חמצן ופולט פחמן דו-חמצני.\n\nדם עשיר בחמצן חוזר בורידי הריאה אל העלייה השמאלית. הדם עובר דרך המסתם הדו-צניפי אל החדר השמאלי, בעל הדופן העבה בלב.\n\nהחדר השמאלי דוחף את הדם לאאורטה, העורק הגדול בגוף. בנימי הגוף הדם מוסר חמצן לתאים, ואוסף מהם פחמן דו-חמצני.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · הניסוי בווריד החסום: הדם זורם רק לכיוון הלב · ויליאם הארווי, 1628. נחלת הכלל, ויקישיתוף",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "refua-vesalius",
+  "title": "וסאליוס: הגוף כאטלס",
+  "subtitle": "רפואה · ידע",
+  "curatorial_text": "אטלס אנטומי מנתיחה של גוף האדם, שתיקן טעויות של גלנוס. ההשראה של האפליקציה הזו.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-poster.jpg",
+    "title": "על מבנה גוף האדם, 1543",
+    "kicker": "טקסט על תמונה",
+    "body": "אטלס אנטומי מנתיחה של גוף האדם, שתיקן טעויות של גלנוס. ההשראה של האפליקציה הזו.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · לוח מתוך \"על מבנה גוף האדם\" · אנדראס וסאליוס, 1543. נחלת הכלל, ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-fromto.jpg",
+    "title": "מבעלי חיים אל גוף האדם",
+    "kicker": "ממה למה",
+    "body": "נאמר · גלנוס: לסת תחתונה משתי עצמות, לפי ניתוח בעלי חיים.\n\nידוע · וסאליוס, 1543: באדם הלסת התחתונה היא עצם אחת.\n\nאטלס אנטומי מנתיחה של גוף האדם, שתיקן טעויות של גלנוס.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-gradient.jpg",
+    "title": "206 עצמות",
+    "kicker": "שדה צבע",
+    "body": "בשלד של אדם בוגר, שנבנה ומתפרק כל החיים.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-insight.jpg",
+    "title": "החומר זורם, הצורה נשארת",
+    "kicker": "תובנה",
+    "body": "השאלה שעוד פתוחה: איך יודעת העצם היכן להתחזק, לפי העומס שהיא נושאת?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/vesalius-post.jpg",
+    "title": "וסאליוס, פדובה, 1543",
+    "kicker": "פוסט",
+    "body": "אטלס אנטומי מנתיחה של גוף האדם, שתיקן טעויות של גלנוס.\nגלנוס תיאר לסת משתי עצמות.\nוסאליוס הראה: באדם זו עצם אחת.\nבשלד של אדם בוגר 206 עצמות. העצם נבנית ומתפרקת כל הזמן.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "refua-immune",
+  "title": "הזיכרון שמאחורי כל חיסון",
+  "subtitle": "רפואה · ידע",
+  "curatorial_text": "מערכת החיסון זוכרת פולש שפגשה. על הזיכרון הזה נשען כל חיסון, שמונע 3.5 עד 5 מיליון מקרי מוות בשנה.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/immune-gradient.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/immune-gradient.jpg",
+    "title": "3.5 עד 5 מיליון",
+    "kicker": "שדה צבע",
+    "body": "חיים בשנה, בזכות הזיכרון שחיסונים מלמדים.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/immune-insight.jpg",
+    "title": "זיכרון של פולשים הוא הבסיס לכל חיסון.",
+    "kicker": "תובנה",
+    "body": "השאלה שעוד פתוחה: איך זוכרת מערכת החיסון פולש במשך עשרות שנים?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/immune-fromto.jpg",
+    "title": "מחיסון ראשון למחלה שנמחקה",
+    "kicker": "ממה למה",
+    "body": "ג׳נר, ברקלי, 1796: החיסון הראשון: חשיפה לאבעבועות הבקר הגנה מפני אבעבועות שחורות.\n\nWHO, ז׳נבה, 1980: אבעבועות שחורות הוכרזו כמוכחדות: המחלה הראשונה שהאנושות מחקה, בזכות חיסון.\n\nבין שתי הנקודות: 184 שנים.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/immune-post.jpg",
+    "title": "זיכרון של פולשים",
+    "kicker": "פוסט",
+    "body": "מערכת החיסון זוכרת פולש שפגשה.\n1796: החיסון הראשון: חשיפה לאבעבועות הבקר הגנה מפני אבעבועות שחורות.\n1980: אבעבועות שחורות הוכרזו כמוכחדות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   }
+  ]
+ },
+ {
+  "slug": "refua-city",
+  "title": "הגוף כעיר של רשתות",
+  "subtitle": "רפואה · הבנה",
+  "curatorial_text": "לכל מערכת: מבנה, תפקוד, וסיפור הגילוי שלה.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-insight.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-insight.jpg",
+    "title": "הגוף: עיר של רשתות, וכל רשת היא גילוי.",
+    "kicker": "תובנה",
+    "body": "לכל מערכת: מבנה, תפקוד, וסיפור הגילוי שלה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-essay.jpg",
+    "title": "שבע רשתות, עיר אחת",
+    "kicker": "מאמר",
+    "body": "הגוף הוא עיר של רשתות: אספקה, תקשורת, אוורור ופינוי, שבע מערכות.\n\nמערכת העצבים: רשת התקשורת של העיר: אותות עוברים בה מהר, לכל הכיוונים. מערכת הנשימה: מערכת האוורור של העיר: אוויר נכנס, מתחלף ויוצא.\n\nהלב וכלי הדם: רשת הכבישים: אספקה לכל בית, ופינוי בחזרה. מערכת העיכול: הנמל והשוק: סחורה נכנסת, ממוינת ומחולקת. כמו נמל אשדוד (Ashdod Port).\n\nהשלד והשרירים: שלד הבניין: קורות ועמודים שנושאים הכול, ומתחדשים בלי הפסקה. מערכת החיסון: מערך הביטחון והתברואה: מזהה, מסמן ומפנה.\n\nמערכת הרבייה: מערך ההתחדשות של העיר: דור אחד מכין את הבא.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-gradient.jpg",
+    "title": "בגוף יש חיידקים כמספר תאיו.",
+    "kicker": "שדה צבע",
+    "body": "הנמל והשוק: סחורה נכנסת, ממוינת ומחולקת. כמו נמל אשדוד (Ashdod Port).",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-quote.jpg",
+    "title": "מה ששנוא עליך, אל תעשה לחברך. זו כל התורה כולה, והשאר פירוש. לך ולמד.",
+    "kicker": "ציטוט",
+    "body": "מה ששנוא עליך, אל תעשה לחברך. זו כל התורה כולה, והשאר פירוש. לך ולמד.\n\nהלל הזקן, תלמוד בבלי, מסכת שבת לא, ע\"א",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/city-haiku.jpg",
+    "title": "על רגל אחת",
+    "kicker": "הייקו",
+    "body": "על רגל אחת\nשבע רשתות בעיר\nשאלה ביד\n\nהגוף כעיר, והידע כשאלה שמביאים לרופא.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "refua-layers",
+  "title": "ידוע, נאמר, מאמינים",
+  "subtitle": "רפואה · הבנה",
+  "curatorial_text": "כל משפט באפליקציה מסומן בשכבה אחת. כך מסורת נבדקת מול ראיה.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-post.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-post.jpg",
+    "title": "שלוש שכבות לכל משפט",
+    "kicker": "פוסט",
+    "body": "ידוע: ממצא מחקרי, עם מקור ועוצמת ראיה.\nנאמר: מה שמסורת אמרה, עם מקור והקשר.\nמאמינים: טענה שלא נבדקה או לא אוששה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-insight.jpg",
+    "title": "מסורת היא השערה שמחכה לבדיקה",
+    "kicker": "תובנה",
+    "body": "חלקן אוששו, חלקן הופרכו. ארבע מסורות, באותו פורמט.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-fromto.jpg",
+    "title": "ממה נגרמת מחלה",
+    "kicker": "ממה למה",
+    "body": "נאמר · רפואה יוונית: הפרה של איזון ארבע הליחות: דם, ליחה, מרה צהובה ומרה שחורה.\n\nידוע · רפואה מודרנית: מנגנון שאפשר למדוד: חיידק, נגיף, תא שהשתבש, או כלי דם שנחסם.\n\nהיפוקרטס, קוס: מחלה היא תופעה טבעית, ולא עונש של האלים.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-essay.jpg",
+    "title": "ארבע מסורות, שאלה אחת",
+    "kicker": "מאמר",
+    "body": "מהי מחלה? ארבע תשובות, ובכל אחת גם איך מתבוננים.\n\nיוונית (מהמאה ה-5 לפנה\"ס): הפרה של איזון ארבע הליחות: דם, ליחה, מרה צהובה ומרה שחורה. התבוננות בחולה, בדופק ובהפרשות, ומעקב אחרי מהלך המחלה.\n\nהרמב\"ם (המאה ה-12): „היות הגוף בריא ושלם” הוא חלק מדרך חיים נכונה, ולא רק עניין רפואי. הרגלים: מתי אוכלים, כמה ישנים, איך מתנועעים.\n\nסינית (אלפי שנים): חוסר איזון של צ׳י ושל יין ויאנג בגוף. בדיקת הדופק ובדיקת הלשון.\n\nמודרנית (מהמאה ה-19): מנגנון שאפשר למדוד: חיידק, נגיף, תא שהשתבש, או כלי דם שנחסם. בדיקות, הדמיה, וניסויים מבוקרים שבודקים מה עובד.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/layers-quote.jpg",
+    "title": "הואיל והיות הגוף בריא ושלם מדרכי השם הוא.",
+    "kicker": "ציטוט",
+    "body": "הואיל והיות הגוף בריא ושלם מדרכי השם הוא.\n\nהרמב״ם, משנה תורה, הלכות דעות ד, א",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "refua-pressure",
+  "title": "לחץ הדם: מודדים, לא מנחשים",
+  "subtitle": "רפואה · יישום",
+  "curatorial_text": "לרוב האנשים עם יתר לחץ דם אין תסמינים. רק מדידה מגלה אותו.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pressure-gradient.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pressure-gradient.jpg",
+    "title": "1.4 מיליארד מבוגרים, ורובם לא מרגישים דבר.",
+    "kicker": "שדה צבע",
+    "body": "ב-2024 חיו בעולם 1.4 מיליארד מבוגרים עם יתר לחץ דם. 44% מהם לא ידעו על כך.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pressure-fromto.jpg",
+    "title": "מתחושה אל מדידה",
+    "kicker": "ממה למה",
+    "body": "מאמינים · לא אוששה: כאב ראש הוא סימן אמין ללחץ דם גבוה.\n\nידוע · WHO: אין סימן אמין. הדרך היחידה לדעת: מדידה.\n\nלרוב האנשים עם יתר לחץ דם אין תסמינים. רק מדידה מגלה אותו.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pressure-insight.jpg",
+    "title": "רק מדידה מגלה אותו",
+    "kicker": "תובנה",
+    "body": "מחר בבוקר: מדידה אצל רופא המשפחה או באחות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pressure-post.jpg",
+    "title": "שאלה אחת לרופא",
+    "kicker": "פוסט",
+    "body": "מה לחץ הדם שלי, ומתי כדאי למדוד שוב?\nאיפה: מדידה אצל רופא המשפחה או באחות.\nבניסוי DASH-Sodium, הפחתת נתרן במזון לוותה בירידה בלחץ הדם.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   }
+  ]
+ },
+ {
+  "slug": "refua-pump",
+  "title": "משאבה אחת ברחוב ברוד",
+  "subtitle": "רפואה · יישום",
+  "curatorial_text": "ג׳ון סנואו (John Snow) מיפה ב-1854 מקרי כולרה בלונדון (London), ומצא אותם סביב משאבת מים אחת.",
+  "inquiry": "יצירות מתוך האפליקציה רפואה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "רפואה",
+    "url": "https://refua-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-veil.jpg",
+    "title": "מפה אחת, משאבה אחת",
+    "kicker": "שקיפות",
+    "body": "מפה של מקרי כולרה הובילה למשאבת מים אחת. ידית המשאבה הוסרה, והאפידמיולוגיה נולדה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · מפת הכולרה של רחוב ברוד · ג׳ון סנואו, 1854. נחלת הכלל, ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-haiku.jpg",
+    "title": "משאבת לונדון",
+    "kicker": "הייקו",
+    "body": "משאבת לונדון\nידית יורדת לאט\nהעיר נושמת\n\nמפה אחת וידית אחת: כך נולדה האפידמיולוגיה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-fromto.jpg",
+    "title": "מאוויר רע אל חיידק",
+    "kicker": "ממה למה",
+    "body": "נאמר · תורת המיאזמה: תורת המיאזמה: מחלות נגרמות מ„אוויר רע”. היא שלטה עד המאה ה-19.\n\nידוע · קוך, ברלין, 1882: זיהוי החיידק שגורם לשחפת. תורת החיידקים מחליפה את תורת המיאזמה.\n\nזמלווייס, וינה, 1847: שטיפת ידיים של רופאים הורידה את התמותה מקדחת לידה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-post.jpg",
+    "title": "האוויר ברחוב שלי",
+    "kicker": "פוסט",
+    "body": "חצי ליטר בכל נשימה, ואוויר העיר נכנס איתו.\nזיהום אוויר הוא גורם סיכון מוכר למחלות נשימה.\nהשאלה למחר בבוקר: איכות האוויר ברחוב שלי.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · מפת הכולרה של רחוב ברוד · ג׳ון סנואו, 1854. נחלת הכלל, ויקישיתוף",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Refua-GH@551339fb3516ca3ac7a4cfedee400172b05e3799/creations/pump-quote.jpg",
+    "title": "בריאות היא מצב של רווחה גופנית, נפשית וחברתית מלאה, ולא רק היעדר מחלה או מום.",
+    "kicker": "ציטוט",
+    "body": "בריאות היא מצב של רווחה גופנית, נפשית וחברתית מלאה, ולא רק היעדר מחלה או מום.\n\nארגון הבריאות העולמי (WHO), WHO, Constitution, 1948",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ }
+]

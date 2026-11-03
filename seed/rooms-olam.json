@@ -1,0 +1,576 @@
+[
+ {
+  "slug": "olam-revolution",
+  "title": "המהפכה המדעית",
+  "subtitle": "עולם נעלם ומציאות מצויה · ידע",
+  "curatorial_text": "מקופרניקוס עד ניוטון: 150 שנה שבהן השמים הפכו לחוק.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-poster.jpg",
+    "title": "השליח מן הכוכבים: הטלסקופ מגלה ירחים",
+    "kicker": "טקסט על תמונה",
+    "body": "טלסקופ הופנה לשמים, ונמצאו ירחים שמקיפים את צדק.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Sidereus Nuncius · Galileo Galilei, Public domain. ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-insight.jpg",
+    "title": "150 שנה שבהן השמים הפכו לחוק",
+    "kicker": "תובנה",
+    "body": "ארבעה ספרים, 1543 עד 1687: מתצפית אל חוק אחד.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-quote.jpg",
+    "title": "תמיכתו של גלילאו בשיטה ההליוצנטרית של קופרניקוס נתקלה בהתנגדות מתוך הכנסייה הקתולית ומצד כמה אסטרונומים.",
+    "kicker": "ציטוט",
+    "body": "תמיכתו של גלילאו בשיטה ההליוצנטרית של קופרניקוס נתקלה בהתנגדות מתוך הכנסייה הקתולית ומצד כמה אסטרונומים.\n\nגלילאו וקופרניקוס, Galileo Galilei, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-haiku.jpg",
+    "title": "שמש במרכז",
+    "kicker": "הייקו",
+    "body": "שמש במרכז\nאליפסה של מאדים\nתפוח שנופל\n\nמה ההייקו מאיר: ארבעה ספרים הפכו את השמים לחוק אחד.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-essay.jpg",
+    "title": "ארבעה ספרים ששינו את השמים",
+    "kicker": "מאמר",
+    "body": "מקופרניקוס עד ניוטון: 150 שנה שבהן השמים הפכו לחוק.\n\n1543, פרומבורק. קופרניקוס פרסם מודל שבו השמש, ולא כדור הארץ, במרכז, והצית את המהפכה הקופרניקאית.\n\n1609, פראג. מניתוח התצפיות של טיכו ברהה הראה קפלר שמסלול מאדים הוא אליפסה.\n\n1610, פדובה. גלילאו פרסם תצפיות טלסקופ, ובהן ירחי צדק, שערערו את התמונה שכדור הארץ הוא מרכז כל תנועה.\n\n1687, קיימברידג׳. ניוטון איחד את חוקי התנועה ואת כוח הכבידה, והסביר באותם חוקים את תנועת כוכבי הלכת.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Philosophiæ Naturalis Principia Mathematica · The original uploader was Zhaladshar at English Wikisource., Public domain. ויקישיתוף",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/revolution-post.jpg",
+    "title": "המהפכה המדעית",
+    "kicker": "פוסט",
+    "body": "1543: השמש, ולא כדור הארץ, הוצבה במרכז המודל.\n1609: המסלול של מאדים הוא אליפסה, ולא מעגל.\n1610: טלסקופ הופנה לשמים, ונמצאו ירחים שמקיפים את צדק.\n1687: כוח אחד מסביר גם תפוח שנופל וגם כוכב לכת שנע.\nמתצפית לחוק.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "olam-east-west",
+  "title": "מהמזרח למערב",
+  "subtitle": "עולם נעלם ומציאות מצויה · ידע",
+  "curatorial_text": "מאלכסנדריה דרך בגדד וקהיר אל אירופה.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-veil.jpg",
+    "title": "ספר האופטיקה: הראייה כאור שנכנס לעין",
+    "kicker": "שקיפות",
+    "body": "אבן אל-היית'ם כתב חיבור בן 7 כרכים על האור והראייה, והפך את הניסוי לכלי מרכזי במחקר.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Book of Optics · Unknown author, Public domain. ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-quote.jpg",
+    "title": "היצירה המפורסמת ביותר של אבן אל-היית׳ם היא חיבורו על האופטיקה בשבעה כרכים, כתאב אל-מנאט'ר (ספר האופטיקה), שנכתב בין 1011 ל-1021.",
+    "kicker": "ציטוט",
+    "body": "היצירה המפורסמת ביותר של אבן אל-היית׳ם היא חיבורו על האופטיקה בשבעה כרכים, כתאב אל-מנאט'ר (ספר האופטיקה), שנכתב בין 1011 ל-1021.\n\nאבן אל-היית׳ם, קהיר, Ibn al-Haytham, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-gradient.jpg",
+    "title": "600 שנה מקהיר לפראג.",
+    "kicker": "שדה צבע",
+    "body": "תאוריית הדמות ברשתית של קפלר נבנתה ישירות על המסגרת של אבן אל-היית'ם.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-haiku.jpg",
+    "title": "קרן מאלכסנדריה",
+    "kicker": "הייקו",
+    "body": "קרן מאלכסנדריה\nנכנסת לעין בקהיר\nונוחתת בפראג\n\nמה ההייקו מאיר: מאלכסנדריה דרך קהיר אל פראג, ידע שעבר בין ערים ושפות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/east-west-post.jpg",
+    "title": "מהמזרח למערב",
+    "kicker": "פוסט",
+    "body": "אלכסנדריה: הגאומטריה נבנתה כמערכת הוכחות מתוך מעט אקסיומות.\nבגדאד, 820–825: משוואות מוינו ל-6 צורות, ולכל צורה דרך פתרון קבועה.\nקהיר, 1011–1021: הראייה הוסברה כאור שנכנס לעין, ונבדקה בניסוי.\nלסמן על המפה את המסלול קהיר–פראג: ידע שעבר בתרגום לטינית ובין תרבויות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "olam-kepler-newton",
+  "title": "מקפלר לניוטון: איך ולמה",
+  "subtitle": "עולם נעלם ומציאות מצויה · הבנה",
+  "curatorial_text": "ניוטון הסביר את חוקי קפלר מתוך חוק אחד.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-fromto.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-fromto.jpg",
+    "title": "מתיאור אל הסבר",
+    "kicker": "ממה למה",
+    "body": "קפלר, 1619: זמן המחזור והמרחק מהשמש קשורים בנוסחה אחת.\n\nניוטון, 1687: כוח אחד מסביר גם תפוח שנופל וגם כוכב לכת שנע.\n\nללמד את שני הגילויים כזוג: קודם התצפית של קפלר, אחר כך ההסבר של ניוטון.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-insight.jpg",
+    "title": "ניוטון הסביר את חוקי קפלר מתוך חוק אחד.",
+    "kicker": "תובנה",
+    "body": "קפלר תיאר איך כוכבי הלכת נעים, וניוטון הסביר למה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-quote.jpg",
+    "title": "ב-1687 פרסם ניוטון את הפרינקיפיה, שבה שילב את חוקי התנועה שלו עם ניתוח מתמטי חדש כדי להסביר את התוצאות האמפיריות של קפלר.",
+    "kicker": "ציטוט",
+    "body": "ב-1687 פרסם ניוטון את הפרינקיפיה, שבה שילב את חוקי התנועה שלו עם ניתוח מתמטי חדש כדי להסביר את התוצאות האמפיריות של קפלר.\n\nניוטון וקפלר, Newton's law of universal gravitation, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-poster.jpg",
+    "title": "פרינקיפיה: חוק אחד לשמים ולארץ",
+    "kicker": "טקסט על תמונה",
+    "body": "ניוטון איחד את חוקי התנועה ואת כוח הכבידה, והסביר באותם חוקים את תנועת כוכבי הלכת.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Philosophiæ Naturalis Principia Mathematica · The original uploader was Zhaladshar at English Wikisource., Public domain. ויקישיתוף",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/kepler-newton-haiku.jpg",
+    "title": "קפלר שואל איך",
+    "kicker": "הייקו",
+    "body": "קפלר שואל איך\nניוטון עונה למה\nהירח לא נופל\n\nמה ההייקו מאיר: תיאור מדויק הוא תנאי להסבר.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "olam-perspective",
+  "title": "הפרספקטיבה",
+  "subtitle": "עולם נעלם ומציאות מצויה · הבנה",
+  "curatorial_text": "מברונלסקי האדריכל אל מזאצ׳ו הצייר ואל לאונרדו.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-poster.jpg",
+    "title": "השילוש הקדוש: פרספקטיבה על קיר",
+    "kicker": "טקסט על תמונה",
+    "body": "מזאצ׳ו צייר חלל עמוק בפרספקטיבה לינארית על קיר שטוח.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Holy Trinity (Masaccio) · Masaccio, Public domain. ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-fromto.jpg",
+    "title": "הפרספקטיבה עברה מאדריכל לצייר.",
+    "kicker": "ממה למה",
+    "body": "ברונלסקי, אדריכל: ברונלסקי תיאר לראשונה פרספקטיבה לינארית מדויקת.\n\nמזאצ׳ו, 1425–1426: מזאצ׳ו צייר חלל עמוק בפרספקטיבה לינארית על קיר שטוח.\n\nלשרטט את נקודת המגוז בציור, ולמצוא את העין של הצופה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-insight.jpg",
+    "title": "האדם הוויטרובי: אדריכלות שהפכה לגוף.",
+    "kicker": "תובנה",
+    "body": "לאונרדו צייר את הפרופורציות של הגוף לפי ויטרוביוס.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-quote.jpg",
+    "title": "הניסויים של ברונלסקי בפרספקטיבה קווית היו ככל הנראה ההשראה למבנה הפרספקטיבי של הציור.",
+    "kicker": "ציטוט",
+    "body": "הניסויים של ברונלסקי בפרספקטיבה קווית היו ככל הנראה ההשראה למבנה הפרספקטיבי של הציור.\n\nברונלסקי ומזאצ׳ו, Holy Trinity (Masaccio), Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/perspective-essay.jpg",
+    "title": "מהכיפה אל הקיר",
+    "kicker": "מאמר",
+    "body": "מברונלסקי האדריכל אל מזאצ׳ו הצייר ואל לאונרדו.\n\nברונלסקי בנה כיפה ענקית בלי פיגומי תמיכה מהקרקע. הוא גם תיאר לראשונה פרספקטיבה לינארית מדויקת.\n\nמזאצ׳ו צייר חלל עמוק בפרספקטיבה לינארית על קיר שטוח. זו מהציורים המונומנטליים הראשונים של הרנסנס בפרספקטיבה.\n\nהניסויים של ברונלסקי כנראה היו ההשראה של מזאצ׳ו.\n\nלמדוד את הגוף שלך מול הריבוע והעיגול של לאונרדו.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Florence Cathedral · Petar Milošević, CC BY-SA 4.0. ויקישיתוף",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "olam-parallels",
+  "title": "מה קורה כשמוותרים על אקסיומה",
+  "subtitle": "עולם נעלם ומציאות מצויה · הבנה",
+  "curatorial_text": "2,000 שנה ניסו להוכיח את אקסיומת המקבילים.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-gradient.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-gradient.jpg",
+    "title": "2,000 שנה ניסו להוכיח את אקסיומת המקבילים.",
+    "kicker": "שדה צבע",
+    "body": "לובצ'בסקי ויתר עליה, וקיבל גאומטריה חדשה ועקבית.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-fromto.jpg",
+    "title": "ממקביל אחד ליותר מאחד",
+    "kicker": "ממה למה",
+    "body": "אוקלידס, 300 לפנה״ס: הגאומטריה נבנתה כמערכת הוכחות מתוך מעט אקסיומות.\n\nלובצ׳בסקי, 1829–1830: גאומטריה עקבית בלי אקסיומת המקבילים.\n\nלנסות לצייר שני ישרים מקבילים על כדור: כך מבינים גאומטריה לא אוקלידית.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-quote.jpg",
+    "title": "לפניו ניסו מתמטיקאים לגזור את האקסיומה החמישית של אוקלידס מאקסיומות אחרות.",
+    "kicker": "ציטוט",
+    "body": "לפניו ניסו מתמטיקאים לגזור את האקסיומה החמישית של אוקלידס מאקסיומות אחרות.\n\nעל אקסיומת המקבילים, Nikolai Lobachevsky, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-veil.jpg",
+    "title": "גאומטריה לא אוקלידית: יותר ממקביל אחד",
+    "kicker": "שקיפות",
+    "body": "לובצ'בסקי בנה גאומטריה שבה אקסיומת המקבילים של אוקלידס לא מתקיימת.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Hyperbolic geometry · Neozhaoliang, CC BY-SA 4.0. ויקישיתוף",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/parallels-haiku.jpg",
+    "title": "שני קווים ישרים",
+    "kicker": "הייקו",
+    "body": "שני קווים ישרים\nאלפיים שנה במקביל\nעל כדור נפגשים\n\nמה ההייקו מאיר: ויתור על הנחה אחת פותח גאומטריה חדשה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "olam-white-city",
+  "title": "מהבאוהאוס לעיר הלבנה",
+  "subtitle": "עולם נעלם ומציאות מצויה · יישום",
+  "curatorial_text": "ללכת בעיר הלבנה עם שתי מפות: התוכנית של גדס והבניינים של אדריכלי הבאוהאוס.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-poster.jpg",
+    "title": "תוכנית גדס לתל אביב",
+    "kicker": "טקסט על תמונה",
+    "body": "גדס תכנן עיר של גנים ציבוריים מוקפים בלוקים, עם רחובות קטנים ביניהם.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Geddes Plan for Tel Aviv · Patrick Geddes (1854-1932), Public domain. ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-fromto.jpg",
+    "title": "התוכנית של גדס, הבתים של הבאוהאוס.",
+    "kicker": "ממה למה",
+    "body": "גדס, 1925: זו העיר היחידה שהתרחבותה הראשונה תוכננה כולה לפי תוכנית שלו. היום היא \"העיר הלבנה\".\n\nהבאוהאוס, דסאו: גרופיוס בנה בית ספר שבו הצורה נובעת מהתפקוד, בזכוכית ובבטון.\n\nהאזור שתכנן גדס הפך לעיר הלבנה, שנבנתה בסגנון הבינלאומי.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-insight.jpg",
+    "title": "ללכת בעיר עם שתי מפות",
+    "kicker": "תובנה",
+    "body": "ללכת בעיר הלבנה עם שתי מפות: התוכנית של גדס והבניינים של אדריכלי הבאוהאוס.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-quote.jpg",
+    "title": "חלק זה של תל אביב, שתוכנן במקור על ידי סר פטריק גדס, יוכר לימים כ\"העיר הלבנה\"",
+    "kicker": "ציטוט",
+    "body": "חלק זה של תל אביב, שתוכנן במקור על ידי סר פטריק גדס, יוכר לימים כ\"העיר הלבנה\"\n\nהעיר הלבנה, תל אביב, Patrick Geddes, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-post.jpg",
+    "title": "מחר בבוקר בתל אביב",
+    "kicker": "פוסט",
+    "body": "גדס תכנן עיר של גנים ציבוריים מוקפים בלוקים, עם רחובות קטנים ביניהם.\nגרופיוס בנה בית ספר שבו הצורה נובעת מהתפקוד, בזכוכית ובבטון.\nהאזור שתכנן גדס הפך לעיר הלבנה, שנבנתה בסגנון הבינלאומי.\nללכת בעיר הלבנה עם שתי מפות: התוכנית של גדס והבניינים של אדריכלי הבאוהאוס.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Bauhaus Dessau · A.Savin, FAL. ויקישיתוף",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/white-city-haiku.jpg",
+    "title": "גן בלב הבלוק",
+    "kicker": "הייקו",
+    "body": "גן בלב הבלוק\nקיר לבן וזכוכית\nבוקר בתל אביב\n\nמה ההייקו מאיר: תוכנית של עיר ובניין של בית ספר נפגשו ברחוב אחד.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "olam-pendulum",
+  "title": "מתצפית לכלי: המטוטלת",
+  "subtitle": "עולם נעלם ומציאות מצויה · יישום",
+  "curatorial_text": "המטוטלת של גלילאו הפכה לשעון של הויגנס.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-veil.jpg",
+    "title": "שעון המטוטלת: הזמן נמדד במדויק",
+    "kicker": "שקיפות",
+    "body": "הויגנס המציא את שעון המטוטלת, השעון המדויק בעולם במשך כמעט 300 שנה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · Horologium Oscillatorium · Huygens, Christiaan, Public domain. ויקישיתוף",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-insight.jpg",
+    "title": "המטוטלת של גלילאו הפכה לשעון של הויגנס.",
+    "kicker": "תובנה",
+    "body": "הרעיון עבר מתצפית לכלי מדידה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-gradient.jpg",
+    "title": "הפיזיקה של גלילאו התחילה במיתרים של אביו.",
+    "kicker": "שדה צבע",
+    "body": "לבנות מונוקורד ולמדוד: מוזיקה היא מעבדה של פיזיקה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-quote.jpg",
+    "title": "שעון המטוטלת הומצא ב-25 בדצמבר 1656 על ידי המדען והממציא ההולנדי כריסטיאן הויגנס.",
+    "kicker": "ציטוט",
+    "body": "שעון המטוטלת הומצא ב-25 בדצמבר 1656 על ידי המדען והממציא ההולנדי כריסטיאן הויגנס.\n\nהויגנס, האג, Pendulum clock, Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/pendulum-post.jpg",
+    "title": "ניסוי של חמש דקות",
+    "kicker": "פוסט",
+    "body": "לבנות מטוטלת פשוטה ולמדוד זמן מחזור: התצפית של גלילאו הופכת לכלי.\nמטוטלת הפכה למנגנון שמווסת את השעון.\nהויגנס המציא את שעון המטוטלת, השעון המדויק בעולם במשך כמעט 300 שנה.\nלבנות מונוקורד ולמדוד: מוזיקה היא מעבדה של פיזיקה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   }
+  ]
+ },
+ {
+  "slug": "olam-paradigm",
+  "title": "איך מחליפים תאוריה שלטת",
+  "subtitle": "עולם נעלם ומציאות מצויה · יישום",
+  "curatorial_text": "כדי להחליף תאוריה שלטת צריך מודל שלם חלופי, לא רק ביקורת.",
+  "inquiry": "יצירות מתוך האפליקציה עולם נעלם ומציאות מצויה",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "עולם נעלם ומציאות מצויה",
+    "url": "https://olam-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-fromto.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-fromto.jpg",
+    "title": "מארץ במרכז אל שמש במרכז",
+    "kicker": "ממה למה",
+    "body": "תלמי, 150: תלמי כתב חיבור מתמטי ואסטרונומי על התנועות הנראות של הכוכבים ועל מסלולי כוכבי הלכת.\n\nקופרניקוס, 1543: השמש, ולא כדור הארץ, הוצבה במרכז המודל.\n\nכדי להחליף תאוריה שלטת צריך מודל שלם חלופי, לא רק ביקורת.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-insight.jpg",
+    "title": "המהפכה של קופרניקוס הפכה לתבנית של כל מהפכה.",
+    "kicker": "תובנה",
+    "body": "לזהות שינוי פרדיגמה גם בעיר, בטכנולוגיה ובחברה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-gradient.jpg",
+    "title": "יותר מ-1,200 שנה של ארץ במרכז.",
+    "kicker": "שדה צבע",
+    "body": "המודל הגאוצנטרי של האלמגסט שלט עד המהפכה המדעית, וקופרניקוס החיה את התאוריה ההליוצנטרית.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-quote.jpg",
+    "title": "המהפכה הקופרניקנית הוא ספר משנת 1957 מאת הפילוסוף תומאס קון, שבו המחבר מנתח את המהפכה הקופרניקנית",
+    "kicker": "ציטוט",
+    "body": "המהפכה הקופרניקנית הוא ספר משנת 1957 מאת הפילוסוף תומאס קון, שבו המחבר מנתח את המהפכה הקופרניקנית\n\nתומאס קון, The Copernican Revolution (book), Wikipedia · תרגום מהמקור",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-post.jpg",
+    "title": "שינוי פרדיגמה",
+    "kicker": "פוסט",
+    "body": "החיבור קיבע מודל גאוצנטרי של היקום שהתקבל יותר מ-1,200 שנה, עד המהפכה המדעית.\nהשמש, ולא כדור הארץ, הוצבה במרכז המודל.\nקון טען שהמדע מתקדם במהפכות של פרדיגמות, ולא רק בהצטברות.\nלזהות שינוי פרדיגמה גם בעיר, בטכנולוגיה ובחברה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · De revolutionibus orbium coelestium · Mikołaj Kopernik, Public domain. ויקישיתוף",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Olam-GH@a763328f984411d78281dfbd34964ba445c9636d/public/creations/paradigm-haiku.jpg",
+    "title": "ארץ במרכז",
+    "kicker": "הייקו",
+    "body": "ארץ במרכז\nאלף ומאתיים שנה\nעד שספר זז\n\nמה ההייקו מאיר: תאוריה שלטת מתחלפת רק במודל שלם.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ }
+]
