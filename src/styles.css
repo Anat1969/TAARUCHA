@@ -534,3 +534,17 @@ main { overflow-x: clip; }
   .tour__card .tour__text { display: none; }
   .tour__card .btn { margin-top: 2px; }
 }
+
+/* ---------- Home: new exhibition by drop (admin) ---------- */
+.homedrop { margin-top: clamp(16px, 2vw, 28px); perspective: 1000px; }
+.homedrop__zone {
+  position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 24px; text-align: center;
+  min-height: 96px; padding: 18px 20px;
+  background: radial-gradient(60% 120% at 50% 0%, rgba(255,255,255,.95), transparent 70%), repeating-linear-gradient(135deg, rgba(0,0,0,.03) 0 12px, transparent 12px 24px), linear-gradient(180deg, #ECECE9, #DEDED9);
+  box-shadow: inset 0 14px 30px -26px rgba(0,0,0,.4), var(--shadow-1); transition: transform .4s var(--ease), box-shadow .4s var(--ease), background-color .4s;
+}
+.homedrop__zone:hover, .homedrop__zone.over { transform: translateY(-3px) rotateX(4deg); box-shadow: inset 0 14px 30px -26px rgba(0,0,0,.4), var(--shadow-2); }
+.homedrop__zone.over { background-color: #fff; }
+.homedrop__title { font-weight: 100; font-size: clamp(26px, 3vw, 40px); line-height: 1.1; }
+.homedrop__btn { min-height: 44px; padding: 0 20px; display: inline-flex; align-items: center; background: var(--ink); color: var(--paper); box-shadow: var(--shadow-1); }
+.homedrop__zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }

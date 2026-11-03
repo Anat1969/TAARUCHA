@@ -2,6 +2,7 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { useAsync, fetchExhibitions, fetchSettings, exLinks, hostOf, museumRooms, roomOf, DEV_CHAT } from '../lib/data'
+import { useAuth } from '../lib/auth'
 import { EASE } from './Motion'
 
 // The app's mark: a museum plan seen from above, a hall flanked by two galleries.
@@ -56,6 +57,10 @@ function LogoMenu() {
   const { data: list } = useAsync(fetchExhibitions, [])
   const ref = useRef(null)
   const menuRef = useRef(null)
+  // "תערוכה חדשה" is for the owner: shown when signed in as admin, or on a device she has edited from before.
+  const { isAdmin } = useAuth()
+  let owner = isAdmin
+  try { if (isAdmin) localStorage.setItem('taarucha-owner', '1'); owner = owner || localStorage.getItem('taarucha-owner') === '1' } catch { /* private mode */ }
 
   useEffect(() => { const f = () => tick((n) => n + 1); pageMenuSubs.add(f); return () => pageMenuSubs.delete(f) }, [])
   useEffect(() => { setOpen(false) }, [pathname])
@@ -73,6 +78,7 @@ function LogoMenu() {
     if (!el) return
     el.items = [
       ...pageMenu.items,
+      ...(owner ? [{ label: 'תערוכה חדשה', hint: 'העלאת קבצים', onSelect: () => navigate('/studio/new') }] : []),
       { label: 'מאחורי התערוכות', hint: 'מחקר לפי תערוכה', onSelect: () => setOpen(true) },
       { label: 'אודות', onSelect: () => navigate('/about') },
       { label: 'סטודיו', onSelect: () => navigate('/studio') },
