@@ -70,6 +70,9 @@ function Museum({ list, settings }) {
   const at = tour.findIndex((r) => r.id === room.id)
   const go = (d) => { setOverview(false); setSel(tour[(at + d + tour.length) % tour.length].id) }
   const pick = (id) => { setOverview(false); setSel(id) }
+  // The title is revealed once, on the first visit; returning visitors see it at rest.
+  const [firstVisit] = useState(() => { try { return !localStorage.getItem('taarucha-seen') } catch { return false } })
+  useEffect(() => { try { localStorage.setItem('taarucha-seen', '1') } catch { /* private mode */ } }, [])
 
   return (
     <Page className="museum">
@@ -77,7 +80,7 @@ function Museum({ list, settings }) {
         <div>
           <span className="mono mute">מפת המוזיאון · {pad(list.length)} תערוכות · {pad(rooms.permanent.length)} בקבע</span>
           <h1 className="museum__title">
-            <span className="line-mask"><motion.span style={{ display: 'block' }} initial={{ y: '105%' }} animate={{ y: 0 }} transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}>סיור במוזיאון</motion.span></span>
+            <span className="line-mask"><motion.span style={{ display: 'block' }} initial={firstVisit ? { y: '105%' } : false} animate={{ y: 0 }} transition={{ duration: 1.1, ease: EASE, delay: 0.1 }}>סיור במוזיאון</motion.span></span>
           </h1>
         </div>
         <p className="lede">התערוכה האחרונה שעלתה תמיד באולם המרכזי. כל תערוכה מקבלת חדר, וכל העבודות שלה תלויות על קירותיו. הקבועות באגף שלהן, ובארכיון הכול נשמר.</p>
@@ -91,9 +94,7 @@ function Museum({ list, settings }) {
           <button onClick={() => go(1)} aria-label="החדר הבא">הבא</button>
           <button className={overview ? 'on' : ''} onClick={() => setOverview((o) => !o)} aria-pressed={overview}>מבט על</button>
         </div>
-        <AnimatePresence mode="wait">
-          <RoomCard key={room.id} room={room} />
-        </AnimatePresence>
+        <RoomCard room={room} />
       </div>
 
       <section className="wrap legend" aria-labelledby="legend-h">
@@ -148,17 +149,17 @@ function Stage({ plan, H, sel, overview, onPick }) {
   useEffect(() => { px.set(-34); py.set(overview ? 42 : 50) }, [overview, px, py])
   const onMove = (e) => {
     const b = e.currentTarget.getBoundingClientRect()
-    px.set(-34 + ((e.clientX - b.left) / b.width - 0.5) * 8)
-    py.set((overview ? 42 : 50) + ((e.clientY - b.top) / b.height - 0.5) * -6)
+    px.set(-34 + ((e.clientX - b.left) / b.width - 0.5) * 2)
+    py.set((overview ? 42 : 50) + ((e.clientY - b.top) / b.height - 0.5) * -1.5)
   }
 
   return (
     <div className="tour__stage" ref={ref} onPointerMove={onMove} onPointerLeave={() => { px.set(-34); py.set(overview ? 42 : 50) }}>
       <motion.div className="tour__cam" style={{ rotateX: rx, rotateZ: rz }}>
-        <motion.div className="tour__world" style={{ width: W, height: H, marginLeft: -W / 2, marginTop: -H / 2 }}
+        <motion.div className={`tour__world ${overview ? '' : 'is-lit'}`} style={{ width: W, height: H, marginLeft: -W / 2, marginTop: -H / 2 }}
           initial={{ scale: s * 0.7, opacity: 0 }}
           animate={{ x: -(cx - W / 2) * s + shift, y: -(cy - H / 2) * s, scale: s, opacity: 1 }}
-          transition={{ duration: 1.4, ease: EASE }}>
+          transition={{ duration: 0.55, ease: [0.23, 1, 0.32, 1] }}>
           <div className="tour__slab" />
           {plan.map((p) => <Room key={p.id} p={p} on={p.id === sel && !overview} onPick={onPick} />)}
         </motion.div>
@@ -180,7 +181,7 @@ function Room({ p, on, onPick }) {
   return (
     <motion.div className={`room room--${p.kind} ${on ? 'on' : ''} ${empty ? 'empty' : ''}`}
       style={{ left: p.x, top: p.y, width: p.w, height: p.h }}
-      animate={{ z: on ? 18 : 0 }} transition={{ duration: 0.9, ease: EASE }}>
+      animate={{ z: on ? 18 : 0 }} transition={{ duration: 0.45, ease: [0.23, 1, 0.32, 1] }}>
       <button className="room__floor" disabled={!pickable} onClick={() => onPick(p.id)}
         aria-label={`${p.label}${p.ex ? ` · ${p.ex.title}` : ''}`} aria-pressed={on}>
         {cover && <img src={asset(cover)} alt="" className="room__cover" loading="lazy" />}
@@ -202,36 +203,53 @@ function Art({ w }) {
 }
 
 function RoomCard({ room }) {
-  const ex = room.ex
+  // The card is one object that stays put; only what is written on it changes.
   return (
-    <motion.aside className="tour__card" aria-live="polite"
-      initial={{ opacity: 0, y: 24, rotateX: 10 }} animate={{ opacity: 1, y: 0, rotateX: 0 }} exit={{ opacity: 0, y: -12 }}
-      transition={{ duration: 0.7, ease: EASE }}>
-      <span className="mono mute">{room.label}{ex ? ` · ${KIND_LABEL[ex.kind] || ''}` : ''}</span>
-      {ex ? (
-        <>
-          {ex.cover_url && <Link to={room.to} className="frame tour__thumb"><Img src={ex.cover_url} alt={`שער התערוכה ${ex.title}`} /></Link>}
-          <span className="mono">{ex.code} · {ex.year} · {pad(ex.works?.length || 0)} עבודות</span>
-          <h2 className="tour__title">{ex.title}</h2>
-          {ex.subtitle && <p className="tour__sub">{ex.subtitle}</p>}
-          {ex.inquiry && <p className="tour__inq mono">חקירה · {ex.inquiry}</p>}
-          {splitBody(ex.curatorial_text)[0] && <p className="tour__text">{splitBody(ex.curatorial_text)[0]}</p>}
-          <Link to={room.to} className="btn">כניסה לחדר <span className="arrow">←</span></Link>
-        </>
-      ) : room.kind === 'about' ? (
-        <>
-          <h2 className="tour__title">{room.settings?.name || 'ענת דוד שטיבלמן'}</h2>
-          {room.settings?.tagline && <p className="tour__sub">{room.settings.tagline}</p>}
-          <p className="tour__text">אוצרת, יוצרת, חוקרת, אמנית ואדריכלית. כל תערוכה כאן היא תוצר של חקירה, וסוג החקירה רשום על דלת החדר.</p>
-          <Link to="/about" className="btn">אודות <span className="arrow">←</span></Link>
-        </>
-      ) : (
-        <>
-          <h2 className="tour__title">{pad(room.total)} תערוכות</h2>
-          <p className="tour__text">כל התערוכות נשמרות כאן, גם אלה שעדיין תלויות באולמות.{room.stored?.length ? ` ירדו מהקירות: ${room.stored.map((e) => e.title).join(', ')}.` : ''}</p>
-          <Link to="/archive" className="btn">לארכיון <span className="arrow">←</span></Link>
-        </>
-      )}
-    </motion.aside>
+    <aside className="tour__card" aria-live="polite">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div key={room.id} className="tour__in"
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+          transition={{ duration: 0.18, ease: 'easeOut' }}>
+          <CardBody room={room} />
+        </motion.div>
+      </AnimatePresence>
+    </aside>
+  )
+}
+
+function CardBody({ room }) {
+  const ex = room.ex
+  if (ex) return (
+    <>
+      <span className="mono mute">תווית קיר · {ex.code}</span>
+      {ex.cover_url && <Link to={room.to} className="frame tour__thumb"><Img src={ex.cover_url} alt={`שער התערוכה ${ex.title}`} /></Link>}
+      <h2 className="tour__title">{ex.title}</h2>
+      {ex.subtitle && <p className="tour__sub">{ex.subtitle}</p>}
+      <dl className="tour__label">
+        <div><dt className="mono">חדר</dt><dd>{room.label}</dd></div>
+        <div><dt className="mono">שנה</dt><dd>{ex.year || KIND_LABEL[ex.kind]}</dd></div>
+        <div><dt className="mono">עבודות</dt><dd>{pad(ex.works?.length || 0)}</dd></div>
+        <div><dt className="mono">חקירה</dt><dd>{ex.inquiry || KIND_LABEL[ex.kind] || ''}</dd></div>
+      </dl>
+      {splitBody(ex.curatorial_text)[0] && <p className="tour__text">{splitBody(ex.curatorial_text)[0]}</p>}
+      <Link to={room.to} className="btn">כניסה לחדר <span className="arrow">←</span></Link>
+    </>
+  )
+  if (room.kind === 'about') return (
+    <>
+      <span className="mono mute">{room.label}</span>
+      <h2 className="tour__title">{room.settings?.name || 'ענת דוד שטיבלמן'}</h2>
+      {room.settings?.tagline && <p className="tour__sub">{room.settings.tagline}</p>}
+      <p className="tour__text">אוצרת, יוצרת, חוקרת, אמנית ואדריכלית. כל תערוכה כאן היא תוצר של חקירה, וסוג החקירה רשום על דלת החדר.</p>
+      <Link to="/about" className="btn">אודות <span className="arrow">←</span></Link>
+    </>
+  )
+  return (
+    <>
+      <span className="mono mute">{room.label}</span>
+      <h2 className="tour__title">{pad(room.total)} תערוכות</h2>
+      <p className="tour__text">כל התערוכות נשמרות כאן, גם אלה שעדיין תלויות באולמות.{room.stored?.length ? ` ירדו מהקירות: ${room.stored.map((e) => e.title).join(', ')}.` : ''}</p>
+      <Link to="/archive" className="btn">לארכיון <span className="arrow">←</span></Link>
+    </>
   )
 }
