@@ -1,0 +1,734 @@
+[
+ {
+  "slug": "amirot-river",
+  "title": "שני חכמים, נהר אחד",
+  "subtitle": "אמירות · ידע",
+  "curatorial_text": "במאה החמישית לפני הספירה, בשני קצוות של העולם הידוע, שני אנשים הביטו במים ואמרו כמעט את אותו משפט.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-gradient.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-gradient.jpg",
+    "title": "שני חכמים, נהר אחד",
+    "kicker": "שדה צבע",
+    "body": "במאה החמישית לפני הספירה, בשני קצוות של העולם הידוע, שני אנשים הביטו במים ואמרו כמעט את אותו משפט.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-quote.jpg",
+    "title": "זֶרֶם הַנָּהָר אֵינוֹ פּוֹסֵק, וְאֵין הַמַּיִם אוֹתָם הַמַּיִם",
+    "kicker": "ציטוט",
+    "body": "זֶרֶם הַנָּהָר אֵינוֹ פּוֹסֵק, וְאֵין הַמַּיִם אוֹתָם הַמַּיִם\n\nקאמו נו צ'ומיי Kamo no Chōmei, 1212",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-insight.jpg",
+    "title": "המים מתחלפים, והגדה נשארת. הרקליטוס הסתכל על המים, וקהלת על הגדה.",
+    "kicker": "תובנה",
+    "body": "שניהם תיארו את אותו נהר.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-haiku.jpg",
+    "title": "רגל במים קרים",
+    "kicker": "הייקו",
+    "body": "רגל במים קרים\nוהנהר כבר אחר\nרק הגדה זוכרת\n\nמי שנכנס למים מרגיש את השינוי, והגדה שומרת את הקבוע.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-post.jpg",
+    "title": "שני חכמים, נהר אחד",
+    "kicker": "פוסט",
+    "body": "לפני כ-2,500 שנה, שני אנשים עמדו ליד שני נהרות.\nבאפסוס, הרקליטוס: אי אפשר להיכנס פעמיים לאותו נהר.\nבסין, קונפוציוס: הכול חולף כמו הנהר הזה, יום ולילה.\nביניהם 7,600 קילומטר, ואין עדות שידעו זה על זה.\nמה אצלך מים, ומה גדה?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/river-essay.jpg",
+    "title": "שני חכמים, נהר אחד",
+    "kicker": "מאמר",
+    "body": "במאה החמישית לפני הספירה, בשני קצוות של העולם הידוע, שני אנשים הביטו במים ואמרו כמעט את אותו משפט.\n\nהרקליטוס Heraclitus חי באפסוס Ephesus, על חוף אסיה הקטנה. מהספר שכתב נשארו רק קטעים, מצוטטים אצל אחרים. אחד מהם הגיע אלינו דרך אפלטון: \"אִי אֶפְשָׁר לְהִיכָּנֵס פַּעֲמַיִים לְאוֹתוֹ נָהָר\".\n\nבאותה מאה, 7,649 קילומטר מזרחה, קונפוציוס עמד על גדת נהר. התלמידים רשמו: \"הַכּוֹל חוֹלֵף כְּמוֹ הַנָּהָר הַזֶּה, וְאֵינוֹ פּוֹסֵק יוֹם וָלַיְלָה\".\n\nאין שום עדות שאחד מהם שמע על השני. לא הייתה דרך משי, ולא היה תרגום. היה רק נהר.\n\n1,700 שנה אחר כך, הנזיר קאמו נו צ'ומיי פתח כך את \"רשימות מן הבקתה\", ספר על עיר שנשרפה ונבנתה מחדש. אצלו הנהר הוא כבר לא משל: הוא קיוטו עצמה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-eye",
+  "title": "ארבע מילים, אלף שנה",
+  "subtitle": "אמירות · ידע",
+  "curatorial_text": "\"עין תחת עין\" עבר מבבל לירושלים, משם לבית המדרש ולגליל. בכל תחנה המילים נשארו, והמשמעות הפכה.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-poster.jpg",
+    "title": "ארבע מילים, אלף שנה",
+    "kicker": "טקסט על תמונה",
+    "body": "\"עין תחת עין\" עבר מבבל לירושלים, משם לבית המדרש ולגליל. בכל תחנה המילים נשארו, והמשמעות הפכה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · הצדק · אמן קלפי הטארוקי, פרארה, before 1467. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-quote.jpg",
+    "title": "\"עַיִן תַּחַת עַיִן\" — מָמוֹן",
+    "kicker": "ציטוט",
+    "body": "\"עַיִן תַּחַת עַיִן\" — מָמוֹן\n\nבבא קמא פד ע\"א",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-insight.jpg",
+    "title": "שפה אינה תרבות, גם לאורך זמן. אותן מילים בעברית, ובין שמות לתלמוד עוברת מהפכה של משמעות.",
+    "kicker": "תובנה",
+    "body": "",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-haiku.jpg",
+    "title": "עין תחת עין",
+    "kicker": "הייקו",
+    "body": "עין תחת עין\nושני המאזניים\nרועדים לאט\n\nגם הדין המדויק משאיר את המאזניים בתנועה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-post.jpg",
+    "title": "ארבע מילים, אלף שנה",
+    "kicker": "פוסט",
+    "body": "חמורבי, 1754 לפני הספירה: מי שעיוור עין, תעוור עינו.\nשמות: עין תחת עין.\nואלף שנה אחר כך, התלמוד קורא את אותן ארבע מילים: ממון.\nאותה שפה, אותו ספר, ומשמעות הפוכה.\nשפה אינה תרבות, גם לאורך זמן.\nאיזה משפט ישן אצלך קיבל משמעות חדשה?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/eye-essay.jpg",
+    "title": "ארבע מילים, אלף שנה",
+    "kicker": "מאמר",
+    "body": "\"עין תחת עין\" עבר מבבל לירושלים, משם לבית המדרש ולגליל. בכל תחנה המילים נשארו, והמשמעות הפכה.\n\n1,754 שנים לפני הספירה, חמורבי חקק בבבל: \"אָדָם שֶׁעִיוֵּור עַיִן שֶׁל בֶּן חוֹרִין — יְעַוְּורוּ אֶת עֵינוֹ\". זה החוק הכתוב הקדום ביותר במאגר.\n\nבשמות כא, אותו רעיון בארבע מילים: \"עַיִן תַּחַת עַיִן, שֵׁן תַּחַת שֵׁן\". המטרה הייתה גבול: לא יותר מעין אחת תמורת עין.\n\nאלף שנה אחר כך, בבית המדרש בבבל, חכמים קראו את אותן ארבע מילים כפיצוי כספי. השפה זהה, הספר זהה, והתרבות השתנתה: מנקמה לממון.\n\nבגליל, הבשורה על פי מתי הלכה רחוק יותר: \"הטה לו גם את הלחי האחרת\". ובסין, לאו-דזה הציע \"השב על עלבון בטוב\", וקונפוציוס ענה לו: ביושר לעלבון, בטוב לטובה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-oral",
+  "title": "כתוב מול בעל פה",
+  "subtitle": "אמירות · ידע",
+  "curatorial_text": "כשבודקים לכל עולם כמה מהאמירות שלו הן פתגם עממי בלי תאריך, העולם מתחלק לתרבויות של ספר ותרבויות של רחוב.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-poster.jpg",
+    "title": "כתוב מול בעל פה",
+    "kicker": "טקסט על תמונה",
+    "body": "כשבודקים לכל עולם כמה מהאמירות שלו הן פתגם עממי בלי תאריך, העולם מתחלק לתרבויות של ספר ותרבויות של רחוב.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · לאו-דזה רוכב על שור · צ'ן הונגשואו, 1598–1652. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-quote.jpg",
+    "title": "בְּאַפְרִיקָה, כְּשֶׁזָּקֵן מֵת — סִפְרִיָּה נִשְׂרֶפֶת",
+    "kicker": "ציטוט",
+    "body": "בְּאַפְרִיקָה, כְּשֶׁזָּקֵן מֵת — סִפְרִיָּה נִשְׂרֶפֶת\n\nאמדו המפטה בא, אונסק\"ו, 1960",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-insight.jpg",
+    "title": "==היהדות ורומא מדברות מתוך ספרים.",
+    "kicker": "תובנה",
+    "body": "יפן והעולם הערבי מדברים מתוך הרחוב.== הפתגם העממי מלוטש בשימוש, והציטוט הכתוב נושא שם, תאריך וויכוח.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-haiku.jpg",
+    "title": "זקן על הספסל",
+    "kicker": "הייקו",
+    "body": "זקן על הספסל\nמספר את מה שלא נכתב\nוהרחוב זוכר\n\nכשזקן מת, נשרפת ספרייה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-post.jpg",
+    "title": "כתוב מול בעל פה",
+    "kicker": "פוסט",
+    "body": "בדקתי לכל תרבות כמה מהפתגמים שלה הם עממיים, בלי מחבר ובלי שנה.\nיפן: 93%. העולם הערבי: 81%.\nהיהדות: 9%. יוון ורומא: 7%.\nתרבויות של ספר שומרות גם את הדעה שנדחתה, ולכן הן מלאות סתירות.\nתרבויות של רחוב שוכחות אותה, ומשאירות רק את מה שעובד.\nממה אתם יודעים את מה שאתם יודעים, מספר או מהרחוב?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/oral-essay.jpg",
+    "title": "כתוב מול בעל פה",
+    "kicker": "מאמר",
+    "body": "כשבודקים לכל עולם כמה מהאמירות שלו הן פתגם עממי בלי תאריך, העולם מתחלק לתרבויות של ספר ותרבויות של רחוב.\n\nביפן, 93% מהאמירות במאגר הן פתגם עממי, בלי מחבר ובלי שנה. בעולם הערבי והאסלאם: 81%. ביהדות: רק 9%. ביוון ורומא: 7%.\n\nלהבדל יש השלכה על מה שנאמר. לאמירה כתובה יש מחבר שאפשר להתווכח איתו: קונפוציוס עונה ללאו-דזה, וגתה כותב מחדש את יוחנן. לפתגם עממי אין מחבר, ולכן אין עם מי להתווכח. הוא שורד רק אם הוא נכון במספיק מצבים.\n\nאולי זה מסביר גם את הסתירות: ליהדות, שכמעט כולה כתובה, יש 18 מחלוקות פנימיות. ליפן, שכמעט כולה בעל פה, אין אף אחת. ספר שומר גם את הדעה שנדחתה. הרחוב שוכח אותה.\n\nהסתייגות: זה מדגם, והוא משקף גם את הבחירה של המקורות. תרבות שבעל פה שתועדה פחות, מיוצגת פחות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-certainty",
+  "title": "מחיר הוודאות",
+  "subtitle": "אמירות · הבנה",
+  "curatorial_text": "חמש שפות אומרות \"עדיפה ציפור ביד\". כשמניחים אותן זו ליד זו, מתגלה שכל אחת מתמחרת את הוודאות במטבע אחר.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-poster.jpg",
+    "title": "מחיר הוודאות",
+    "kicker": "טקסט על תמונה",
+    "body": "חמש שפות אומרות \"עדיפה ציפור ביד\". כשמניחים אותן זו ליד זו, מתגלה שכל אחת מתמחרת את הוודאות במטבע אחר.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · אישה עם כלוב ציפור · פרנסואה בושה, probably 18th century. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-quote.jpg",
+    "title": "עָדִיף יַרְגָּזִי בַּיָּד מֵעָגוּר בַּשָּׁמַיִים",
+    "kicker": "ציטוט",
+    "body": "עָדִיף יַרְגָּזִי בַּיָּד מֵעָגוּר בַּשָּׁמַיִים\n\nפתגם רוסי",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-insight.jpg",
+    "title": "יש תרבויות שמתמחרות את הוודאות בכמות, ויש שמתמחרות אותה בחלום. השאלה היא לא כמה מפסידים, אלא מה מפסידים.",
+    "kicker": "תובנה",
+    "body": "",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-haiku.jpg",
+    "title": "דרור בכף היד",
+    "kicker": "הייקו",
+    "body": "דרור בכף היד\nועגור חוצה את השמיים\nשתי פעימות לב\n\nהרוסים שמו בשמיים עגור, ציפור של חלום.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-post.jpg",
+    "title": "מחיר הוודאות",
+    "kicker": "פוסט",
+    "body": "כמה ציפורים שווה ציפור אחת ביד?\nבאנגלית: שתיים. בערבית: עשר. בספרדית: מאה.\nבגרמנית לא סופרים: דרור ביד מול יונה על הגג.\nוברוסית: עגור בשמיים.\nיש תרבויות שמתמחרות את הוודאות בכמות, ויש שמתמחרות אותה בחלום.\nמה אצלך על העץ: עוד ציפורים, או עגור?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/certainty-essay.jpg",
+    "title": "מחיר הוודאות",
+    "kicker": "מאמר",
+    "body": "חמש שפות אומרות \"עדיפה ציפור ביד\". כשמניחים אותן זו ליד זו, מתגלה שכל אחת מתמחרת את הוודאות במטבע אחר.\n\nהפתגם נראה אוניברסלי: עדיף מה שיש ביד על מה שאולי יבוא. אבל כשמסדרים את הגרסאות בטבלה, שואלים שאלה שאף דובר שפה אחת לא שואל: כמה שווה הציפור שביד?\n\nבאנגלית ובעברית: שתיים. בערבית: עשר על העץ. בספרדית: מאה מעופפות. \"עֲדִיפָה צִפּוֹר בַּיָּד מִמֵּאָה מְעוֹפְפוֹת\".\n\nואז שתי שפות יוצאות מהטבלה. הגרמנית לא סופרת בכלל: דרור ביד מול יונה על הגג. היא משווה גודל, לא כמות. והרוסית מציבה מול הירגזי עגור בשמיים: ציפור של חלום, שאי אפשר לספור.\n\nמול כל הציפורים עומד הצד השני: \"מי שלא נכנס למאורת הנמר, לא ישיג את הגור\" (סין), ו\"המזל עוזר לנועזים\" (ורגיליוס). כלל ההכרעה בדף פשוט: כשההפסד בלתי הפיך, מחזיקים את הדרור. כשההפסד קטן, נכנסים למאורה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-both",
+  "title": "תרבויות של \"גם וגם\", ותרבויות של דרך אחת",
+  "subtitle": "אמירות · הבנה",
+  "curatorial_text": "כשסופרים בכל עולם תרבותי באילו מחלוקות הוא אומר את שני הצדדים, העולם מתחלק לשניים: מי שמחזיק בסתירה, ומי שבוחר צד.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-poster.jpg",
+    "title": "תרבויות של \"גם וגם\", ותרבויות של דרך אחת",
+    "kicker": "טקסט על תמונה",
+    "body": "כשסופרים בכל עולם תרבותי באילו מחלוקות הוא אומר את שני הצדדים, העולם מתחלק לשניים: מי שמחזיק בסתירה, ומי שבוחר צד.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · בודהידהרמה · אונקיי אייי, early to mid-1500s. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-quote.jpg",
+    "title": "הַכֹּל צָפוּי, וְהָרְשׁוּת נְתוּנָה",
+    "kicker": "ציטוט",
+    "body": "הַכֹּל צָפוּי, וְהָרְשׁוּת נְתוּנָה\n\nרבי עקיבא, משנה אבות ג, טו",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-insight.jpg",
+    "title": "==סתירה היא לא באג.",
+    "kicker": "תובנה",
+    "body": "היא שיטה.== תרבות של \"גם וגם\" נותנת לאדם פתגם לכל מצב, ומשאירה לו את ההכרעה. תרבות של דרך אחת נותנת לו דרך, ומשחררת אותו מההכרעה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-haiku.jpg",
+    "title": "שני ספסלים בגן",
+    "kicker": "הייקו",
+    "body": "שני ספסלים בגן\nאחד מול השמש, אחד בצל\nוכל אחד צודק\n\nתרבות של \"גם וגם\" מעמידה שני ספסלים, ומשאירה לך לבחור.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-post.jpg",
+    "title": "תרבויות של \"גם וגם\", ותרבויות של דרך אחת",
+    "kicker": "פוסט",
+    "body": "ספרתי באילו מחלוקות כל תרבות אומרת את שני הצדדים.\nהיהדות: 18 מתוך 24. העולם דובר האנגלית: 13 מתוך 20.\nיפן והצפון: אף סתירה אחת.\nתרבות של \"גם וגם\" נותנת פתגם לכל מצב, ומשאירה לך להכריע.\nתרבות של דרך אחת נותנת דרך, ומשחררת אותך מההכרעה.\nבאיזו תרבות גדלתם?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/both-essay.jpg",
+    "title": "תרבויות של \"גם וגם\", ותרבויות של דרך אחת",
+    "kicker": "מאמר",
+    "body": "כשסופרים בכל עולם תרבותי באילו מחלוקות הוא אומר את שני הצדדים, העולם מתחלק לשניים: מי שמחזיק בסתירה, ומי שבוחר צד.\n\nהיהדות אומרת את שני הצדדים ב-18 מתוך 24 מחלוקות. העולם דובר האנגלית ב-13 מתוך 20. קהלת אומר \"והכסף יענה את הכול\" וגם \"אוהב כסף לא ישבע כסף\". האנגלית אומרת \"הכה בברזל בעודו חם\" וגם \"חיפזון מוליד בזבוז\".\n\nובצד השני: יפן וקוריאה — 0 מתוך 14. הצפון — 0 מתוך 10. הנצרות — 0 מתוך 11. אף סתירה פנימית אחת.\n\nההבדל ניכר גם בהכרעות: להיהדות יש 10 אמירות שמחזיקות את שני הצדדים במשפט אחד. זו לא מקריות: התלמוד בנוי על שמירת דעת המיעוט, ו\"אלו ואלו דברי אלוהים חיים\".\n\nביפן ובצפון, החוכמה היא מידה: מה שלא נאמר הוא הפרח, חכם במידה ולא חכם מדי, אל תחשוב שאתה משהו. הפתגם לא מציע שתי אפשרויות, אלא מראה דרך.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-not",
+  "title": "ההבדל הוא במילה \"אל\"",
+  "subtitle": "אמירות · הבנה",
+  "curatorial_text": "כלל הזהב מופיע בתשע תרבויות. כשמסדרים אותן זו ליד זו, מתגלה שהן מתחלקות לשתי משפחות, לפי מילה אחת.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-poster.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-poster.jpg",
+    "title": "ההבדל הוא במילה \"אל\"",
+    "kicker": "טקסט על תמונה",
+    "body": "כלל הזהב מופיע בתשע תרבויות. כשמסדרים אותן זו ליד זו, מתגלה שהן מתחלקות לשתי משפחות, לפי מילה אחת.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · מתינות · הנס בורגקמאייר, ca. 1510. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-quote.jpg",
+    "title": "מַה שֶּׁשָּׂנוּא עָלֶיךָ — אַל תַּעֲשֶׂה לַחֲבֵרְךָ",
+    "kicker": "ציטוט",
+    "body": "מַה שֶּׁשָּׂנוּא עָלֶיךָ — אַל תַּעֲשֶׂה לַחֲבֵרְךָ\n\nהלל, שבת לא ע\"א",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-insight.jpg",
+    "title": "המשפחה הראשונה אומרת \"אל תעשה\", והשנייה אומרת \"עשה\". זו לא אותה מצווה.",
+    "kicker": "תובנה",
+    "body": "הראשונה היא רצפה שכולם יכולים לעמוד עליה, והשנייה היא תקרה שתמיד מושכת למעלה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-haiku.jpg",
+    "title": "רגל אחת על האבן",
+    "kicker": "הייקו",
+    "body": "רגל אחת על האבן\nוהגר שואל עוד\nהלל מחייך\n\nכל התורה על רגל אחת: משפט אחד, ואת השאר \"זיל גמור\".",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-post.jpg",
+    "title": "ההבדל הוא במילה \"אל\"",
+    "kicker": "פוסט",
+    "body": "כלל הזהב מופיע בתשע תרבויות.\nהלל, קונפוציוס, איסוקרטס והמהאבהארטה אומרים: אל תעשה.\nויקרא, מתי והחדית' אומרים: עשה, ואהבת.\nההבדל הוא מילה אחת: אל.\nעל איזו מהן עמדתם היום?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/not-essay.jpg",
+    "title": "ההבדל הוא במילה \"אל\"",
+    "kicker": "מאמר",
+    "body": "כלל הזהב מופיע בתשע תרבויות. כשמסדרים אותן זו ליד זו, מתגלה שהן מתחלקות לשתי משפחות, לפי מילה אחת.\n\nהלל בירושלים, כפי שמביא התלמוד הבבלי: \"מַה שֶּׁשָּׂנוּא עָלֶיךָ — אַל תַּעֲשֶׂה לַחֲבֵרְךָ\". קונפוציוס בסין: \"מָה שֶׁאֵינְךָ רוֹצֶה לְעַצְמְךָ — אַל תַּעֲשֶׂה לַאֲחֵרִים\". איסוקרטס באתונה, ספר טוביה באלכסנדריה והמהאבהארטה בהודו אומרים כמעט מילה במילה את אותו משפט.\n\nואז משפחה שנייה: \"וְאָהַבְתָּ לְרֵעֲךָ כָּמוֹךָ\" בספר ויקרא, \"כָּל מָה שֶׁאַתֶּם רוֹצִים שֶׁיַּעֲשׂוּ לָכֶם — כֵּן עֲשׂוּ גַּם אַתֶּם לָהֶם\" בבשורה על פי מתי, והחדית' מוסיף: \"אֵינוֹ מַאֲמִין מִי מִכֶּם, עַד שֶׁיֹּאהַב לְאֶחָיו אֶת מָה שֶׁהוּא אוֹהֵב לְעַצְמוֹ\".\n\nהלל ענה כך לגר שביקש ללמוד את כל התורה על רגל אחת. הניסוח השולל מתאים לרגל אחת: אפשר לקיים אותו תמיד, כלפי כל אדם, גם כלפי זר. הניסוח החיובי דורש אהבה, ואהבה דורשת קרבה.\n\nובקוריאה הכלל מנוסח כחוק של הד: \"אם המילה היוצאת נאה, גם המילה החוזרת נאה\". לא מצווה ולא איסור, אלא תיאור של איך העולם מגיב.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   }
+  ]
+ },
+ {
+  "slug": "amirot-haste",
+  "title": "חיפזון: למהר או להמתין?",
+  "subtitle": "אמירות · יישום",
+  "curatorial_text": "כל תרבות מזהירה מחיפזון, ובאותה נשימה דוחקת לא להחמיץ את הרגע.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-veil.jpg",
+    "title": "למהר או להמתין?",
+    "kicker": "שקיפות",
+    "body": "כל תרבות מזהירה מחיפזון, ובאותה נשימה דוחקת לא להחמיץ את הרגע.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · הדייגים · אדריאן ואן אוסטאדה, c. 1647. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-fromto.jpg",
+    "title": "מתי כל צד נכון",
+    "kicker": "ממה למה",
+    "body": "להמתין: כשהטעות יקרה ואי אפשר לתקן אותה.\n\nלפעול עכשיו: כשחלון ההזדמנות קצר והוא נסגר.\n\nשאלת בקרה: אם אטעה עכשיו, האם אפשר לתקן מחר?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-insight.jpg",
+    "title": "המהירות אינה הבעיה. הטעות היא.",
+    "kicker": "תובנה",
+    "body": "כל תרבות מזהירה מחיפזון, ובאותה נשימה דוחקת לא להחמיץ את הרגע.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-quote.jpg",
+    "title": "מַהֵר לְאַט",
+    "kicker": "ציטוט",
+    "body": "מַהֵר לְאַט\n\nרומא העתיקה, סוטוניוס Suetonius, חיי אוגוסטוס 25: אמרתו של הקיסר",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-haiku.jpg",
+    "title": "הברזל עוד חם",
+    "kicker": "הייקו",
+    "body": "הברזל עוד חם\nוהיד על הפטיש\nרגע של שקט\n\nהרגע שבין שני הפתגמים: הברזל מוכן, והמחשבה עוד לא.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-gradient.jpg",
+    "title": "בעיר: רומא",
+    "kicker": "שדה צבע",
+    "body": "רומא לא נבנתה ביום אחד, אבל היא נבנתה מכל החלטה שלא נדחתה. תוכנית מתאר כוללת מחכה לשנים; חנייה זמנית לאירוע נקבעת היום.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/haste-post.jpg",
+    "title": "למהר או להמתין?",
+    "kicker": "פוסט",
+    "body": "שני פתגמים עומדים זה מול זה בכל שפה.\n\"החיפזון מן השטן\", ו\"הכה בברזל בעודו חם\".\nהם לא סותרים. הם עונים על שתי שאלות שונות.\nהראשון שואל כמה עולה טעות. השני שואל כמה זמן נשאר.\nאיזו שאלה שאלת לפני ההחלטה האחרונה שלך?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 7
+   }
+  ]
+ },
+ {
+  "slug": "amirot-silence",
+  "title": "שתיקה: לשתוק או לדבר?",
+  "subtitle": "אמירות · יישום",
+  "curatorial_text": "התלמוד מעריך שתיקה בשני סלעים, ובמסכת אחרת קובע ששתיקה כהודאה.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-veil.jpg",
+    "title": "לשתוק או לדבר?",
+    "kicker": "שקיפות",
+    "body": "התלמוד מעריך שתיקה בשני סלעים, ובמסכת אחרת קובע ששתיקה כהודאה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · בודהידהרמה · אונקיי אייי, early to mid-1500s. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-fromto.jpg",
+    "title": "מתי כל צד נכון",
+    "kicker": "ממה למה",
+    "body": "לשתוק: כשאינך יודע מספיק, או כשהרגש מדבר במקומך.\n\nלדבר: כשהשתיקה תיחשב הסכמה, או כשצורך שלך לא נענה.\n\nשאלת בקרה: אם אשתוק עכשיו, איך תתפרש השתיקה שלי?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-insight.jpg",
+    "title": "השתיקה זהב, עד שהיא הסכמה.",
+    "kicker": "תובנה",
+    "body": "התלמוד מעריך שתיקה בשני סלעים, ובמסכת אחרת קובע ששתיקה כהודאה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-quote.jpg",
+    "title": "עֵת לַחֲשׁוֹת וְעֵת לְדַבֵּר",
+    "kicker": "ציטוט",
+    "body": "עֵת לַחֲשׁוֹת וְעֵת לְדַבֵּר\n\nהמקרא, קהלת ג, ז",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-haiku.jpg",
+    "title": "גלגל אחד חורק",
+    "kicker": "הייקו",
+    "body": "גלגל אחד חורק\nובשורה שקטים כולם\nשמן לאחד\n\nמי שמשמיע קול מקבל את השמן, והשקטים נשארים יבשים.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-gradient.jpg",
+    "title": "בעיר: undefined",
+    "kicker": "שדה צבע",
+    "body": "בהתנגדות לתוכנית בנייה, מי ששותק בזמן ההפקדה נחשב כמי שהסכים. שתיקה בוועדה היא עמדה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/silence-post.jpg",
+    "title": "לשתוק או לדבר?",
+    "kicker": "פוסט",
+    "body": "התלמוד אומר שמילה שווה סלע, ושתיקה שווה שניים.\nאותו תלמוד אומר במקום אחר: שתיקה כהודאה.\nהשתיקה נשמעת כמו מקום בטוח, אבל היא לא ניטרלית.\nכשאינך יודע, היא מגינה עליך.\nמתי לאחרונה השתיקה שלך נספרה בתור כן?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 7
+   }
+  ]
+ },
+ {
+  "slug": "amirot-love",
+  "title": "אהבה: האהבה מנצחת הכול?",
+  "subtitle": "אמירות · יישום",
+  "curatorial_text": "ורגיליוס ושיר השירים: מים רבים לא יכבו. הפתגם האנגלי והמשורר הסיני: העוני מגרש אותה.",
+  "inquiry": "יצירות מתוך האפליקציה אמירות",
+  "kind": "permanent",
+  "year": "2026",
+  "links": [
+   {
+    "label": "אמירות",
+    "url": "https://amirot-gh.vercel.app"
+   }
+  ],
+  "cover_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-veil.jpg",
+  "works": [
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-veil.jpg",
+    "title": "האהבה מנצחת הכול?",
+    "kicker": "שקיפות",
+    "body": "ורגיליוס ושיר השירים: מים רבים לא יכבו. הפתגם האנגלי והמשורר הסיני: העוני מגרש אותה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4 · אישה מביטה בזוג צעיר מתחבק במרפסת · סוזוקי הרונובו, late 1760s. מוזיאון קליבלנד לאמנות, CC0",
+    "position": 1
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-fromto.jpg",
+    "title": "מתי כל צד נכון",
+    "kicker": "ממה למה",
+    "body": "האהבה גוברת: כשהאהבה אינה תלויה בדבר: לא ביופי, לא בכסף, לא בנוחות.\n\nהמציאות גוברת: כשהיא נשענת על תנאי שעלול להיעלם.\n\nשאלת בקרה: במה האהבה שלי תלויה?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 2
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-insight.jpg",
+    "title": "אהבה תלויה בדבר — נגמרת עם הדבר.",
+    "kicker": "תובנה",
+    "body": "ורגיליוס ושיר השירים: מים רבים לא יכבו. הפתגם האנגלי והמשורר הסיני: העוני מגרש אותה.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 3
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-quote.jpg",
+    "title": "כָּל אַהֲבָה שֶׁהִיא תְלוּיָה בְדָבָר — בָּטֵל דָּבָר, בְּטֵלָה אַהֲבָה; וְשֶׁאֵינָהּ תְּלוּיָה בְדָבָר — אֵינָהּ בְּטֵלָה לְעוֹלָם",
+    "kicker": "ציטוט",
+    "body": "כָּל אַהֲבָה שֶׁהִיא תְלוּיָה בְדָבָר — בָּטֵל דָּבָר, בְּטֵלָה אַהֲבָה; וְשֶׁאֵינָהּ תְּלוּיָה בְדָבָר — אֵינָהּ בְּטֵלָה לְעוֹלָם\n\nהמשנה, משנה אבות ה, טז",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 4
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-haiku.jpg",
+    "title": "צריף על החוף",
+    "kicker": "הייקו",
+    "body": "צריף על החוף\nושני כוסות תה חמות\nהרוח בחוץ\n\nהפתגם הרוסי: עם האהוב, גן עדן גם בצריף.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 5
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-gradient.jpg",
+    "title": "בעיר: undefined",
+    "kicker": "שדה צבע",
+    "body": "שכונה שאוהבים אותה עמידה גם במשבר. אהבה למקום שתלויה רק בנוחות נעלמת עם הנוחות.",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 6
+   },
+   {
+    "type": "image",
+    "media_url": "https://cdn.jsdelivr.net/gh/Anat1969/Amirot-GH@a6df3ffbf40704528aabde6d810db9c4b1ef5c76/public/creations/love-post.jpg",
+    "title": "האהבה מנצחת הכול?",
+    "kicker": "פוסט",
+    "body": "ורגיליוס כתב: האהבה מנצחת הכול.\nשיר השירים: מים רבים לא יוכלו לכבות את האהבה.\nוהפתגם האנגלי עונה: כשהעוני נכנס בדלת, האהבה עפה מהחלון.\nהתלמוד מביא פתגם שמכיל את שניהם: פעם ישנו על להב חרב, ועכשיו מיטה של שישים אמה צרה לנו.\nבמה שלך תלויה?",
+    "year": "2026",
+    "medium": "יצירה דיגיטלית, A4",
+    "position": 7
+   }
+  ]
+ }
+]
