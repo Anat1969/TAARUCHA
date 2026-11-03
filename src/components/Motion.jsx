@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { asset } from '../lib/data'
 
@@ -56,31 +56,6 @@ export function Reveal({ children, delay = 0, y = 40, className, style, as = 'di
   )
 }
 
-// Pointer-driven 3D tilt with spring physics.
-export function Tilt({ children, max = 8, className, style }) {
-  const x = useMotionValue(0.5)
-  const y = useMotionValue(0.5)
-  const sx = useSpring(x, { stiffness: 120, damping: 18 })
-  const sy = useSpring(y, { stiffness: 120, damping: 18 })
-  const rotateY = useTransform(sx, [0, 1], [-max, max])
-  const rotateX = useTransform(sy, [0, 1], [max, -max])
-  return (
-    <motion.div
-      className={className}
-      style={{ ...style, rotateX, rotateY, transformStyle: 'preserve-3d' }}
-      onPointerMove={(e) => {
-        const r = e.currentTarget.getBoundingClientRect()
-        x.set((e.clientX - r.left) / r.width)
-        y.set((e.clientY - r.top) / r.height)
-      }}
-      onPointerLeave={() => { x.set(0.5); y.set(0.5) }}
-    >
-      {children}
-    </motion.div>
-  )
-}
-
-// Image that fades and sharpens in once loaded.
 export function Img({ src, alt, style, className, onClick, eager }) {
   const [loaded, setLoaded] = useState(false)
   return (

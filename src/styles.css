@@ -495,3 +495,42 @@ main { overflow-x: clip; }
   .arch-ex__list a { grid-template-columns: 56px minmax(0, 1fr); }
   .arch-ex__list a > :nth-child(n+3) { grid-column: 2; text-align: start; }
 }
+
+/* ---------- The lit room (taste-skill + Emil Kowalski pass, 03.11.2026) ----------
+   The room you stand in is the only lit one: a white spotlight on its floor, the others dimmed.
+   Still grayscale: colour comes only from the works, and only the lit room shows them in colour. */
+.tour__world .room__floor { transition: filter .45s cubic-bezier(.23,1,.32,1), border-color .2s ease-out; }
+.tour__world.is-lit .room:not(.on) .room__floor { filter: brightness(.9); }
+.tour__world.is-lit .room:not(.on) .room__wall { filter: brightness(.88) grayscale(1); }
+.room.on .room__floor::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(60% 70% at 50% 40%, rgba(255,255,255,.55), rgba(255,255,255,0) 72%);
+}
+.room.on .room__wall { filter: none; }
+
+/* Card: one object; the cover keeps its own proportions (a flyer is never cropped). */
+.tour__in { display: flex; flex-direction: column; gap: 10px; }
+.tour__thumb { aspect-ratio: auto; display: flex; justify-content: center; background: rgba(18,18,18,.04); }
+.tour__thumb img { width: auto; max-width: 100%; height: auto; max-height: 260px; object-fit: contain; }
+
+/* Wall label: mono label above a bold value, instead of a dotted meta line. */
+.tour__label { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin: 2px 0 0; padding-top: 10px; border-top: 1px solid rgba(18,18,18,.14); }
+.tour__label dt { font-size: 11px; color: var(--mute); letter-spacing: .06em; }
+.tour__label dd { margin: 0; font-weight: 400; font-size: 15px; line-height: 1.3; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 900px) {
+  /* On a phone the exhibition comes first, then the plan to walk. */
+  .tour__card { order: -1; margin: 0 var(--gutter) 12px; }
+  .tour__controls { position: relative; inset: auto; order: 0; margin: 0 var(--gutter) 8px; }
+  .tour__stage { order: 1; }
+  .tour__card { padding: 14px 16px 16px; }
+  .tour__in { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 6px 14px; align-items: start; }
+  .tour__in > * { grid-column: 2; }
+  .tour__in > .tour__thumb { grid-column: 1; grid-row: 1 / span 4; }
+  .tour__thumb img { max-height: 132px; }
+  .tour__title { font-size: 24px; }
+  .tour__label { grid-template-columns: 1fr 1fr; gap: 4px 12px; padding-top: 6px; }
+  .tour__in > .tour__label, .tour__in > .btn { grid-column: 1 / -1; }
+  .tour__card .tour__text { display: none; }
+  .tour__card .btn { margin-top: 2px; }
+}

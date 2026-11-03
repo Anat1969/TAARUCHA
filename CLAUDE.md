@@ -21,7 +21,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 ## Structure
 
 - `src/pages/` Home (museum plan tour), Exhibition (horizontal wall walk), Archive, About, NotFound
-- `src/components/` Atmosphere (light, grid, grain), Header, Footer, Motion (Page, Lines, Reveal, Tilt, Img), Work, Lightbox, EditBar
+- `src/components/` Atmosphere (light, grid, grain), Header, Footer, Motion (Page, Lines, Reveal, Img), Work, Lightbox, EditBar
 - `src/studio/` Studio (list, exhibition editor, work editor, settings), upload helper, studio.css
 - `src/lib/` supabase client, data queries and helpers (`asset()` prefixes local `/media/` paths), auth context (email/password, email link, Google when enabled)
 - `public/media/` images shipped with the repo (first exhibition's flyers). New uploads go to the Supabase bucket.
@@ -67,6 +67,7 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 - Always: animation, depth, shadow, perspective, gradients, layers. Never flat. Never icons, except the app mark and the owner's logo in the header (she asked for them) and the Google mark on sign-in.
 - Wall labels in mono (W-01 · title / kicker / year · medium), scale bar as progress, spotlight and floor shadow per work.
 - Hebrew, RTL, works at phone width (wall becomes a vertical stack under 900px).
+- The lit room (03.11.2026, skill pass, branch preview): on the home plan the room you stand in is the only lit one (white spotlight, works in colour); the others dim and stay grayscale. The room card is one object that stays put; only its content crossfades (0.18s). Its meta is a wall label (mono label over value: חדר, שנה, עבודות, חקירה) and the cover keeps its own proportions. Camera move 0.55s, pointer parallax ±1°, title reveal on the first visit only. On a phone the card comes first, compact, then the controls and the plan.
 
 ## Commands
 
