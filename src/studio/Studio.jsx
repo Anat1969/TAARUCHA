@@ -6,6 +6,7 @@ import { pad, TYPE_LABEL, asset, SITE, exLinks, linkHref, hostOf } from '../lib/
 import { uploadFile, slugify, workFromFile, pdfPreview, isPdf, kindOf } from './upload'
 import { useAuth, GoogleMark, googleEnabled } from '../lib/auth'
 import { createExhibition, takePendingFiles } from '../lib/create'
+import Import from './Import'
 import './studio.css'
 
 const EASE = [0.2, 0.7, 0.1, 1]
@@ -52,6 +53,7 @@ export default function Studio() {
         <Routes>
           <Route index element={<List />} />
           <Route path="new" element={<NewExhibition />} />
+          <Route path="import" element={<Import />} />
           <Route path="e/:id" element={<Editor />} />
           <Route path="settings" element={<Settings />} />
         </Routes>

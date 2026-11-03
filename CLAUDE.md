@@ -52,6 +52,19 @@ Live: https://taarucha.vercel.app — every push to `main` deploys automatically
 - Header: app mark (plan icon) + "תערוכות" → home; nav: מפת המוזיאון, ארכיון; the A&I logo button (`<ai-menu>`): העתקת קישור, שיחת הפיתוח, התקנת האפליקציה, the page's edit actions, אודות, סטודיו, and "מאחורי התערוכות", which opens the panel with who she is and each exhibition's inquiry type and research/dev links (the current one first).
 - Installable: `public/manifest.webmanifest`, `public/sw.js` (pages from network, images/assets cached), icons `icon-192/512.png` rendered from `public/icon.svg`.
 
+## Creations from apps (03.11.2026)
+
+Anat: "המטרה גם לעלות כל נושא לחדר משלו, וגם שניתן יהיה להוריד להדפסה." Every app of hers has a "יצירות" page (shared
+`<app-creations>`, standard: AppOfApp-GH `docs/creations-standard.md`). Each topic of an app becomes a room here:
+- `/studio/import?src=<creations.json>&topic=<id>` (`src/studio/Import.jsx`): the app's "העלאה לחדר בתערוכה" button lands
+  here; the admin ticks topics and each becomes a published permanent exhibition (slug `<app.id>-<topic.id>`), its creations
+  hung as image works (the app's exported JPG, the creation's text in the body). Re-import updates the same room and
+  replaces its works. Mapping in one place: `src/lib/creations.js`. Test: `node tests/import.cjs` (mocked admin + Supabase).
+- From a Claude session (no login): `node tools/creations-rooms.mjs <json url>` writes `seed/rooms-<app>.json`; after
+  pushing, `select taarucha_import_rooms((select content::jsonb from http_get('<jsDelivr url of that file at the commit>')))`.
+  The function (migration `20261103_taarucha_import_rooms.sql`) is security definer and revoked from anon/authenticated.
+  Images are served by jsDelivr from each app's repo at a fixed commit, so they never depend on the Vercel quota.
+
 ## Studio layout
 
 - Compact by default: title edited inline in a sticky top bar with save / publish / view; subtitle and curatorial text beside a small cover; code, year, slug and order folded under "פרטים נוספים". Upload is one short strip. Each work is a one-line row (thumb, title edited inline, type, order, "עריכה") that opens in place. No explanatory hints.
