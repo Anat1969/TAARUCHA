@@ -1,6 +1,17 @@
 import { splitBody, videoEmbed, TYPE_LABEL, pad, asset } from '../lib/data'
 import { Img } from './Motion'
 import { WorkEditLink } from './EditBar'
+import { parseArticle } from '../lib/creations'
+
+// כתבה מאפליקציה: <app-article> מהרכיב המשותף, מעל תמונת הכתבה. כל עוד הרכיב לא נטען (או נכשל), רואים את התמונה.
+export function ArticleSheet({ a, w }) {
+  return (
+    <div className="article-sheet">
+      {w.media_url && <img className="article-sheet__fb" src={asset(w.media_url)} alt="" />}
+      <app-article src={a.src} {...(a.pool ? { pool: a.pool } : { topic: a.topic })} />
+    </div>
+  )
+}
 
 export function Prose({ body, skipPoem }) {
   const parts = splitBody(body)
@@ -64,6 +75,23 @@ export function WallWork({ w, i, h, onOpen, stacked, exId }) {
   const open = () => onOpen?.(i)
   const imgStyle = stacked ? { width: '100%', height: 'auto' } : { height: h, width: 'auto' }
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open() } }
+
+  const art = parseArticle(w)
+  if (art) {
+    return (
+      <figure className="work work--article">
+        <div className="work__spot" aria-hidden="true" />
+        <div className="work__body" role="button" tabIndex={0} onClick={open} onKeyDown={key} aria-label={`הגדלת הכתבה ${w.title || ''}`}>
+          <div className="frame article-frame" style={stacked ? { width: '100%' } : { height: h, width: `calc(${h} / 1.4142)` }}>
+            <ArticleSheet a={art} w={w} />
+          </div>
+          <div className="work__cast" aria-hidden="true" />
+        </div>
+        <Label w={w} i={i} />
+        <WorkEditLink exhibitionId={exId} workId={w.id} />
+      </figure>
+    )
+  }
 
   if (w.type === 'text') {
     return (
