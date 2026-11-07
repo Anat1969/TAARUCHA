@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Prose, VideoPlayer, DocCard } from './Work'
+import { Prose, VideoPlayer, DocCard, ArticleSheet } from './Work'
+import { parseArticle } from '../lib/creations'
 import { pad, TYPE_LABEL, asset } from '../lib/data'
 import { EASE } from './Motion'
 
 export default function Lightbox({ works, index, onClose, onIndex }) {
   const [zoom, setZoom] = useState(null)
   const w = index != null ? works[index] : null
+  const art = parseArticle(w)
 
   useEffect(() => {
     if (index == null) return
@@ -28,7 +30,11 @@ export default function Lightbox({ works, index, onClose, onIndex }) {
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.5, ease: EASE }}>
           <button className="lb__close mono" onClick={onClose} autoFocus>סגירה</button>
           <div className="lb__media">
-            {w.type === 'video' ? (
+            {art ? (
+              <motion.div key={w.id} className="lb__article" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, ease: EASE }}>
+                <ArticleSheet a={art} w={w} />
+              </motion.div>
+            ) : w.type === 'video' ? (
               <div style={{ width: '100%' }}><VideoPlayer w={w} /></div>
             ) : w.type === 'document' && !w.media_url ? (
               <DocCard w={w} />
@@ -49,7 +55,7 @@ export default function Lightbox({ works, index, onClose, onIndex }) {
             <span className="mono" style={{ color: 'var(--on-deep-mute)' }}>W-{pad(index + 1)} / {pad(works.length)} · {TYPE_LABEL[w.type]}</span>
             {w.kicker && <span className="mono" style={{ color: 'var(--on-deep-mute)' }}>{w.kicker}</span>}
             <h2 style={{ margin: 0, fontWeight: 200, fontSize: 'clamp(28px, 3vw, 44px)', lineHeight: 1.15 }}>{w.title}</h2>
-            {w.body && <Prose body={w.body} />}
+            {w.body && !art && <Prose body={w.body} />}
             <span className="mono" style={{ color: 'var(--on-deep-mute)' }}>{[w.year, w.medium].filter(Boolean).join(' · ')}</span>
             {w.file_url && <a className="lb__doc mono" href={asset(w.file_url)} target="_blank" rel="noopener">פתיחת המסמך המלא ←</a>}
             <div className="lb__nav mono">

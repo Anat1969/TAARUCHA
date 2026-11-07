@@ -5,9 +5,106 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { supabase, T } from '../lib/supabase'
 import { pad } from '../lib/data'
-import { roomsFromCreations } from '../lib/creations'
+import { roomsFromCreations, articleSource, articleHero, articleBody, articleRoom, plain, ARTICLE_LAYOUT } from '../lib/creations'
 
 export default function Import() {
+  const { search } = useLocation()
+  if (new URLSearchParams(search).get('article') === '1') return <ArticleImport />
+  return <TopicsImport />
+}
+
+// כתבה אחת מאפליקציה: /studio/import?article=1&src=<creations.json>&topic=<id> (או &pool=<id>)
+// הכתבה נתלית בחדר של האפליקציה (room-<app.id>, אגף הקבע). אותה כתבה שוב: מעדכנים, לא מכפילים.
+function ArticleImport() {
+  const { search } = useLocation()
+  const q = new URLSearchParams(search)
+  const src = q.get('src') || ''
+  const key = q.get('pool') ? { pool: q.get('pool') } : { topic: q.get('topic') || '' }
+  const [data, setData] = useState(null)
+  const [err, setErr] = useState('')
+  const [state, setState] = useState('idle')
+  const [msg, setMsg] = useState('')
+  const [room, setRoom] = useState(null)
+
+  useEffect(() => {
+    if (!src) { setErr('חסרה כתובת של קובץ יצירות. הכפתור "העלאה לחדר במוזיאון" שליד כל כתבה באפליקציה מוסיף אותה.'); return }
+    fetch(src, { cache: 'no-cache' }).then((r) => { if (!r.ok) throw new Error(r.status); return r.json() }).then(async (d) => {
+      if (!articleSource(d, key)) throw new Error('הכתבה לא נמצאה בקובץ')
+      setData(d)
+      const { data: ex } = await supabase.from(T.exhibitions).select('id').eq('slug', `room-${d.app.id}`).maybeSingle()
+      setRoom(ex || null)
+    }).catch((e) => setErr(`הכתבה לא נטענה (${e.message}). בדקו שהאפליקציה פורסמה ושהכתובת נכונה: ${src}`))
+  }, [src, key.topic, key.pool])
+
+  const t = data ? articleSource(data, key) : null
+  const app = data?.app || {}
+
+  const hang = async () => {
+    setState('busy'); setErr('')
+    const fail = (m) => { setState('error'); setErr(m) }
+    const hero = articleHero(t, src)
+    const fields = articleRoom(app)
+    const now = new Date().toISOString()
+    const { data: cur } = await supabase.from(T.exhibitions).select('id, cover_url').eq('slug', fields.slug).maybeSingle()
+    let id = cur?.id
+    if (id) {
+      const u = await supabase.from(T.exhibitions).update({ ...fields, status: 'published', published_at: now, ...(cur.cover_url ? {} : { cover_url: hero }) }).eq('id', id)
+      if (u.error) return fail('עדכון החדר נכשל: ' + u.error.message)
+    } else {
+      const { data: top } = await supabase.from(T.exhibitions).select('position').order('position', { ascending: false }).limit(1)
+      const next = (top?.[0]?.position || 0) + 1
+      const ins = await supabase.from(T.exhibitions).insert({ ...fields, code: `EX ${pad(next)}`, position: next, status: 'published', published_at: now, cover_url: hero }).select('id').single()
+      if (ins.error) return fail('יצירת החדר נכשלה: ' + ins.error.message)
+      id = ins.data.id
+    }
+    const body = articleBody(src, key)
+    const work = { type: 'image', layout: ARTICLE_LAYOUT, media_url: hero, title: plain(t.title), kicker: t.zone || null, body, medium: 'כתבה, A4', year: String(new Date().getFullYear()) }
+    const { data: same } = await supabase.from(T.works).select('id').eq('exhibition_id', id).eq('body', body).limit(1)
+    if (same?.length) {
+      const u = await supabase.from(T.works).update(work).eq('id', same[0].id)
+      if (u.error) return fail('עדכון הכתבה נכשל: ' + u.error.message)
+      setMsg('הכתבה כבר תלויה בחדר, עודכנה.')
+    } else {
+      const { data: last } = await supabase.from(T.works).select('position').eq('exhibition_id', id).order('position', { ascending: false }).limit(1)
+      const w = await supabase.from(T.works).insert({ ...work, exhibition_id: id, position: (last?.[0]?.position || 0) + 1 })
+      if (w.error) return fail('תליית הכתבה נכשלה: ' + w.error.message)
+      setMsg(`הכתבה נתלתה בחדר של ${app.name}.`)
+    }
+    setState('done')
+  }
+
+  return (
+    <div className="art-import" style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div>
+        <span className="mono mute">כתבה מאפליקציה</span>
+        <h1 className="st-title">{t ? plain(t.title) : 'כתבה מאפליקציה'}</h1>
+        {data && <p className="lede">הכתבה תיתלה בחדר של {app.name}{room ? ', שכבר קיים באגף הקבע.' : '. החדר ייפתח באגף הקבע.'}</p>}
+      </div>
+      {err && <p className="lede" role="alert" style={{ color: '#b3261e' }}>{err}</p>}
+      {!data && !err && <div className="loader" />}
+      {data && (
+        <div className="art-import__grid">
+          <div className="art-import__sheet">
+            <app-article src={src} {...(key.pool ? { pool: key.pool } : { topic: key.topic })} />
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12, alignItems: 'flex-start' }}>
+            <button className="sbtn primary" disabled={state === 'busy'} onClick={hang}>
+              {state === 'busy' ? 'תולה…' : `תלייה בחדר של ${app.name}`}
+            </button>
+            {state === 'done' && (
+              <div className="panel" role="status" style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <strong style={{ fontWeight: 400 }}>{msg}</strong>
+                <Link to={`/e/room-${app.id}`} className="mono">לחדר של {app.name} ←</Link>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
+
+function TopicsImport() {
   const { search } = useLocation()
   const q = new URLSearchParams(search)
   const src = q.get('src') || ''

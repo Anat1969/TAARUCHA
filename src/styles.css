@@ -548,3 +548,15 @@ main { overflow-x: clip; }
 .homedrop__title { font-weight: 100; font-size: clamp(26px, 3vw, 40px); line-height: 1.1; }
 .homedrop__btn { min-height: 44px; padding: 0 20px; display: inline-flex; align-items: center; background: var(--ink); color: var(--paper); box-shadow: var(--shadow-1); }
 .homedrop__zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+/* כתבה מאפליקציה על הקיר: גיליון A4 ממוסגר, ובהגדלה בגובה המסך */
+.article-frame { background: #fff; aspect-ratio: 1 / 1.4142; overflow: hidden; }
+.article-sheet { position: relative; width: 100%; aspect-ratio: 1 / 1.4142; overflow: hidden; background: #fff; }
+.article-sheet__fb { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; filter: grayscale(1); }
+.article-sheet app-article { position: relative; display: block; width: 100%; }
+.article-sheet app-article:not([data-ready]) .ar-sheet { visibility: hidden; }
+.article-frame .ar-sheet, .lb__article .ar-sheet { box-shadow: none; }
+.lb__article { width: min(calc((100vh - 112px) / 1.4142), 100%); box-shadow: 0 40px 120px -30px rgba(0,0,0,.9); background: #fff; }
+.art-import__grid { display: grid; grid-template-columns: minmax(0, 620px) minmax(0, 1fr); gap: 28px; align-items: start; }
+.art-import__sheet { box-shadow: var(--shadow-2); background: #fff; }
+@media (max-width: 860px) { .art-import__grid { grid-template-columns: minmax(0, 1fr); } .lb__article { width: min(calc(62vh / 1.4142), 100%); } }

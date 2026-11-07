@@ -2,7 +2,7 @@
 // כל נושא = תערוכה קבועה משלה (חדר באגף הקבע), וכל יצירה = עבודת דימוי על הקיר, עם הטקסט שלה בגוף העבודה.
 // המיפוי משותף לייבוא בסטודיו (/studio/import) ולסקריפט ה-SQL (tools/creations-sql.mjs).
 export const STYLE_HE = { poster: 'טקסט על תמונה', gradient: 'שדה צבע', veil: 'שקיפות', insight: 'תובנה', quote: 'ציטוט', haiku: 'הייקו', post: 'פוסט', fromto: 'ממה למה', essay: 'מאמר' }
-const plain = (s) => String(s ?? '').replace(/==(.+?)==/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').trim()
+export const plain = (s) => String(s ?? '').replace(/==(.+?)==/g, '$1').replace(/\*\*(.+?)\*\*/g, '$1').trim()
 
 function workBody(c) {
   switch (c.style) {
@@ -42,4 +42,33 @@ export function roomsFromCreations(data, jsonUrl, onlyTopic) {
       works,
     }
   })
+}
+
+// כתבה מאפליקציה: עמוד A4 אחד (רכיב <app-article>), שנתלה בחדר של האפליקציה, room-<app.id>.
+// גוף העבודה הוא JSON עם הכתובת והמקור, והקיר מציג את הכתבה החיה מתוך קובץ היצירות של האפליקציה.
+export const ARTICLE_LAYOUT = 'cr-article'
+export function articleSource(data, key) {
+  if (key.pool) return (data.pool || []).find((x) => x.id === key.pool) || null
+  return (data.topics || []).find((x) => x.id === key.topic) || null
+}
+export function articleHero(t, jsonUrl) {
+  const c = (t?.creations || []).find((x) => x.image && ['poster', 'veil', 'post', 'essay'].includes(x.style)) || (t?.creations || []).find((x) => x.image)
+  return c ? new URL(c.image, jsonUrl).href : null
+}
+export function articleBody(src, key) { return JSON.stringify(key.pool ? { src, pool: key.pool } : { src, topic: key.topic }) }
+export function parseArticle(w) {
+  if (w?.layout !== ARTICLE_LAYOUT) return null
+  try { const b = JSON.parse(w.body || ''); return b && b.src && (b.topic || b.pool) ? b : null } catch { return null }
+}
+export function articleRoom(app) {
+  return {
+    slug: `room-${app.id}`,
+    title: app.name,
+    subtitle: 'החדר של האפליקציה',
+    curatorial_text: plain(app.description || '') || `כתבות שנוצרו באפליקציה ${app.name}`,
+    kind: 'permanent',
+    inquiry: `כתבות מתוך האפליקציה ${app.name}`,
+    year: String(new Date().getFullYear()),
+    links: app.url ? [{ label: app.name, url: app.url }] : [],
+  }
 }

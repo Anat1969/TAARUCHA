@@ -64,6 +64,16 @@ Anat: "המטרה גם לעלות כל נושא לחדר משלו, וגם שני
   pushing, `select taarucha_import_rooms((select content::jsonb from http_get('<jsDelivr url of that file at the commit>')))`.
   The function (migration `20261103_taarucha_import_rooms.sql`) is security definer and revoked from anon/authenticated.
   Images are served by jsDelivr from each app's repo at a fixed commit, so they never depend on the Vercel quota.
+- Article rooms (07.11.2026, Anat: "לכל אפליקציה תאפשר לעלות את הכתבה שנוצרה ישר לתוך החדר שלה במוזאון"): every app
+  page shows one A4 article per topic (shared `<app-creations>` v2), each with "העלאה לחדר במוזיאון" →
+  `/studio/import?article=1&src=<json>&topic=<id>` (or `&pool=<id>`). The page shows the article large (`<app-article>`)
+  and "תלייה בחדר של <app>": upserts the app's own room `room-<app.id>` (permanent, published, subtitle "החדר של
+  האפליקציה", curatorial text = `app.description`, link to the app, cover = the article's hero image if the room has none)
+  and hangs one work: type image, layout `cr-article`, body = JSON `{src, topic}` / `{src, pool}`, media_url = hero image
+  (thumbnail for plan and archive), medium "כתבה, A4". The same article again updates that work ("הכתבה כבר תלויה בחדר,
+  עודכנה"). On the wall and in the lightbox the work renders the live article (`ArticleSheet` in Work.jsx) over its
+  image as fallback. `index.html` loads `creations.js` async, Pages first, Vercel fallback. Test: `node tests/import.cjs`
+  (serves creations.js from `../appofapp-gh/public` or `CREATIONS_JS`, data from `tests/fixtures/olam-creations.json`).
 
 ## Studio layout
 
